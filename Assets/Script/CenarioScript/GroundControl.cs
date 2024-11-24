@@ -26,7 +26,7 @@ public class GroundControl : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         _inter1n = _groundList.Count / 3;
         _inter2n = _inter1n + _inter1n;
-        Debug.Log(_groundList.Count);
+       // Debug.Log(_groundList.Count);
         for (int i = 0; i < _groundList.Count; i++)
         {
           

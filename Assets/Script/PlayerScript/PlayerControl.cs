@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public int _indexPlayer; 
-    public GameControl _gameControl;
+    GameControl _gameControl;
   
 
     private void Awake()
@@ -31,12 +31,22 @@ public class PlayerControl : MonoBehaviour
         {
             _gameControl._playerCamT[_indexPlayer] = true;
         }
+        if (_indexPlayer==0 && other.gameObject.name == "Inter1")
+        {
+            _gameControl._levelOn = 1;
+        }
+        if (_indexPlayer == 0 && other.gameObject.name == "Inter2")
+        {
+            _gameControl._levelOn = 2;
+        }
+        
         if (other.gameObject.name== "TTFim")
         {
             _gameControl._isDir=true;
             _gameControl._camPlayer.RotateToY(-_gameControl._camPlayer.targetYRotation);
             _gameControl.BlockFim();
             _gameControl._coolFimFase.SetActive(true);
+            _gameControl._levelOn = 3;
         }
         if (other.gameObject.name == "TTFimaFase")
         {

@@ -7,6 +7,7 @@ public class GameControl : MonoBehaviour
     public PlayerMove _playerMove;
     public GroundControl _groundControl;
     public CamPlayer _camPlayer;
+    public EnemyBaseControl _enemyBaseControl;
     public Transform _playerBase;
     public GameObject _coolFimFase;
 
@@ -14,6 +15,8 @@ public class GameControl : MonoBehaviour
     public Transform _player;
     public bool _checkCamOn;
     public List<GameObject> _BlockList;
+
+    public int _levelOn;
 
     public int _numbPlayer;
     public bool _isDirIvert;
@@ -24,6 +27,8 @@ public class GameControl : MonoBehaviour
     {
         _BlockList[0].SetActive(false);
         _BlockList[1].SetActive(true);
+        Physics.IgnoreLayerCollision(7, 6);
+        Physics.IgnoreLayerCollision(3, 8);
     }
      public void BlockFim()
     {

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7530371909983469688}
   - component: {fileID: 7961941735116505818}
   - component: {fileID: 689901141686543076}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -217,7 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _indexPlayer: 0
-  _gameControl: {fileID: 0}
 --- !u!1 &2613129806422083192
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +229,7 @@ GameObject:
   - component: {fileID: 3064161034257572055}
   - component: {fileID: 6540689921147330213}
   - component: {fileID: 6763069344825290312}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RenderPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +334,7 @@ GameObject:
   - component: {fileID: 2399612278491812812}
   - component: {fileID: 9121397346437586833}
   - component: {fileID: 8721813452469912065}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: PlayerRot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FollowTarget : MonoBehaviour
+public class EnemeyMove : MonoBehaviour
 {
     public string targetTag = "Player"; // Tag usada para identificar os alvos
     public float maxSpeed = 5f; // Velocidade máxima
@@ -13,18 +13,25 @@ public class FollowTarget : MonoBehaviour
     private Rigidbody rb;
     private Transform closestTarget;
     private float currentSpeed = 0f; // Velocidade atual
-    private List<Transform> targets = new List<Transform>(); // Lista de alvos
+    GameControl _gameControl;
+
+    public int timePos;
+
+    public float countdownTime = 5f; // Tempo inicial do contador em segundos
+
+
+    public float currentTime;
+
+
+    private void Awake()
+    {
+        _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+    }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
-        // Encontra todos os objetos com a tag especificada e os adiciona à lista
-        GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(targetTag);
-        foreach (GameObject obj in targetObjects)
-        {
-            targets.Add(obj.transform);
-        }
+        currentTime = countdownTime;
     }
 
     void FixedUpdate()
@@ -80,7 +87,7 @@ public class FollowTarget : MonoBehaviour
         float closestDistance = Mathf.Infinity;
         Transform bestTarget = null;
 
-        foreach (Transform target in targets)
+        foreach (Transform target in _gameControl.targets)
         {
             if (target == null) continue; // Evita erros caso algum objeto tenha sido destruído
 
@@ -94,5 +101,57 @@ public class FollowTarget : MonoBehaviour
         }
 
         closestTarget = bestTarget;
+        TimeRe();
+    }
+
+    void TimeRe()
+    {
+        if (timePos == 0)
+        {
+            // Reduz o tempo enquanto ele for maior que zero
+            if (currentTime > 0)
+            {
+                currentTime -= Time.deltaTime; // Decremento com base no tempo real
+                currentTime = Mathf.Max(currentTime, 0); // Evita valores negativos
+            }
+            else
+            {
+                // Ação quando o tempo chega a zero
+                TimerEnded();
+            }
+        }
+    }
+
+    void TimerEnded()// se o inimigo estive seguindo  muito tempo o player e não alcança, muda de posição
+    {
+       
+        currentTime = countdownTime;
+        if (_gameControl._levelOn <= 2)
+        {
+            int rand = Random.Range(0, _gameControl._enemyBaseControl._posListBase2.Count);
+            transform.position = _gameControl._enemyBaseControl._posListBase2[rand].position;
+        }
+        else {
+            int rand = Random.Range(0, _gameControl._enemyBaseControl._posListBase1.Count);
+            transform.position = _gameControl._enemyBaseControl._posListBase1[rand].position;
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            timePos = 1;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.layer == 8)
+        {
+            timePos = 0;
+            currentTime = countdownTime;
+        }
     }
 }
