@@ -23,13 +23,15 @@ public class GameControl : MonoBehaviour
     public bool _isDir;
     public bool[] _playerCamT;
 
-    private void Start()
+    private void Awake()
     {
         _BlockList[0].SetActive(false);
         _BlockList[1].SetActive(true);
         Physics.IgnoreLayerCollision(7, 6);
         Physics.IgnoreLayerCollision(3, 8);
+        Physics.IgnoreLayerCollision(3, 9);
     }
+   
      public void BlockFim()
     {
         _BlockList[0].SetActive(true);

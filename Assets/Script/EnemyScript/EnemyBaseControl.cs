@@ -93,15 +93,21 @@ public class EnemyBaseControl : MonoBehaviour
     {
         if (bullet != null)
         {
-            if (!_checkPosini)
+            if (!_checkPosini && _posListBase1[_numbList1].GetComponent<BaseEnemey>().BaseOn)
             {
                 bullet.transform.position = _posListBase2[_numbList1].position; 
                 Pos1list();
             }
-            else
+            else if (_checkPosini && _posListBase2[_numbList2].GetComponent<BaseEnemey>().BaseOn)
             {
                 bullet.transform.position = _posListBase1[_numbList2].position;
                 Pos2list();
+            }
+            else
+            {
+                bullet.GetComponent<EnemeyMove>().PosInver();
+
+                return;
             }
             bullet.SetActive(true);
             _checkPosini = !_checkPosini;

@@ -18,10 +18,7 @@ public class EnemeyMove : MonoBehaviour
     public int timePos;
 
     public float countdownTime = 5f; // Tempo inicial do contador em segundos
-
-
     public float currentTime;
-
 
     private void Awake()
     {
@@ -32,6 +29,10 @@ public class EnemeyMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentTime = countdownTime;
+    }
+    private void Update()
+    {
+        TimeRe();
     }
 
     void FixedUpdate()
@@ -101,7 +102,7 @@ public class EnemeyMove : MonoBehaviour
         }
 
         closestTarget = bestTarget;
-        TimeRe();
+      
     }
 
     void TimeRe()
@@ -126,14 +127,31 @@ public class EnemeyMove : MonoBehaviour
     {
        
         currentTime = countdownTime;
+        PosInver();//
+    }
+
+    public void PosInver()
+    {
         if (_gameControl._levelOn <= 2)
         {
             int rand = Random.Range(0, _gameControl._enemyBaseControl._posListBase2.Count);
-            transform.position = _gameControl._enemyBaseControl._posListBase2[rand].position;
+            if (_gameControl._enemyBaseControl._posListBase2[rand].GetComponent<BaseEnemey>().BaseOn)
+            {
+                transform.position = _gameControl._enemyBaseControl._posListBase2[rand].position;
+            }
+            
+           
+          
         }
-        else {
+        else
+        {
             int rand = Random.Range(0, _gameControl._enemyBaseControl._posListBase1.Count);
-            transform.position = _gameControl._enemyBaseControl._posListBase1[rand].position;
+            if (_gameControl._enemyBaseControl._posListBase1[rand].GetComponent<BaseEnemey>().BaseOn)
+            {
+                transform.position = _gameControl._enemyBaseControl._posListBase1[rand].position;
+            }
+           
+
 
         }
     }
