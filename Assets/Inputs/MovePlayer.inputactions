@@ -26,7 +26,7 @@
             ],
             "bindings": [
                 {
-                    "name": "Jostick",
+                    "name": "Teclado",
                     "id": "afd89f20-fd94-467f-b5ce-893735b10fc9",
                     "path": "3DVector",
                     "interactions": "",
@@ -94,6 +94,83 @@
                 {
                     "name": "backward",
                     "id": "78e2d698-e2f0-4be2-b1a6-2fe10ff53ba0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Jostick",
+                    "id": "8139fc43-c863-4626-ad4b-7c9bc01692bb",
+                    "path": "3DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "f4597c47-f065-406f-aa54-25a79affaaf4",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "5fa74b9d-7da9-48e4-ac74-232b8f4d6d1a",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "60032662-9427-48bd-867f-71f50808e4a5",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "7ea53e28-7316-492a-ab7a-a33db485e2da",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "forward",
+                    "id": "c608e0fe-b284-443a-882b-782e496f6175",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "backward",
+                    "id": "745c32a2-933b-44f6-b7a7-b629c63c8e81",
                     "path": "",
                     "interactions": "",
                     "processors": "",

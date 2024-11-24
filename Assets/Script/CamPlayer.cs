@@ -6,8 +6,6 @@ using UnityEngine.PlayerLoop;
 public class CamPlayer : MonoBehaviour
 {
     public string targetTag = "Player";
-    private List<Transform> targets = new List<Transform>(); // Lista de
-    Transform _player;
     private Vector3 _lastPosition;
     public GameControl _gameControl;
 
@@ -26,19 +24,15 @@ public class CamPlayer : MonoBehaviour
         _lastPosition = transform.position;
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         // Encontra todos os objetos com a tag especificada e os adiciona à lista
-        GameObject[] targetObjects = GameObject.FindGameObjectsWithTag(targetTag);
-        foreach (GameObject obj in targetObjects)
-        {
-            targets.Add(obj.transform);
-        }
-        _player = targets[0];
+       
+
         RotateToY(targetYRotation);
     }
 
     private void Update()
     {
         _gameControl._playerCamT[0] = true;
-        if (_gameControl._playerCamT[0] && _gameControl._playerCamT[1] && _gameControl._playerCamT[2] && _gameControl._playerCamT[3])
+        if (_gameControl._checkCamOn  && _gameControl._playerCamT[0] && _gameControl._playerCamT[1] && _gameControl._playerCamT[2] && _gameControl._playerCamT[3])
         {
             MoveCam();
         }
@@ -47,7 +41,7 @@ public class CamPlayer : MonoBehaviour
     void MoveCam()
     {
         // Calcula a nova posição no eixo X com suavização
-        float newX = Mathf.Lerp(transform.position.x, _player.position.x, transitionSpeed * Time.deltaTime);
+        float newX = Mathf.Lerp(transform.position.x, _gameControl._player.position.x, transitionSpeed * Time.deltaTime);
 
         // Atualiza a posição apenas no eixo X, mantendo Y e Z
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);

@@ -6,13 +6,22 @@ public class PlayerControl : MonoBehaviour
 {
     public int _indexPlayer; 
     public GameControl _gameControl;
-    
-    void Start()
+  
+
+    private void Awake()
     {
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+        _gameControl.ContPLayer();
+    }
+
+    void Start()
+    {
+        
+        transform.SetParent(_gameControl._playerBase);
         _indexPlayer = _gameControl._numbPlayer;
         _gameControl._playerCamT[_indexPlayer] = false;
         _gameControl._numbPlayer++;
+
     }
 
     // Update is called once per frame
@@ -21,6 +30,17 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.CompareTag("CamTriguer"))
         {
             _gameControl._playerCamT[_indexPlayer] = true;
+        }
+        if (other.gameObject.name== "TTFim")
+        {
+            _gameControl._isDir=true;
+            _gameControl._camPlayer.RotateToY(-_gameControl._camPlayer.targetYRotation);
+            _gameControl.BlockFim();
+            _gameControl._coolFimFase.SetActive(true);
+        }
+        if (other.gameObject.name == "TTFimaFase")
+        {
+            Debug.Log("Fim da fase 1");
         }
     }
     private void OnTriggerExit(Collider other)
