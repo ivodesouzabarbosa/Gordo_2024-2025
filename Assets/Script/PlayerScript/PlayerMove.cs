@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-
-
     public float _speed;
     public float _gravity = -9.81f;    // Intensidade da gravidade
     public float _jumpHeight = 1.5f;   // Altura do pulo

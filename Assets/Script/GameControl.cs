@@ -6,6 +6,10 @@ public class GameControl : MonoBehaviour
 {
     public PlayerMove _playerMove;
     public GroundControl _groundControl;
+    public int _numbPlayer;
+    public bool _isDirIvert;
+    public bool _isDir;
+    public bool[] _playerCamT;
 
     void Start()
     {

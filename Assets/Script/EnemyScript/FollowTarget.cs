@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FollowTarget : MonoBehaviour
 {
-    public string targetTag = "Target"; // Tag usada para identificar os alvos
+    public string targetTag = "Player"; // Tag usada para identificar os alvos
     public float maxSpeed = 5f; // Velocidade máxima
     public float acceleration = 2f; // Taxa de aceleração
     public float rotationSpeed = 10f; // Velocidade de rotação
