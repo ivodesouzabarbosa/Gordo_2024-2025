@@ -11,7 +11,7 @@ public class PlayerMove : MonoBehaviour
     public float _speed;
     public float _gravity = -9.81f;    // Intensidade da gravidade
     public float _jumpHeight = 1.5f;   // Altura do pulo
-    public float rotationSpeed = 100f; // Velocidade de rotação para os lados
+    public float _rotationSpeed = 10f; // Velocidade de rotação para os lados
 
     private bool _isGrounded;          // Checa se está no chão
     private bool _checkJump;          // Checa se apertou botão de pular
@@ -58,7 +58,7 @@ public class PlayerMove : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
 
             // Suaviza a transição para a nova rotação
-            _playerObject.rotation = Quaternion.Slerp(_playerObject.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            _playerObject.rotation = Quaternion.Slerp(_playerObject.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
 
 
@@ -81,7 +81,7 @@ public class PlayerMove : MonoBehaviour
         float rotateY = _inputDir.y;
 
         // Calcula o ângulo de rotação baseado na entrada
-        float rotation = rotateY * rotationSpeed * Time.deltaTime;
+        float rotation = rotateY * _rotationSpeed * Time.deltaTime;
 
         // Aplica a rotação ao personagem no eixo Y
         transform.Rotate(0, rotation, 0);
