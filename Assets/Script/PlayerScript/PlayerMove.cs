@@ -45,7 +45,7 @@ public class PlayerMove : MonoBehaviour
             _inputDir.y = -2f;
         }
 
-        Vector3 move = transform.right * _inputDir.x + transform.forward * _inputDir.z * _speed;
+        Vector3 move = transform.right * _inputDir.x + transform.forward * (_inputDir.z/6) * _speed;
 
         controller.Move(move * _speed * Time.deltaTime);
 

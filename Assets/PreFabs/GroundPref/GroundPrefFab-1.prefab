@@ -1064,7 +1064,7 @@ GameObject:
   - component: {fileID: 2318356711048110267}
   - component: {fileID: 6030931222410995511}
   - component: {fileID: 2006481574767652900}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: TTFim
   m_TagString: Untagged
   m_Icon: {fileID: 0}
