@@ -24,23 +24,17 @@ public class SelectPerson : MonoBehaviour
     int _tempN;
 
     public List<GameObject> _personSelec = new List<GameObject>();
-    public List<GameObject> _personSelecTemp = new List<GameObject>();
+  //  public List<GameObject> _personSelecTemp = new List<GameObject>();
 
     public List<Button> _buttonsNav;
 
-    private void Awake()
-    {
-        for (int i = 0; i < _personSelec.Count; i++)
-        {
-            _personSelecTemp.Add(_personSelec[i]);
-        }
-      
-
-    }
+   
     void Start()
     {
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         _gameControl._multiPlayerControl._selectsPersonList.Add(this.GetComponent<SelectPerson>());
+        _gameControl._multiPlayerControl._selectsPersonListFree.Add(this.GetComponent<SelectPerson>());
+
         numbPerson = _gameControl._playerMove.Count-1;
         _indexPlayer = _gameControl._numberPlayer;
         _gameControl._numberPlayer++;
@@ -49,12 +43,16 @@ public class SelectPerson : MonoBehaviour
         transform.localScale = new Vector3(2,2,2);
         transform.localPosition = Vector3.zero;
         transform.localEulerAngles = Vector3.zero;
-
         PersonImgOn();
+        _gameControl._multiPlayerControl.BlockOnBig();
+        //  _gameControl._multiPlayerControl.CheckListBloc(imgBlockPerson.gameObject, numbSelectPerson, true);
 
-       // sourceObject = _gameControl._playerInputs[0].gameObject;
-       // CopiarPlayer();
-       // _gameControl._playerInputs[0].gameObject.SetActive(true);
+
+
+
+        // sourceObject = _gameControl._playerInputs[0].gameObject;
+        // CopiarPlayer();
+        // _gameControl._playerInputs[0].gameObject.SetActive(true);
     }
 
 
@@ -80,7 +78,6 @@ public class SelectPerson : MonoBehaviour
        
         if (!_checkSelect)
         {
-
             if (value == 0)
             {
                 numbSelectPerson++;
@@ -104,23 +101,9 @@ public class SelectPerson : MonoBehaviour
                 }
                 PersonImgOn();
             }
-            else if (!imgBlockPerson.gameObject.activeInHierarchy)//persosnagem selecioando
+            else if (value == 2)//persosnagem selecioando
             {
-                _checkSelect = true;
-                _gameControl._playerMove[numbSelectPerson].gameObject.SetActive(true);
-                _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
-                imgSelecPerson.gameObject.SetActive(true);
-                _gameControl._multiPlayerControl._personSelecNumber.Add(numbSelectPerson);
-
-                for (int i = 0; i < _buttonsNav.Count; i++)
-                {
-                    _buttonsNav[i].interactable = false;
-                }
-                //_gameControl._multiPlayerControl.CheckBlockPersonMenu(playerInput.playerIndex);
-                //ativar botão de voltar;
-                PersonImgOn();
-                _gameControl._multiPlayerControl.CheckSelecPersonList();
-
+                ConfirmSelec();
             }
             else
             {
@@ -141,9 +124,20 @@ public class SelectPerson : MonoBehaviour
                     _gameControl._multiPlayerControl._personSelecNumber.Remove(_gameControl._multiPlayerControl._personSelecNumber[i]);
                 }
             }
+            _gameControl._multiPlayerControl._selectsPersonListBlock.Remove(this.GetComponent<SelectPerson>());
+            _gameControl._multiPlayerControl._selectsPersonListFree.Add(this.GetComponent<SelectPerson>());
             _gameControl._playerMove[numbSelectPerson].gameObject.SetActive(false);
+            BlockOffList();
+            _gameControl._multiPlayerControl.BlockOffBig();
+            
+            
+            // _gameControl._multiPlayerControl.CheckListFree(imgBlockPerson.gameObject, numbSelectPerson);
             _playerMove = null;
             _checkSelect = false;
+
+           
+
+
             PersonImgOn();
          // _gameControl._multiPlayerControl.CheckSelecPersonList();
 
@@ -151,20 +145,47 @@ public class SelectPerson : MonoBehaviour
 
     }
 
+    void ConfirmSelec()
+    {
+        _checkSelect = true;
+        _gameControl._playerMove[numbSelectPerson].gameObject.SetActive(true);
+        _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
+
+        _gameControl._multiPlayerControl._personSelecNumber.Add(numbSelectPerson);
+        _gameControl._multiPlayerControl._selectsPersonListBlock.Add(this.GetComponent<SelectPerson>());
+        _gameControl._multiPlayerControl._selectsPersonListFree.Remove(this.GetComponent<SelectPerson>());
+
+        BlockOnList();
+        _gameControl._multiPlayerControl.BlockOnBig();
+        imgBlockPerson.gameObject.SetActive(false);
+        imgSelecPerson.gameObject.SetActive(true);
+        // _gameControl._multiPlayerControl.CheckListBloc(imgBlockPerson.gameObject, numbSelectPerson);
+
+        for (int j = 0; j < _buttonsNav.Count; j++)
+        {
+            _buttonsNav[j].interactable = false;
+        }
+        //_gameControl._multiPlayerControl.CheckBlockPersonMenu(playerInput.playerIndex);
+        //ativar botão de voltar;
+        PersonImgOn();
+        //  _gameControl._multiPlayerControl.CheckSelecPersonList();
+       
+    }
+
     public void PersonImgOn()
     {
-        ChechPersonBlock();
-        if (_tempN < 0 || _tempN > _personSelecTemp.Count-1)
+       // ChechPersonBlock();
+        if (_tempN < 0 || _tempN > _personSelec.Count-1)
         {
 
         }
         else
         {
-            for (int i = 0; i < _personSelecTemp.Count; i++)
+            for (int i = 0; i < _personSelec.Count; i++)
             {
-                _personSelecTemp[i].SetActive(false);
+                _personSelec[i].SetActive(false);
             }
-            _personSelecTemp[numbSelectPerson].SetActive(true);
+            _personSelec[numbSelectPerson].SetActive(true);
            
         }
 
@@ -181,6 +202,24 @@ public class SelectPerson : MonoBehaviour
         //_checkJump = true;
     }
 
-   
-
+    public void BlockOnList()
+    {
+        for (int i = 0; i < _gameControl._multiPlayerControl._personSelecNumber.Count; i++)
+        {
+            for (int j = 0; j < _personSelec.Count; j++)
+            {
+                if (_gameControl._multiPlayerControl._personSelecNumber[i] == j)
+                {
+                    _personSelec[j].GetComponent<PersonSelectCorMenu>().BlockOn(true);
+                }              
+            }
+        }       
+    }
+    public void BlockOffList()
+    {
+        for (int i = 0; i < _gameControl._multiPlayerControl._selectsPersonList.Count; i++)
+        {
+            _personSelec[numbSelectPerson].GetComponent<PersonSelectCorMenu>().BlockOn(false);
+        }
+    }
 }
