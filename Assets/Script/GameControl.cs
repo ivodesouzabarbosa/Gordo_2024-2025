@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameControl : MonoBehaviour
 {
-    public PlayerMove _playerMove;
     public GroundControl _groundControl;
     public CamPlayer _camPlayer;
     public EnemyBaseControl _enemyBaseControl;
+    public MultiPlayerControl _multiPlayerControl;
     public Transform _playerBase;
     public GameObject _coolFimFase;
 
@@ -23,10 +24,16 @@ public class GameControl : MonoBehaviour
     public bool _isDir;
     public bool[] _playerCamT;
 
+    public Transform _panelSelectPerson;
+    public int _numberPlayer;
+
+    public List<PlayerMove> _playerMove = new List<PlayerMove>();
+
     private void Awake()
     {
         _BlockList[0].SetActive(false);
         _BlockList[1].SetActive(true);
+        _multiPlayerControl = GetComponent<MultiPlayerControl>();
         Physics.IgnoreLayerCollision(7, 6);
         Physics.IgnoreLayerCollision(3, 8);
         Physics.IgnoreLayerCollision(3, 9);
@@ -48,4 +55,6 @@ public class GameControl : MonoBehaviour
         _player = targets[0];
         _checkCamOn= true;
     }
+
+    
 }

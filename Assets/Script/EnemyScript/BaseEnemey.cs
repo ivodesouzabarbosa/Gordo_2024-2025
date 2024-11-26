@@ -28,14 +28,14 @@ public class BaseEnemey : MonoBehaviour
 
             BaseOn = false;
 
-            Debug.Log($"Acertou: {hit.collider.name} na posição {hit.point}");
+          //  Debug.Log($"Acertou: {hit.collider.name} na posição {hit.point}");
         }
         else
         {
             // Desenha uma linha até o final da distância máxima, caso não acerte nada
             Debug.DrawLine(origin, origin + direction * rayDistance, Color.red);
             BaseOn = true;
-            Debug.Log("Nenhum impacto detectado para baixo.");
+          //  Debug.Log("Nenhum impacto detectado para baixo.");
         }
     }
 }
