@@ -1,49 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MultiPlayerControl : MonoBehaviour
 {
   //  public List<Transform> _personMenu=new List<Transform>();
     public List<SelectPerson> _selectsPersonList=new List<SelectPerson>();
-    public List<SelectPerson> _selectsPersonListFree = new List<SelectPerson>();
-    public List<SelectPerson> _selectsPersonListBlock = new List<SelectPerson>();
+    public List<bool> _checkPersonSel = new List<bool>();
     public List<int> _personSelecNumber = new List<int>();
-   
+    GameControl _gameControl;
 
-    public void BlockOnBig()
+
+
+    private void Start()
     {
-        for (int i = 0; i < _selectsPersonList.Count; i++)
+        _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+        for (int i = 0; i < _gameControl._playerMove.Count; i++)
         {
-            _selectsPersonList[i].BlockOnList();
+            _checkPersonSel.Add(false);
         }
     }
-
-    public void BlockOffBig()
+    public void SetCheckBlock(int value,bool check)
     {
-        for (int i = 0; i < _selectsPersonList.Count; i++)
-        {
-            _selectsPersonList[i].BlockOffList();
-        }
-
-    }
-    public void CheckListFree(GameObject value)
-    {
-        for (int i = 0; i < _selectsPersonListBlock.Count; i++)
-        {
-            _selectsPersonListBlock[i].imgBlockPerson.gameObject.SetActive(false);
-        }
-        value.gameObject.SetActive(false);
-   
-    }
-    public void CheckSelecPersonList()
-    {
-        Debug.Log("CheckSelecPersonList");
-        for (int j = 0; j < _selectsPersonList.Count; j++)
-        {           
-            _selectsPersonList[j].imgBlockPerson.gameObject.SetActive(true);
-        }
-
+        _checkPersonSel[value] = check;
     }
 
    
