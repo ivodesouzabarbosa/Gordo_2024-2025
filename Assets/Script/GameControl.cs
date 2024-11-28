@@ -29,6 +29,7 @@ public class GameControl : MonoBehaviour
     public int _numberPlayer;
 
     public List<PlayerMove> _playerMove = new List<PlayerMove>();
+    public List<Transform> _basePlayer = new List<Transform>();
 
     private void Awake()
     {

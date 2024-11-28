@@ -20,12 +20,14 @@ public class PlayerMove : MonoBehaviour
 
     CharacterController controller;
     Rigidbody _rb;
+    public Vector3 _posIniMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         controller= GetComponent<CharacterController>();
+        _posIniMenu=transform.position;
     }
 
     // Update is called once per frame
@@ -92,8 +94,8 @@ public class PlayerMove : MonoBehaviour
 
     public void SetMove(InputAction.CallbackContext value)
     {
-        _inputDir.x = value.ReadValue<Vector3>().x;
-        _inputDir.z = value.ReadValue<Vector3>().y;
+        _inputDir.x = value.ReadValue<Vector2>().x;
+        _inputDir.z = value.ReadValue<Vector2>().y;
     }
     public void SetJump(InputAction.CallbackContext value)
     {

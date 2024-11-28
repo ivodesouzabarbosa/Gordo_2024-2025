@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public int _indexPlayer; 
     GameControl _gameControl;
+    
 
 
     private void Awake()

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,10 @@ public class MultiPlayerControl : MonoBehaviour
   //  public List<Transform> _personMenu=new List<Transform>();
     public List<SelectPerson> _selectsPersonList=new List<SelectPerson>();
     public List<bool> _checkPersonSel = new List<bool>();
+    public int _numberPersonSel;
     public List<int> _personSelecNumber = new List<int>();
+    public List<Transform> _camImg = new List<Transform>();
+    public List<Texture> _TextImg = new List<Texture>();
     GameControl _gameControl;
 
 
@@ -26,5 +30,25 @@ public class MultiPlayerControl : MonoBehaviour
         _checkPersonSel[value] = check;
     }
 
+    public void MoveCamMenu(Transform _transform, GameControl gameControl, int selecPerson )
+    {
+        Vector3 vectorCam = gameControl._playerMove[selecPerson].transform.position;
+        _transform.DOMove(new Vector3(vectorCam.x+3, -3,vectorCam.z), .5f);
+    }
+    
+    public void CheckIniGame()
+    {
+        if (_numberPersonSel == _gameControl._numberPlayer)
+        {
+            Debug.Log("COMEÇAR GAME");
+            PersonMovemntStart();
+
+        }
+    }
+
+    public void PersonMovemntStart()// liberar movimento de personagens
+    {
+        _gameControl._gameStart=true;
+    }
    
 }
