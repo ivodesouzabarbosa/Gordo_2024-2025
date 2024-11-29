@@ -38,6 +38,7 @@ public class SelectPerson : MonoBehaviour
     public Button _btCima;
     public Transform _camImgPlayer;
     public RawImage _rawImagecam;
+    public Transform _pPlayer;
 
 
 
@@ -49,9 +50,7 @@ public class SelectPerson : MonoBehaviour
       
 
         numbPerson = _gameControl._playerMove.Count-1;
-        _indexPlayer = _gameControl._numberPlayer;
-        _camImgPlayer = _gameControl._multiPlayerControl._camImg[_indexPlayer];
-        _rawImagecam.texture = _gameControl._multiPlayerControl._TextImg[_indexPlayer];
+        SetIndex();
         _gameControl._numberPlayer++;
         transform.SetParent(_gameControl._panelSelectPerson);
 
@@ -67,13 +66,20 @@ public class SelectPerson : MonoBehaviour
         imgBlockPerson.gameObject.SetActive(_gameControl._multiPlayerControl._checkPersonSel[numbSelectPerson]);
         _gameControl._multiPlayerControl.MoveCamMenu(_camImgPlayer, _gameControl, numbSelectPerson);
 
-
+        _pPlayer.SetParent(_gameControl._multiPlayerControl._PlayerGame);
 
         // sourceObject = _gameControl._playerInputs[0].gameObject;
         // CopiarPlayer();
         // _gameControl._playerInputs[0].gameObject.SetActive(true);
     }
 
+    public void SetIndex()
+    {
+        _indexPlayer = _gameControl._numberPlayer;
+        _camImgPlayer = _gameControl._multiPlayerControl._camImg[_indexPlayer];
+        _rawImagecam.texture = _gameControl._multiPlayerControl._TextImg[_indexPlayer];
+
+    }
 
     public void ChechPersonBlock()
     {
@@ -135,6 +141,7 @@ public class SelectPerson : MonoBehaviour
             {
                 _gameControl._multiPlayerControl.SetCheckBlock(numbSelectPerson, true);
                 ConfirmSelec();
+               
                 _btVoltar.GetComponent<Button>().Select();
                 
                 _btVoltar.localScale = Vector3.one; Debug.Log("Animação de aumentar botão de voltar");
@@ -156,6 +163,7 @@ public class SelectPerson : MonoBehaviour
     public void BtVoltar()
     {
         Debug.Log("Animação de dinimuir botão  de voltar");
+        //_pPlayer.SetParent(transform);
         _gameControl._multiPlayerControl._numberPersonSel--;
         _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
         _checkSelect = false;
@@ -249,7 +257,7 @@ public class SelectPerson : MonoBehaviour
 
         //  _gameControl._multiPlayerControl.CheckSelecPersonList();
         _gameControl._multiPlayerControl._numberPersonSel++;
-        _gameControl._multiPlayerControl.CheckIniGame();
+        _gameControl._multiPlayerControl.CheckIniGame(_indexPlayer);
 
     }
 

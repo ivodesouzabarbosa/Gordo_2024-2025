@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MultiPlayerControl : MonoBehaviour
@@ -14,7 +15,9 @@ public class MultiPlayerControl : MonoBehaviour
     public List<Transform> _camImg = new List<Transform>();
     public List<Texture> _TextImg = new List<Texture>();
     GameControl _gameControl;
-
+    public GameObject _menuGame;
+    public Transform _PlayerGame;
+    public PlayerInputManager _inputManager;
 
 
     private void Start()
@@ -36,13 +39,14 @@ public class MultiPlayerControl : MonoBehaviour
         _transform.DOMove(new Vector3(vectorCam.x+3, -3,vectorCam.z), .5f);
     }
     
-    public void CheckIniGame()
+    public void CheckIniGame(int value)
     {
         if (_numberPersonSel == _gameControl._numberPlayer)
         {
             Debug.Log("COMEÇAR GAME");
             PersonMovemntStart();
-
+            _menuGame.SetActive(false);
+            
         }
     }
 
@@ -50,5 +54,7 @@ public class MultiPlayerControl : MonoBehaviour
     {
         _gameControl._gameStart=true;
     }
+
+   
    
 }

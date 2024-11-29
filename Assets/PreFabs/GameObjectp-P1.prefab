@@ -757,6 +757,7 @@ MonoBehaviour:
   _btCima: {fileID: 8135622368997198176}
   _camImgPlayer: {fileID: 0}
   _rawImagecam: {fileID: 290837166656856587}
+  _pPlayer: {fileID: 7573071255749603046}
 --- !u!1 &5941654361596959896
 GameObject:
   m_ObjectHideFlags: 0
