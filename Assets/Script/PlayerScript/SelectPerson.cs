@@ -42,8 +42,9 @@ public class SelectPerson : MonoBehaviour
 
     bool _timeD;
 
+    public SliderPLayer _sliderPLayers;
 
-
+    public string _nomePLayer;
     void Start()
     {
         _pPlayer.GetComponent<InptPLayerControll>().selectPerson = this.GetComponent<SelectPerson>();
@@ -52,8 +53,9 @@ public class SelectPerson : MonoBehaviour
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         _gameControl._multiPlayerControl._selectsPersonList.Add(this.GetComponent<SelectPerson>());
       
-
         numbPerson = _gameControl._playerMove.Count-1;
+        _nomePLayer = "Player " + _nomePLayer+1;
+        _sliderPLayers = _gameControl._multiPlayerControl._sliderPLayers[_gameControl._numberPlayer];
         SetIndex();
         _gameControl._numberPlayer++;
          transform.SetParent(_gameControl._panelSelectPerson);
@@ -80,7 +82,6 @@ public class SelectPerson : MonoBehaviour
     public void SetIndex()
     {
         _indexPlayer = _gameControl._numberPlayer;
-        Debug.Log(_indexPlayer);
         _camImgPlayer = _gameControl._multiPlayerControl._camImg[_indexPlayer];
         _rawImagecam.texture = _gameControl._multiPlayerControl._TextImg[_indexPlayer];
 

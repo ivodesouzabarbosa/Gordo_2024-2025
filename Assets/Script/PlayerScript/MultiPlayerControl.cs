@@ -18,6 +18,7 @@ public class MultiPlayerControl : MonoBehaviour
     public GameObject _menuGame;
     public Transform _PlayerGame;
     public PlayerInputManager _inputManager;
+    public List<SliderPLayer> _sliderPLayers = new List<SliderPLayer>();
 
 
     private void Start()
