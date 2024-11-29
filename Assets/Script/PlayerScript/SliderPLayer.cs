@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SliderPLayer : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject _imgDescGame;
-    void Start()
+    public TextMeshProUGUI _textPlayerGame;
+
+    public void SetNomePlayer(string nomePLayer)
     {
-        
+
+        _textPlayerGame.text = nomePLayer;
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

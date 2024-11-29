@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -45,18 +46,32 @@ public class SelectPerson : MonoBehaviour
     public SliderPLayer _sliderPLayers;
 
     public string _nomePLayer;
+
+   
+
     void Start()
     {
+
         _pPlayer.GetComponent<InptPLayerControll>().selectPerson = this.GetComponent<SelectPerson>();
 
         _btVoltar.localScale = Vector3.zero; 
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+
+
         _gameControl._multiPlayerControl._selectsPersonList.Add(this.GetComponent<SelectPerson>());
       
         numbPerson = _gameControl._playerMove.Count-1;
-        _nomePLayer = "Player " + _nomePLayer+1;
-        _sliderPLayers = _gameControl._multiPlayerControl._sliderPLayers[_gameControl._numberPlayer];
+       
+        
+            
+        
+        
+      
         SetIndex();
+        Debug.Log("_gameControl._numberPlayer " + _indexPlayer);
+        _sliderPLayers = _gameControl._multiPlayerControl._sliderPLayers[_indexPlayer];
+        _gameControl._multiPlayerControl._sliderPLayersOn.Add(this.GetComponent<SliderPLayer>());
+        _sliderPLayers.gameObject.SetActive(true);
         _gameControl._numberPlayer++;
          transform.SetParent(_gameControl._panelSelectPerson);
 
@@ -77,13 +92,21 @@ public class SelectPerson : MonoBehaviour
         // sourceObject = _gameControl._playerInputs[0].gameObject;
         // CopiarPlayer();
         // _gameControl._playerInputs[0].gameObject.SetActive(true);
+        _nomePLayer = "Player " + (playerInput.playerIndex+1);// nomear o player
+        _pPlayer.GetComponent<InptPLayerControll>()._nomePLayerMenu.text = _nomePLayer;//(_nomePLayer);
+        _sliderPLayers.SetNomePlayer(_nomePLayer);
+
+
+
     }
 
     public void SetIndex()
     {
-        _indexPlayer = _gameControl._numberPlayer;
+        _indexPlayer = _pPlayer.GetComponent<PlayerInput>().playerIndex;//_gameControl._numberPlayer;
         _camImgPlayer = _gameControl._multiPlayerControl._camImg[_indexPlayer];
         _rawImagecam.texture = _gameControl._multiPlayerControl._TextImg[_indexPlayer];
+       
+        
 
     }
 
@@ -172,7 +195,7 @@ public class SelectPerson : MonoBehaviour
         {
             _timeD = true;
             Debug.Log("Animação de dinimuir botão  de voltar");
-
+            _sliderPLayers.gameObject.SetActive(false);
             //_pPlayer.SetParent(transform);
             _gameControl._multiPlayerControl._numberPersonSel--;
             _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);

@@ -19,6 +19,8 @@ public class MultiPlayerControl : MonoBehaviour
     public Transform _PlayerGame;
     public PlayerInputManager _inputManager;
     public List<SliderPLayer> _sliderPLayers = new List<SliderPLayer>();
+    public List<SliderPLayer> _sliderPLayersOn = new List<SliderPLayer>();
+    public Transform _sliderPLayersGame;
 
 
     private void Start()
@@ -28,6 +30,7 @@ public class MultiPlayerControl : MonoBehaviour
         {
             _checkPersonSel.Add(false);
         }
+        _sliderPLayersGame.transform.localScale = Vector3.zero;
     }
     public void SetCheckBlock(int value,bool check)
     {
@@ -50,6 +53,8 @@ public class MultiPlayerControl : MonoBehaviour
                 Debug.Log("COMEÇAR GAME");
                 PersonMovemntStart();
                 _menuGame.SetActive(false);
+                SliderPLayer sliderPLayer1= _sliderPLayers[0];
+                _sliderPLayersGame.transform.localScale = Vector3.one;
                 for (int i = 0; i < _gameControl._playerCamT.Length; i++)
                 {
                     _gameControl._playerCamT[i]=true;
