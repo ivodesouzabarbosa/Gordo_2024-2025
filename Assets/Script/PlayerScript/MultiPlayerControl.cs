@@ -41,11 +41,25 @@ public class MultiPlayerControl : MonoBehaviour
     
     public void CheckIniGame(int value)
     {
+        PlayerMove playerMove = _gameControl._playerMove[0];
         if (_numberPersonSel == _gameControl._numberPlayer)
         {
-            Debug.Log("COMEÇAR GAME");
-            PersonMovemntStart();
-            _menuGame.SetActive(false);
+            if (playerMove._selectPersonMove)
+            {
+                Debug.Log("COMEÇAR GAME");
+                PersonMovemntStart();
+                _menuGame.SetActive(false);
+                for (int i = 0; i < _gameControl._playerCamT.Length; i++)
+                {
+                    _gameControl._playerCamT[i]=true;
+                }
+            }
+            else
+            {
+                Debug.Log("Personagem 1(Diguinho) precisa ser escolhido");
+            }
+           
+          
             
         }
     }

@@ -21,6 +21,7 @@ public class PlayerMove : MonoBehaviour
     CharacterController controller;
     Rigidbody _rb;
     public Vector3 _posIniMenu;
+    public bool _selectPersonMove;
 
     // Start is called before the first frame update
     void Start()
@@ -96,6 +97,7 @@ public class PlayerMove : MonoBehaviour
     {
         _inputDir.x = value.ReadValue<Vector2>().x;
         _inputDir.z = value.ReadValue<Vector2>().y;
+
     }
     public void SetJump(InputAction.CallbackContext value)
     {

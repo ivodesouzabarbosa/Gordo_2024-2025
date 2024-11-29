@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour
         
         transform.SetParent(_gameControl._playerBase);
         _indexPlayer = _gameControl._numbPlayer;
-        _gameControl._playerCamT[_indexPlayer] = false;
+        _gameControl._playerCamT[_indexPlayer] = true;
         _gameControl._numbPlayer++;
 
     }

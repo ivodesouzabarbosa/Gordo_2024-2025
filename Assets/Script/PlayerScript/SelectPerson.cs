@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SelectPerson : MonoBehaviour
 {
-    [SerializeField] int _indexPlayer;
+    public int _indexPlayer;
     GameControl _gameControl;
     [SerializeField] Button _buttonSelect;
     public PlayerInput playerInput;
@@ -26,7 +26,7 @@ public class SelectPerson : MonoBehaviour
     int _tempN;
 
     public List<GameObject> _personSelec = new List<GameObject>();
-
+    
 
 
     //  public List<GameObject> _personSelecTemp = new List<GameObject>();
@@ -40,10 +40,14 @@ public class SelectPerson : MonoBehaviour
     public RawImage _rawImagecam;
     public Transform _pPlayer;
 
+    bool _timeD;
+
 
 
     void Start()
     {
+        _pPlayer.GetComponent<InptPLayerControll>().selectPerson = this.GetComponent<SelectPerson>();
+
         _btVoltar.localScale = Vector3.zero; 
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         _gameControl._multiPlayerControl._selectsPersonList.Add(this.GetComponent<SelectPerson>());
@@ -52,7 +56,7 @@ public class SelectPerson : MonoBehaviour
         numbPerson = _gameControl._playerMove.Count-1;
         SetIndex();
         _gameControl._numberPlayer++;
-        transform.SetParent(_gameControl._panelSelectPerson);
+         transform.SetParent(_gameControl._panelSelectPerson);
 
         transform.localScale = new Vector3(2,2,2);
         transform.localPosition = Vector3.zero;
@@ -76,6 +80,7 @@ public class SelectPerson : MonoBehaviour
     public void SetIndex()
     {
         _indexPlayer = _gameControl._numberPlayer;
+        Debug.Log(_indexPlayer);
         _camImgPlayer = _gameControl._multiPlayerControl._camImg[_indexPlayer];
         _rawImagecam.texture = _gameControl._multiPlayerControl._TextImg[_indexPlayer];
 
@@ -162,13 +167,21 @@ public class SelectPerson : MonoBehaviour
 
     public void BtVoltar()
     {
-        Debug.Log("Animação de dinimuir botão  de voltar");
-        //_pPlayer.SetParent(transform);
-        _gameControl._multiPlayerControl._numberPersonSel--;
-        _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
-        _checkSelect = false;
-        Invoke("TimeVoltar", 0.3f);
+        if (!_timeD)
+        {
+            _timeD = true;
+            Debug.Log("Animação de dinimuir botão  de voltar");
 
+            //_pPlayer.SetParent(transform);
+            _gameControl._multiPlayerControl._numberPersonSel--;
+            _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
+            _playerMove._selectPersonMove = false;
+            //  _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
+            _checkSelect = false;
+
+            _buttonConf.Select();
+            Invoke("TimeVoltar", 0.3f);
+        }
 
       
     }
@@ -177,6 +190,7 @@ public class SelectPerson : MonoBehaviour
     public void VoltarCam()
     {
         _gameControl._multiPlayerControl.MoveCamMenu(_camImgPlayer, _gameControl, numbSelectPerson);
+       
 
     }
     void TimeVoltar()
@@ -204,8 +218,8 @@ public class SelectPerson : MonoBehaviour
         _gameControl._multiPlayerControl._personSelecNumber.Remove(numbSelectPerson);
 ;
         // _gameControl._multiPlayerControl.CheckListFree(imgBlockPerson.gameObject, numbSelectPerson);
-        _playerMove = null;
-      
+        //_playerMove = null;
+        _timeD = false;
         PersonImgOn();
 
        
@@ -227,6 +241,7 @@ public class SelectPerson : MonoBehaviour
 
         //_gameControl._playerMove[numbSelectPerson].gameObject.SetActive(true); ----             // ativar personagem
         _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
+        _playerMove._selectPersonMove = true;
         _playerMove.transform.position = _gameControl._basePlayer[_indexPlayer].position;
         _playerMove.transform.DOMove(_gameControl._basePlayer[_indexPlayer].position, 0.25f);
         _gameControl._multiPlayerControl.MoveCamMenu(_camImgPlayer, _gameControl, numbSelectPerson);

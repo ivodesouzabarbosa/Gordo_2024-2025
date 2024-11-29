@@ -51,7 +51,16 @@ public class JoystickPlayerMonitor : MonoBehaviour
             {
                 Debug.Log($"Joystick desconectado: Player {i + 1}");
                 _gameControl._numberPlayer--;
-               // _gameControl._multiPlayerControl._selectsPersonList[i].gameObject.SetActive(false);
+                
+                //Debug.Log[i];
+                if (_gameControl._multiPlayerControl._selectsPersonList[i] != null) { }
+                {
+                    SelectPerson menuPlayer = _gameControl._multiPlayerControl._selectsPersonList[i];
+                   // menuPlayer._pPlayer.GetComponent<InptPLayerControll>()._imgDesc.enabled = true;
+                    //  menuPlayer.localScale = Vector3.zero;
+                    // menuPlayer.SetParent(_gameControl._multiPlayerControl._PlayerGame);
+                    // menuPlayer._desconectImg.SetActive(true);
+                }
             }
         }
 
@@ -62,6 +71,18 @@ public class JoystickPlayerMonitor : MonoBehaviour
             {
                 Debug.Log($"Joystick conectado: Player {i + 1} - {newJoysticks[i]}");
                 _gameControl._numberPlayer++;
+                bool CheckGameStart = _gameControl._gameStart;
+                
+
+                if (!CheckGameStart && _gameControl._multiPlayerControl._selectsPersonList[i] != null)
+                {
+                    // menuPlayer.localScale = new Vector3(2, 2, 2);
+                    SelectPerson menuPlayer = _gameControl._multiPlayerControl._selectsPersonList[i];
+                  //  menuPlayer._pPlayer.GetComponent<InptPLayerControll>()._imgDesc.enabled = false;
+                   // menuPlayer._desconectImg.SetActive(false);
+                    // menuPlayer.SetSiblingIndex(_gameControl._multiPlayerControl._selectsPersonList[i]._indexPlayer);
+                }
+                    
             }
         }
     }
@@ -75,8 +96,7 @@ public class JoystickPlayerMonitor : MonoBehaviour
             {
                 Debug.Log($"Joystick conectado: Player {i + 1} - {joysticks[i]}");
                _gameControl._numberPlayer++;
-               // if (_gameControl._multiPlayerControl._selectsPersonList[i] != null)
-                    // _gameControl._multiPlayerControl._selectsPersonList[i].gameObject.SetActive(true);
+
             }
         }
     }

@@ -2559,7 +2559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &825561293
 Transform:
   m_ObjectHideFlags: 0
@@ -4137,7 +4137,7 @@ MonoBehaviour:
   _playerBase: {fileID: 1377468121}
   _coolFimFase: {fileID: 107870237}
   targets: []
-  _player: {fileID: 0}
+  _player: {fileID: 2079843047}
   _checkCamOn: 0
   _BlockList:
   - {fileID: 1843032082}
@@ -4166,7 +4166,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616038497}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37882a4810763f84bb6dd408d0180907, type: 3}
   m_Name: 
@@ -4214,6 +4214,7 @@ MonoBehaviour:
   - {fileID: 8400000, guid: 3034b15149a80234dbb30e5e52f781b1, type: 2}
   _menuGame: {fileID: 2051078967}
   _PlayerGame: {fileID: 1092988003}
+  _inputManager: {fileID: 64551609}
 --- !u!114 &1616038502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4221,7 +4222,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616038497}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a227a30208b042d43a1ccba87a19bdab, type: 3}
   m_Name: 
@@ -5497,7 +5498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1850333247409767505, guid: 02f6d995d074d274db29cf27c66ea8d9, type: 3}
       propertyPath: m_Name
-      value: Person1
+      value: Person1(Diguinho)
       objectReference: {fileID: 0}
     - target: {fileID: 1850333247409767505, guid: 02f6d995d074d274db29cf27c66ea8d9, type: 3}
       propertyPath: m_IsActive

@@ -54,7 +54,7 @@ public class GameControl : MonoBehaviour
         {
             targets.Add(obj.transform);
         }
-        _player = targets[0];
+        //_player = targets[0];
         _checkCamOn= true;
     }
 
