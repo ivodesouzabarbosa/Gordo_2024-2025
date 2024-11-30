@@ -17,6 +17,8 @@ public class CamPlayer : MonoBehaviour
 
     private Coroutine rotationCoroutine; // Referência para a corrotina em execução
 
+    public List<PlayerMove> _playerMoves;
+
 
 
     // Start is called before the first frame update
@@ -31,8 +33,8 @@ public class CamPlayer : MonoBehaviour
 
     private void Update()
     {
-        _gameControl._playerCamT[0] = true;
-        if (_gameControl._checkCamOn  && _gameControl._playerCamT[0] && _gameControl._playerCamT[1] && _gameControl._playerCamT[2] && _gameControl._playerCamT[3])
+        _playerMoves[0]._personMoveCam = true;
+        if (_gameControl._checkCamOn  && _playerMoves[1]._personMoveCam && _playerMoves[2]._personMoveCam && _playerMoves[3]._personMoveCam)
         {
             MoveCam();
         }

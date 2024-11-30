@@ -394,6 +394,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7961941735116505818, guid: 5965dae5052b76b4d8988e4dd0a9dba0, type: 3}
+      propertyPath: _indexPerson
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7530371909983469688, guid: 5965dae5052b76b4d8988e4dd0a9dba0, type: 3}
     m_RemovedGameObjects: []
@@ -3682,6 +3686,11 @@ MonoBehaviour:
   rotationSpeed: 5
   targetYRotation: 5
   _cameraVirtual: {fileID: 1545739753}
+  _playerMoves:
+  - {fileID: 2079843049}
+  - {fileID: 823818036}
+  - {fileID: 1943536759}
+  - {fileID: 1252025626}
 --- !u!1 &597451728
 GameObject:
   m_ObjectHideFlags: 0
@@ -5390,6 +5399,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7961941735116505818, guid: 4353b09f3ec2ed248926ab8d0617ffec, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961941735116505818, guid: 4353b09f3ec2ed248926ab8d0617ffec, type: 3}
+      propertyPath: _indexPerson
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -9889,7 +9902,6 @@ MonoBehaviour:
   _numbPlayer: 0
   _isDirIvert: 0
   _isDir: 0
-  _playerCamT: 01010101
   _panelSelectPerson: {fileID: 664589258}
   _numberPlayer: 0
   _playerMove:
@@ -12497,6 +12509,10 @@ PrefabInstance:
     - target: {fileID: 7961941735116505818, guid: d0167220530d2e743b160fa2eb257c9b, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961941735116505818, guid: d0167220530d2e743b160fa2eb257c9b, type: 3}
+      propertyPath: _indexPerson
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7530371909983469688, guid: d0167220530d2e743b160fa2eb257c9b, type: 3}

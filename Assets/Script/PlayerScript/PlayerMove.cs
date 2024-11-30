@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
+    public int _indexPerson;
     public float _speed;
     public float _gravity = -9.81f;    // Intensidade da gravidade
     public float _jumpHeight = 1.5f;   // Altura do pulo
@@ -22,6 +23,8 @@ public class PlayerMove : MonoBehaviour
     Rigidbody _rb;
     public Vector3 _posIniMenu;
     public bool _selectPersonMove;
+    public bool _personMoveCam;
+    public SelectPerson _selectPerson;
 
     // Start is called before the first frame update
     void Start()

@@ -6,11 +6,13 @@ public class PlayerControl : MonoBehaviour
 {
     public int _indexPlayer; 
     GameControl _gameControl;
+    PlayerMove _playerMove;
     
 
 
     private void Awake()
     {
+        _playerMove = GetComponent<PlayerMove>();
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         _gameControl.ContPLayer();
     }
@@ -20,7 +22,7 @@ public class PlayerControl : MonoBehaviour
         
         transform.SetParent(_gameControl._playerBase);
         _indexPlayer = _gameControl._numbPlayer;
-        _gameControl._playerCamT[_indexPlayer] = true;
+        _playerMove._personMoveCam = true;
         _gameControl._numbPlayer++;
 
     }
@@ -30,7 +32,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.CompareTag("CamTriguer"))
         {
-            _gameControl._playerCamT[_indexPlayer] = true;
+            _playerMove._personMoveCam = true; 
         }
         if (_indexPlayer==0 && other.gameObject.name == "Inter1")
         {
@@ -58,7 +60,7 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.CompareTag("CamTriguer"))
         {
-            _gameControl._playerCamT[_indexPlayer] = false;
+            _playerMove._personMoveCam = false;
         }
     }
 }

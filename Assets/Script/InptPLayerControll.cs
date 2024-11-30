@@ -13,6 +13,7 @@ public class InptPLayerControll : MonoBehaviour
     public SelectPerson selectPerson;
 
     public TextMeshProUGUI _nomePLayerMenu;
+    bool checkPass;
    
 
    
@@ -86,12 +87,25 @@ public class InptPLayerControll : MonoBehaviour
         //Debug.Log(selectPerson._nomePLayer + " " + selectPerson._sliderPLayers._imgDescGame.activeInHierarchy);
         if (selectPerson != null)
         {
-            if (IsJoystickConnected() && selectPerson._checkSelect)
+            if (IsJoystickConnected() && selectPerson._checkSelect && (!selectPerson._playerMove.gameObject.activeInHierarchy || !checkPass))
             {
+                
                 Debug.Log(selectPerson._nomePLayer + " conectado");
                 _gameControl._numberPlayer++;
                 selectPerson._sliderPLayers._imgDescGame.gameObject.SetActive(false);
                 selectPerson._sliderPLayers.SetNomePlayer(selectPerson._nomePLayer);
+                if (checkPass && selectPerson._playerMove._indexPerson != 0  && selectPerson._playerMove._selectPersonMove)
+                {
+                    selectPerson._playerMove.gameObject.SetActive(true);
+                    selectPerson._playerMove._personMoveCam = false;
+                    selectPerson._playerMove.transform.position = _gameControl._camPlayer.transform.position;
+                    Debug.Log("ww");
+                }
+                else
+                {
+                    Debug.Log("DesPausar game, pois o diguinho personagem está com jogador desconectado");
+                }
+                checkPass = true;
                 //SetNomePlayer(selectPerson._nomePLayer);
                 // selectPerson._sliderPLayers.gameObject.SetActive(true);
 
@@ -102,7 +116,17 @@ public class InptPLayerControll : MonoBehaviour
 
                 _gameControl._numberPlayer--;
                 selectPerson._sliderPLayers._imgDescGame.gameObject.SetActive(true);
-              
+                if (selectPerson._playerMove._indexPerson!= 0 && selectPerson._playerMove._selectPersonMove)
+                {
+                    selectPerson._playerMove.gameObject.SetActive(false);
+                    selectPerson._playerMove._personMoveCam = true;
+                }
+                else
+                {
+                    Debug.Log("Pausar game, pois o diguinho personagem está com jogador desconectado");
+                }
+
+
             }
 
         }

@@ -23,7 +23,7 @@ public class GameControl : MonoBehaviour
     public int _numbPlayer;
     public bool _isDirIvert;
     public bool _isDir;
-    public bool[] _playerCamT;
+    //public bool[] _playerCamT;
 
     public Transform _panelSelectPerson;
     public int _numberPlayer;

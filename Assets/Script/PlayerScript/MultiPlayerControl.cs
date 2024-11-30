@@ -55,9 +55,9 @@ public class MultiPlayerControl : MonoBehaviour
                 _menuGame.SetActive(false);
                 SliderPLayer sliderPLayer1= _sliderPLayers[0];
                 _sliderPLayersGame.transform.localScale = Vector3.one;
-                for (int i = 0; i < _gameControl._playerCamT.Length; i++)
+                for (int i = 0; i < _gameControl._playerMove.Count; i++)
                 {
-                    _gameControl._playerCamT[i]=true;
+                    _gameControl._playerMove[i]._personMoveCam=true;
                 }
             }
             else

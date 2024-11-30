@@ -265,6 +265,7 @@ public class SelectPerson : MonoBehaviour
 
         //_gameControl._playerMove[numbSelectPerson].gameObject.SetActive(true); ----             // ativar personagem
         _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
+        _playerMove._selectPerson=this.GetComponent<SelectPerson>();
         _playerMove._selectPersonMove = true;
         _playerMove.transform.position = _gameControl._basePlayer[_indexPlayer].position;
         _playerMove.transform.DOMove(_gameControl._basePlayer[_indexPlayer].position, 0.25f);
