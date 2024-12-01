@@ -1,12 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
     public int _indexPerson;
+    public int _indexSkin;
+    public bool _checkSkin;
+    public bool _personSeleck;
+    public bool _selectTemp;
     public float _speed;
     public float _gravity = -9.81f;    // Intensidade da gravidade
     public float _jumpHeight = 1.5f;   // Altura do pulo
@@ -17,7 +22,7 @@ public class PlayerMove : MonoBehaviour
 
     [SerializeField] Vector3 _inputDir;
     [SerializeField] float _speedAnim;
-    [SerializeField] Transform _playerObject;
+    public List<Transform> _playerObject;
 
     CharacterController controller;
     Rigidbody _rb;
@@ -25,13 +30,21 @@ public class PlayerMove : MonoBehaviour
     public bool _selectPersonMove;
     public bool _personMoveCam;
     public SelectPerson _selectPerson;
+    GameControl _gameControl;
+    int _numberTrue;
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        controller= GetComponent<CharacterController>();
+        _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+        controller = GetComponent<CharacterController>();
         _posIniMenu=transform.position;
+        if (_playerObject.Count > 1)
+        {
+            _checkSkin = true;
+        }
+        SelectSkin(_indexSkin);
     }
 
     // Update is called once per frame
@@ -62,7 +75,7 @@ public class PlayerMove : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
 
             // Suaviza a transição para a nova rotação
-            _playerObject.rotation = Quaternion.Slerp(_playerObject.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            _playerObject[_indexSkin].rotation = Quaternion.Slerp(_playerObject[_indexSkin].rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
 
 
@@ -105,5 +118,60 @@ public class PlayerMove : MonoBehaviour
     public void SetJump(InputAction.CallbackContext value)
     {
         _checkJump = true;
+    }
+    public void SelectSkin(int value)
+    {
+        for (int i = 0; i < _playerObject.Count; i++)
+        {
+            _playerObject[i].gameObject.SetActive(false);
+        }
+        Debug.Log("_indexSkin " + _indexSkin);
+        _playerObject[_indexSkin].gameObject.SetActive(true);
+
+
+    }
+    void CheckInter()
+    {
+        for (int i = 0; i < _gameControl._playerMove.Count; i++)
+        {
+            if (_gameControl._playerMove[i]._checkSkin)
+            {
+                _numberTrue++;
+               
+                Debug.Log("_numberTrue "+_numberTrue+ " "+ _checkSkin);
+
+            }
+        }
+        if (_numberTrue == 0)
+        {
+            _checkSkin = true;
+        }
+        else
+        {
+            _checkSkin = false;
+        }
+        _numberTrue = 0;
+    }
+    public void SkinU()
+    {     
+        
+        _indexSkin++;
+        if (_indexSkin >= _playerObject.Count-1)
+        {
+            _indexSkin= _playerObject.Count-1;
+        }
+      //  CheckInter();
+        SelectSkin(_indexSkin);
+
+    }
+    public void SkinD()
+    {
+        _indexSkin--;
+        if (_indexSkin < 0)
+        {
+            _indexSkin=0;
+        }
+    //    CheckInter();
+        SelectSkin(_indexSkin);
     }
 }

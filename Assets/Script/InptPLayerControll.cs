@@ -74,7 +74,7 @@ public class InptPLayerControll : MonoBehaviour
             _gameControl._numberPlayer--;
             if (selectPerson._checkSelect)// se ainda estiver no menu de seleção de personagem
             {
-                selectPerson.BtVoltar();
+                selectPerson.BtVoltarPerson();
                 
             }
            
