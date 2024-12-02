@@ -5,10 +5,15 @@ using UnityEngine;
 public class EnemeyMove : MonoBehaviour
 {
     public string targetTag = "Player"; // Tag usada para identificar os alvos
+    public Transform targetIni; // Tag usada para identificar os alvos
+    [SerializeField] float distance;
+    [SerializeField] float distanceCheck;
+    Vector3 direction;
     public float maxSpeed = 5f; // Velocidade máxima
     public float acceleration = 2f; // Taxa de aceleração
     public float rotationSpeed = 10f; // Velocidade de rotação
     public float stoppingDistance = 1f; // Distância mínima para parar
+    public bool _stopMove;
 
     private Rigidbody rb;
     private Transform closestTarget;
@@ -29,6 +34,7 @@ public class EnemeyMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentTime = countdownTime;
+        closestTarget = targetIni;
     }
     private void Update()
     {
@@ -46,14 +52,30 @@ public class EnemeyMove : MonoBehaviour
             rb.velocity = Vector3.zero; // Para o movimento se não houver alvos
             return;
         }
+        if (distance>distanceCheck)
+        {
+           // closestTarget = targetIni;
 
-        // Calcula a direção para o alvo
-        Vector3 direction = (closestTarget.position - transform.position).normalized;
+            direction = (targetIni.position - transform.position).normalized;
 
-        // Calcula a distância até o alvo
-        float distance = Vector3.Distance(transform.position, closestTarget.position);
+            // Calcula a distância até o alvo
+            distance = Vector3.Distance(transform.position, targetIni.position);
+        }
+        else
+        {
+           
+            // Calcula a direção para o alvo
+            direction = (closestTarget.position - transform.position).normalized;
 
-        if (distance > stoppingDistance)
+            // Calcula a distância até o alvo
+            distance = Vector3.Distance(transform.position, closestTarget.position);
+
+        }
+       
+        distance = Vector3.Distance(transform.position, closestTarget.position);
+
+
+        if (distance > stoppingDistance && !_stopMove)
         {
             // Aumenta a velocidade gradualmente até o máximo permitido
             currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.fixedDeltaTime);

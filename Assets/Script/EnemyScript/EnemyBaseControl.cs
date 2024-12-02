@@ -95,12 +95,14 @@ public class EnemyBaseControl : MonoBehaviour
         {
             if (!_checkPosini && _posListBase1[_numbList1].GetComponent<BaseEnemey>().BaseOn)
             {
-                bullet.transform.position = _posListBase2[_numbList1].position; 
+                bullet.transform.position = _posListBase2[_numbList1].position;
+                bullet.GetComponent<EnemeyMove>().targetIni = _posListBase1[_numbList1];
                 Pos1list();
             }
             else if (_checkPosini && _posListBase2[_numbList2].GetComponent<BaseEnemey>().BaseOn)
             {
                 bullet.transform.position = _posListBase1[_numbList2].position;
+                bullet.GetComponent<EnemeyMove>().targetIni = _posListBase2[_numbList2];
                 Pos2list();
             }
             else

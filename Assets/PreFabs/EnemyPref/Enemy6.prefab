@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 1867477417887492036}
   - component: {fileID: 1558778506948391644}
   - component: {fileID: 6587966757814691122}
+  - component: {fileID: -3898977182468647}
   m_Layer: 7
   m_Name: Enemy6
   m_TagString: Untagged
@@ -255,7 +256,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
+  targetIni: {fileID: 0}
+  distance: 0
+  distanceCheck: 25
   maxSpeed: 3
   acceleration: 1
   rotationSpeed: 10
   stoppingDistance: 2
+  _stopMove: 0
+  timePos: 0
+  countdownTime: 5
+  currentTime: 0
+--- !u!114 &-3898977182468647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870456747863721192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2151dbec37ef9414da69a5443d7cad8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxOrigin: {x: 0, y: 0, z: 0.01}
+  boxSize: {x: 1, y: 1, z: 1}
+  direction: {x: 0, y: 0, z: 1}
+  distance: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
