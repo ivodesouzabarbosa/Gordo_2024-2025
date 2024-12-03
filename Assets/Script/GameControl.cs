@@ -31,6 +31,7 @@ public class GameControl : MonoBehaviour
     public List<PlayerMove> _playerMove = new List<PlayerMove>();
     public List<PlayerMove> _playerMoveSkinDig = new List<PlayerMove>();
     public List<Transform> _basePlayer = new List<Transform>();
+    public Transform _canvasEnemy;
 
     private void Awake()
     {

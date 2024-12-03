@@ -211,13 +211,30 @@ public class SelectPerson : MonoBehaviour
                     _gameControl._multiPlayerControl.SetCheckBlock(numbSelectPerson, true);
                     _btBaixo.gameObject.SetActive(false);
                     _btCima.gameObject.SetActive(false);
-                    
+
+
+                    for (int i = 0; i < _gameControl._multiPlayerControl._selectsPersonList.Count; i++)
+                    {
+                       
+                        if (!_gameControl._multiPlayerControl._selectsPersonList[i]._checkSelect)
+                        {
+                            _gameControl._multiPlayerControl._selectsPersonList[i].imgBlockPerson.gameObject.SetActive(true);
+                        }
+
+                        _gameControl._multiPlayerControl._selectsPersonList[i].CamConfirm();
+                    }
+
+                    imgBlockPerson.gameObject.SetActive(false);
+                    imgSelecPerson.gameObject.SetActive(true);
+
+                    PersonImgOn();
 
 
                 }
                 else
                 {
                     ConfirmPerson();
+
                 }
               
             }
@@ -234,6 +251,11 @@ public class SelectPerson : MonoBehaviour
         _playerMoveTemp = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
        
         
+    }
+
+    void TimeBlock()
+    {
+
     }
 
     public void ConfirmSkin()

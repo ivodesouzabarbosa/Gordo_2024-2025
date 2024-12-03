@@ -24,10 +24,12 @@ public class EnemeyMove : MonoBehaviour
 
     public float countdownTime = 5f; // Tempo inicial do contador em segundos
     public float currentTime;
+    public Transform _canvasLive;
 
     private void Awake()
     {
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+        _canvasLive.SetParent(_gameControl._canvasEnemy);
     }
 
     void Start()
@@ -39,6 +41,7 @@ public class EnemeyMove : MonoBehaviour
     private void Update()
     {
         TimeRe();
+        _canvasLive.transform.position = new Vector3(transform.position.x, _canvasLive.transform.position.y, transform.position.z);
     }
 
     void FixedUpdate()
