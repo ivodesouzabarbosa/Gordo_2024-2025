@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoxRaycastEnemey : MonoBehaviour
+public class BoxRaycastAtaquePLayer : MonoBehaviour
 {
     public Vector3 boxOrigin = Vector3.zero;      // Origem da caixa relativa ao objeto
     public Vector3 boxSize = new Vector3(1, 1, 1); // Tamanho da caixa
     public Vector3 direction = Vector3.forward;   // Direção local do raycast
     public float distance = 5f;                   // Distância máxima do raycast
     public LayerMask layerMask;                   // Camadas para detectar colisões
-    EnemeyMove _enemeyMove;
+    public PlayerMove _playerMove;
 
     private void Start()
     {
-        _enemeyMove = GetComponent<EnemeyMove>();
+        
     }
 
     private void Update()
@@ -28,14 +28,15 @@ public class BoxRaycastEnemey : MonoBehaviour
         if (Physics.BoxCast(origin, boxSize / 2, rotatedDirection, out RaycastHit hit, transform.rotation, distance, layerMask))
         {
             //  Debug.Log("Hit: true");
-          //  Debug.Log("Hit: " + hit.collider.name);
-            _enemeyMove._stopMove = true;
-           
+           // Debug.Log("Hit: " + hit.collider.name);
+            hit.collider.GetComponent<HitSlider>().TakeDamage(25);
+           // _enemeyMove._stopMove = true;
+
         }
         else
         {
-          //  Debug.Log("Hit: false");
-            _enemeyMove._stopMove = false;
+           // Debug.Log("Hit: false");
+          //  _enemeyMove._stopMove = false;
         }
     }
 

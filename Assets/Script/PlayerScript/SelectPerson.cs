@@ -475,9 +475,15 @@ public class SelectPerson : MonoBehaviour
             _playerMove.SetMove(value);
         }
     }
-    public void SetJump(InputAction.CallbackContext value)
+    public void SetAtack(InputAction.CallbackContext value)
     {
-        //_checkJump = true;
+        if(_checkSelect && _playerMove != null && _gameControl._gameStart)
+        {
+            _playerMove.SetAtack(value);
+         
+        }
+      
+      
     }
 
     

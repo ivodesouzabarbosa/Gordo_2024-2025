@@ -32,6 +32,13 @@ public class PlayerMove : MonoBehaviour
     public SelectPerson _selectPerson;
     GameControl _gameControl;
     int _numberTrue;
+    public GameObject _ataqueG;
+    public Animator _anim;
+   
+
+    private float _ataqueTimeN = 0f;  // Tempo acumulado
+    private int _cont = 1;  // Contador inicial (começa em 1)
+    public bool _checkAtaque;
 
     // Start is called before the first frame update
     void Start()
@@ -52,8 +59,11 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Anim();
+
+       
     }
 
+  
     void Move()
     {
         // Verifica se está no chão
@@ -115,9 +125,9 @@ public class PlayerMove : MonoBehaviour
         _inputDir.z = value.ReadValue<Vector2>().y;
 
     }
-    public void SetJump(InputAction.CallbackContext value)
+    public void SetAtack(InputAction.CallbackContext value)
     {
-        _checkJump = true;
+       
     }
     public void SelectSkin(int value)
     {
@@ -125,7 +135,7 @@ public class PlayerMove : MonoBehaviour
         {
             _playerObject[i].gameObject.SetActive(false);
         }
-        Debug.Log("_indexSkin " + _indexSkin);
+        //Debug.Log("_indexSkin " + _indexSkin);
         _playerObject[_indexSkin].gameObject.SetActive(true);
 
 

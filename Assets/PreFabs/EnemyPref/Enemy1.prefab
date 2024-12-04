@@ -238,6 +238,7 @@ GameObject:
   - component: {fileID: 1558778506948391644}
   - component: {fileID: 8971956064117407927}
   - component: {fileID: 4292784342118916179}
+  - component: {fileID: 8215594320341270100}
   m_Layer: 7
   m_Name: Enemy1
   m_TagString: Untagged
@@ -406,6 +407,22 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
+--- !u!114 &8215594320341270100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2870456747863721192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d00c78a10bec548924defb3ad79eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthSlider: {fileID: 4806367438591967126}
+  currentHealth: 0
+  maxHealth: 100
+  lerpSpeed: 5
 --- !u!1 &3848742881157931212
 GameObject:
   m_ObjectHideFlags: 0
@@ -823,7 +840,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
