@@ -32,12 +32,9 @@ public class PlayerMove : MonoBehaviour
     public SelectPerson _selectPerson;
     GameControl _gameControl;
     int _numberTrue;
-    public GameObject _ataqueG;
     public Animator _anim;
+    public bool _checkAnim;
    
-
-    private float _ataqueTimeN = 0f;  // Tempo acumulado
-    private int _cont = 1;  // Contador inicial (começa em 1)
     public bool _checkAtaque;
 
     // Start is called before the first frame update
@@ -46,6 +43,7 @@ public class PlayerMove : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         controller = GetComponent<CharacterController>();
+        _anim = GetComponent<Animator>();
         _posIniMenu=transform.position;
         if (_playerObject.Count > 1)
         {
@@ -58,9 +56,15 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         Move();
-        Anim();
-
-       
+        if (_checkAnim)
+        {
+            Anim();
+        }
+          
+    }
+    public void AtacFalse()
+    {
+        _checkAtaque = false;
     }
 
   
@@ -117,6 +121,8 @@ public class PlayerMove : MonoBehaviour
     void Anim()//controle de animações
     {
         _speedAnim = MathF.Abs((_inputDir.x + _inputDir.z) * _speed);
+        _anim.SetFloat("move", _speedAnim);
+        _anim.SetBool("atack1", _checkAtaque);
     }
 
     public void SetMove(InputAction.CallbackContext value)
@@ -125,9 +131,12 @@ public class PlayerMove : MonoBehaviour
         _inputDir.z = value.ReadValue<Vector2>().y;
 
     }
+
+
     public void SetAtack(InputAction.CallbackContext value)
     {
-       
+        if(!_checkAtaque)
+        _checkAtaque = true;
     }
     public void SelectSkin(int value)
     {
@@ -183,5 +192,13 @@ public class PlayerMove : MonoBehaviour
         }
     //    CheckInter();
         SelectSkin(_indexSkin);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 11)
+        {
+            Debug.Log("hit");
+        }
     }
 }
