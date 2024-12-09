@@ -9,10 +9,10 @@ public class EnemeyMove : MonoBehaviour
     [SerializeField] float distance;
     [SerializeField] float distanceCheck;
     Vector3 direction;
-    public float maxSpeed = 5f; // Velocidade máxima
-    public float acceleration = 2f; // Taxa de aceleração
-    public float rotationSpeed = 10f; // Velocidade de rotação
-    public float stoppingDistance = 1f; // Distância mínima para parar
+    public float maxSpeed = 5f; // Velocidade mï¿½xima
+    public float acceleration = 2f; // Taxa de aceleraï¿½ï¿½o
+    public float rotationSpeed = 10f; // Velocidade de rotaï¿½ï¿½o
+    public float stoppingDistance = 1f; // Distï¿½ncia mï¿½nima para parar
     public bool _stopMove;
 
     private Rigidbody rb;
@@ -46,13 +46,13 @@ public class EnemeyMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Atualiza o alvo mais próximo
+        // Atualiza o alvo mais prï¿½ximo
         FindClosestTarget();
 
         if (closestTarget == null)
         {
-            Debug.LogWarning("Nenhum alvo disponível na lista.");
-            rb.velocity = Vector3.zero; // Para o movimento se não houver alvos
+            Debug.LogWarning("Nenhum alvo disponï¿½vel na lista.");
+            rb.linearVelocity = Vector3.zero; // Para o movimento se nï¿½o houver alvos
             return;
         }
         if (distance>distanceCheck)
@@ -61,16 +61,16 @@ public class EnemeyMove : MonoBehaviour
 
             direction = (targetIni.position - transform.position).normalized;
 
-            // Calcula a distância até o alvo
+            // Calcula a distï¿½ncia atï¿½ o alvo
             distance = Vector3.Distance(transform.position, targetIni.position);
         }
         else
         {
            
-            // Calcula a direção para o alvo
+            // Calcula a direï¿½ï¿½o para o alvo
             direction = (closestTarget.position - transform.position).normalized;
 
-            // Calcula a distância até o alvo
+            // Calcula a distï¿½ncia atï¿½ o alvo
             distance = Vector3.Distance(transform.position, closestTarget.position);
 
         }
@@ -80,30 +80,30 @@ public class EnemeyMove : MonoBehaviour
 
         if (distance > stoppingDistance && !_stopMove)
         {
-            // Aumenta a velocidade gradualmente até o máximo permitido
+            // Aumenta a velocidade gradualmente atï¿½ o mï¿½ximo permitido
             currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.fixedDeltaTime);
 
-            // Move o Rigidbody na direção do alvo
+            // Move o Rigidbody na direï¿½ï¿½o do alvo
             Vector3 moveVelocity = direction * currentSpeed;
-            rb.velocity = new Vector3(moveVelocity.x, rb.velocity.y, moveVelocity.z); // Mantém a velocidade vertical
+            rb.linearVelocity = new Vector3(moveVelocity.x, rb.linearVelocity.y, moveVelocity.z); // Mantï¿½m a velocidade vertical
         }
         else
         {
-            // Reduz a velocidade para zero ao atingir a distância mínima
+            // Reduz a velocidade para zero ao atingir a distï¿½ncia mï¿½nima
             currentSpeed = 0f;
-            rb.velocity = Vector3.zero;
+            rb.linearVelocity = Vector3.zero;
         }
 
         // Rotaciona para alinhar ao alvo sem afetar o eixo X
         if (distance > 0.1f) // Apenas rotaciona se estiver longe o suficiente
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction); // Calcula a rotação desejada
+            Quaternion targetRotation = Quaternion.LookRotation(direction); // Calcula a rotaï¿½ï¿½o desejada
             Vector3 eulerRotation = targetRotation.eulerAngles;
 
-            // Preserva o valor atual do eixo X, mas aplica a rotação no eixo Y e Z
+            // Preserva o valor atual do eixo X, mas aplica a rotaï¿½ï¿½o no eixo Y e Z
             eulerRotation.x = transform.rotation.eulerAngles.x;
 
-            // Aplica a rotação sem modificar o eixo X
+            // Aplica a rotaï¿½ï¿½o sem modificar o eixo X
             rb.rotation = Quaternion.Euler(eulerRotation);
         }
     }
@@ -115,7 +115,7 @@ public class EnemeyMove : MonoBehaviour
 
         foreach (Transform target in _gameControl.targets)
         {
-            if (target == null) continue; // Evita erros caso algum objeto tenha sido destruído
+            if (target == null) continue; // Evita erros caso algum objeto tenha sido destruï¿½do
 
             float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
@@ -142,13 +142,13 @@ public class EnemeyMove : MonoBehaviour
             }
             else
             {
-                // Ação quando o tempo chega a zero
+                // Aï¿½ï¿½o quando o tempo chega a zero
                 TimerEnded();
             }
         }
     }
 
-    void TimerEnded()// se o inimigo estive seguindo  muito tempo o player e não alcança, muda de posição
+    void TimerEnded()// se o inimigo estive seguindo  muito tempo o player e nï¿½o alcanï¿½a, muda de posiï¿½ï¿½o
     {
        
         currentTime = countdownTime;

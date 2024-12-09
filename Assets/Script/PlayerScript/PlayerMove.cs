@@ -35,7 +35,13 @@ public class PlayerMove : MonoBehaviour
     public Animator _anim;
     public bool _checkAnim;
    
-    public bool _checkAtaque;
+    public int _nunbAtaque;
+    public bool _checkAt=false;
+
+  
+    private float timer = 0f; // Temporizador
+    private bool isTiming = false; // Controle do temporizador
+
 
     // Start is called before the first frame update
     void Start()
@@ -60,11 +66,28 @@ public class PlayerMove : MonoBehaviour
         {
             Anim();
         }
-          
+
+        if (isTiming)
+        {
+            timer -= Time.deltaTime; // Reduz o tempo restante
+            if (timer <= 0f)
+            {
+                _checkAt = false; // Desativar a booleana
+                isTiming = false; // Parar o temporizador
+            }
+        }
+
+    }
+
+    public void ActivateBoolForSeconds(float duration)
+    {
+        _checkAt = true; // Ativar a booleana
+        timer = duration; // Definir o tempo
+        isTiming = true; // Iniciar o temporizador
     }
     public void AtacFalse()
     {
-        _checkAtaque = false;
+        _checkAt = false;
     }
 
   
@@ -122,7 +145,8 @@ public class PlayerMove : MonoBehaviour
     {
         _speedAnim = MathF.Abs((_inputDir.x + _inputDir.z) * _speed);
         _anim.SetFloat("move", _speedAnim);
-        _anim.SetBool("atack1", _checkAtaque);
+        _anim.SetInteger("atack", _nunbAtaque);
+        _anim.SetBool("checkAt", _checkAt);
     }
 
     public void SetMove(InputAction.CallbackContext value)
@@ -135,8 +159,13 @@ public class PlayerMove : MonoBehaviour
 
     public void SetAtack(InputAction.CallbackContext value)
     {
-        if(!_checkAtaque)
-        _checkAtaque = true;
+        Debug.Log("ataque");
+        if (!_checkAt)
+        {
+            _checkAt = true;
+            _nunbAtaque = UnityEngine.Random.Range(1, 4);
+            ActivateBoolForSeconds(1.2f); // Ativar por 3 segundos
+        }
     }
     public void SelectSkin(int value)
     {
