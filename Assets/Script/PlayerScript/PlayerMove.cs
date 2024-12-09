@@ -159,7 +159,7 @@ public class PlayerMove : MonoBehaviour
 
     public void SetAtack(InputAction.CallbackContext value)
     {
-        Debug.Log("ataque");
+      
         if (!_checkAt)
         {
             _checkAt = true;
@@ -223,11 +223,5 @@ public class PlayerMove : MonoBehaviour
         SelectSkin(_indexSkin);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.layer == 11)
-        {
-            Debug.Log("hit");
-        }
-    }
+   
 }
