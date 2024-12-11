@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Atack1
+  m_Name: P3-Atack2
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -48,7 +48,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
   m_ScaleCurves:
   - curve:
       serializedVersion: 2
@@ -83,7 +83,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
   m_FloatCurves:
   - serializedVersion: 2
     curve:
@@ -120,7 +120,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: castDistance
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 114
     script: {fileID: 11500000, guid: 127f34a57f75a5d4aa2ee90b48fbb225, type: 3}
     flags: 0
@@ -133,7 +133,7 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 3787093513
+      path: 2025007027
       attribute: 1
       script: {fileID: 0}
       typeID: 4
@@ -142,7 +142,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3787093513
+      path: 2025007027
       attribute: 3
       script: {fileID: 0}
       typeID: 4
@@ -151,7 +151,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3787093513
+      path: 2025007027
       attribute: 2243213971
       script: {fileID: 11500000, guid: 127f34a57f75a5d4aa2ee90b48fbb225, type: 3}
       typeID: 114
@@ -216,7 +216,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.x
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -255,7 +255,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.y
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -294,7 +294,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalPosition.z
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -333,7 +333,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.x
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -372,7 +372,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.y
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -411,7 +411,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalScale.z
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -450,7 +450,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: castDistance
-    path: PlayerRot(Skin1)/Atack1
+    path: PlayerRot(Skin1)/Atack2
     classID: 114
     script: {fileID: 11500000, guid: 127f34a57f75a5d4aa2ee90b48fbb225, type: 3}
     flags: 0

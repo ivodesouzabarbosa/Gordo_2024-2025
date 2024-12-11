@@ -25,6 +25,13 @@ public class EnemeyMove : MonoBehaviour
     public float countdownTime = 5f; // Tempo inicial do contador em segundos
     public float currentTime;
     public Transform _canvasLive;
+    public HitSlider _hitSlider;
+    public bool _deathOn;
+
+    public bool _invuneravel = false; // Variável que queremos controlar
+    public float invincibilityTime = 1f; // Tempo de espera entre danos
+    bool _moveBack;
+    [SerializeField] private float reverseSpeed = 10f; // Velocidade fixa para trás
 
     private void Awake()
     {
@@ -37,73 +44,108 @@ public class EnemeyMove : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentTime = countdownTime;
         closestTarget = targetIni;
+        _moveBack = true;
     }
+
     private void Update()
     {
-        TimeRe();
-        _canvasLive.transform.position = new Vector3(transform.position.x, _canvasLive.transform.position.y, transform.position.z);
+        if (!_deathOn)
+        {
+            TimeRe();
+            _canvasLive.transform.position = new Vector3(transform.position.x, _canvasLive.transform.position.y, transform.position.z);
+        }
     }
 
     void FixedUpdate()
     {
-        // Atualiza o alvo mais pr�ximo
-        FindClosestTarget();
-
-        if (closestTarget == null)
+        if (!_deathOn)
         {
-            Debug.LogWarning("Nenhum alvo dispon�vel na lista.");
-            rb.linearVelocity = Vector3.zero; // Para o movimento se n�o houver alvos
-            return;
-        }
-        if (distance>distanceCheck)
-        {
-           // closestTarget = targetIni;
+            // Atualiza o alvo mais próximo
+            FindClosestTarget();
 
-            direction = (targetIni.position - transform.position).normalized;
+            if (closestTarget == null)
+            {
+                Debug.LogWarning("Nenhum alvo disponível na lista.");
+                rb.linearVelocity = Vector3.zero; // Para o movimento se não houver alvos
+                return;
+            }
 
-            // Calcula a dist�ncia at� o alvo
-            distance = Vector3.Distance(transform.position, targetIni.position);
-        }
-        else
-        {
-           
-            // Calcula a dire��o para o alvo
-            direction = (closestTarget.position - transform.position).normalized;
-
-            // Calcula a dist�ncia at� o alvo
             distance = Vector3.Distance(transform.position, closestTarget.position);
+            // Calcula a direção padrão para o alvo
+            if (distance > distanceCheck)
+            {
+                direction = (targetIni.position - transform.position).normalized;
+              //  distance = Vector3.Distance(transform.position, targetIni.position);
+            }
+            else
+            {
+                direction = (closestTarget.position - transform.position).normalized;
+              //  distance = Vector3.Distance(transform.position, closestTarget.position);
+            }
 
+            if (_invuneravel)
+            {
+                // Movimento para trás independente de direção
+                MoveBackward();
+                if (_invuneravel && Time.time >= invincibilityTime)
+                {
+                    _invuneravel = false;
+                    rb.linearVelocity = Vector3.zero; 
+
+                }
+               
+            }
+            else if (!_moveBack)
+            {
+                if (Time.time >= invincibilityTime + 0.5f)
+                {
+                    _moveBack = true;
+
+                }
+            }
+            else if (_moveBack && !_invuneravel && distance > stoppingDistance && !_stopMove)
+            {
+                // Movimento normal em direção ao alvo
+                MoveForward();
+            }
+            else
+            {
+                // Para o movimento
+                currentSpeed = 0f;
+                rb.linearVelocity = Vector3.zero;
+            }
+
+            // Rotaciona para alinhar ao alvo
+            RotateTowardsTarget();
         }
-       
-        distance = Vector3.Distance(transform.position, closestTarget.position);
+    }
 
+    private void MoveBackward()
+    {
+        // Define uma velocidade fixa para trás
+        Vector3 backwardVelocity = -transform.forward * reverseSpeed; // Move para trás na direção fixa
+        rb.linearVelocity = new Vector3(backwardVelocity.x, rb.linearVelocity.y, backwardVelocity.z);
 
-        if (distance > stoppingDistance && !_stopMove)
-        {
-            // Aumenta a velocidade gradualmente at� o m�ximo permitido
-            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.fixedDeltaTime);
+        Debug.Log("Movendo para trás com invulnerabilidade!");
+    }
 
-            // Move o Rigidbody na dire��o do alvo
-            Vector3 moveVelocity = direction * currentSpeed;
-            rb.linearVelocity = new Vector3(moveVelocity.x, rb.linearVelocity.y, moveVelocity.z); // Mant�m a velocidade vertical
-        }
-        else
-        {
-            // Reduz a velocidade para zero ao atingir a dist�ncia m�nima
-            currentSpeed = 0f;
-            rb.linearVelocity = Vector3.zero;
-        }
+    private void MoveForward()
+    {
+        // Aumenta a velocidade gradualmente até o máximo permitido
+        currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.fixedDeltaTime);
 
-        // Rotaciona para alinhar ao alvo sem afetar o eixo X
+        // Move o Rigidbody na direção do alvo
+        Vector3 moveVelocity = direction * currentSpeed;
+        rb.linearVelocity = new Vector3(moveVelocity.x, rb.linearVelocity.y, moveVelocity.z);
+    }
+
+    private void RotateTowardsTarget()
+    {
         if (distance > 0.1f) // Apenas rotaciona se estiver longe o suficiente
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction); // Calcula a rota��o desejada
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
             Vector3 eulerRotation = targetRotation.eulerAngles;
-
-            // Preserva o valor atual do eixo X, mas aplica a rota��o no eixo Y e Z
-            eulerRotation.x = transform.rotation.eulerAngles.x;
-
-            // Aplica a rota��o sem modificar o eixo X
+            eulerRotation.x = transform.rotation.eulerAngles.x; // Preserva o eixo X
             rb.rotation = Quaternion.Euler(eulerRotation);
         }
     }
@@ -196,5 +238,12 @@ public class EnemeyMove : MonoBehaviour
             timePos = 0;
             currentTime = countdownTime;
         }
+    }
+    public void AtivarPorTempo(float duracao)
+    {
+        _invuneravel = true;
+        _moveBack = false;
+        invincibilityTime = Time.time + duracao; // Define o tempo final
+    
     }
 }

@@ -112,6 +112,7 @@ public class EnemyBaseControl : MonoBehaviour
                 return;
             }
             bullet.SetActive(true);
+            bullet.GetComponent<HitSlider>().ResetLife();
             _checkPosini = !_checkPosini;
         }
     }

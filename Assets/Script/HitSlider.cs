@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class HitSlider : MonoBehaviour
 {
@@ -13,24 +15,38 @@ public class HitSlider : MonoBehaviour
 
     private float targetHealth;     // Vida alvo após o ataque
     private float lastDamageTime;   // Tempo do último dano recebido
+    public EnemeyMove _enemeyMove;
+ 
 
     void Start()
     {
+        healthSlider.transform.position = Vector3.zero;
         ResetLife();
+     //   _enemeyMove=GetComponent<EnemeyMove>();
     }
 
     void Update()
     {
-        // Gradualmente diminui a barra de vida até atingir o valor alvo
-        currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * lerpSpeed);
-
-        // Atualiza o valor do Slider
-        healthSlider.value = currentHealth;
-
-        // Para a interpolação quando o valor está próximo do alvo
-        if (Mathf.Abs(currentHealth - targetHealth) < 0.01f)
+        if (!_enemeyMove._deathOn)
         {
-            currentHealth = targetHealth;
+            // Gradualmente diminui a barra de vida até atingir o valor alvo
+            currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * lerpSpeed);
+
+            // Atualiza o valor do Slider
+            healthSlider.value = currentHealth;
+
+            // Para a interpolação quando o valor está próximo do alvo
+            if (Mathf.Abs(currentHealth - targetHealth) < 0.01f)
+            {
+                currentHealth = targetHealth;
+                if (!_enemeyMove._deathOn && currentHealth <= 0)
+                {
+                    _enemeyMove._deathOn = true;//morte do inimigo
+                    _enemeyMove._invuneravel = true;
+                    Death();
+                }
+            }
+
         }
     }
 
@@ -38,13 +54,14 @@ public class HitSlider : MonoBehaviour
     public void TakeDamage(float damage)
     {
         // Verifica se o jogador está invulnerável
-        if (Time.time - lastDamageTime >= invincibilityTime)
+        if (!_enemeyMove._invuneravel && !_enemeyMove._deathOn && Time.time - lastDamageTime >= invincibilityTime)
         {
             // Aplica o dano e atualiza o tempo do último dano
             targetHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
-            Debug.Log("dano");
             lastDamageTime = Time.time;
+            _enemeyMove.AtivarPorTempo(.25f);
         }
+       
     }
 
     // Método para curar (opcional)
@@ -55,6 +72,7 @@ public class HitSlider : MonoBehaviour
 
     public void ResetLife()
     {
+        StopCoroutine(DeathTime());
         // Configura o Slider para o intervalo desejado
         healthSlider.minValue = 0;
         healthSlider.maxValue = maxHealth;
@@ -66,5 +84,27 @@ public class HitSlider : MonoBehaviour
 
         // Inicializa o tempo do último dano
         lastDamageTime = -invincibilityTime; // Permite tomar dano imediatamente no início
+        _enemeyMove._invuneravel = false;
+        _enemeyMove._deathOn = false;//morte do inimigo
+        _enemeyMove.transform.localScale = Vector3.one;
+    }
+
+    public void Death()
+    {
+        StartCoroutine(DeathTime());
+    }
+    IEnumerator DeathTime()
+    {
+        healthSlider.transform.position = Vector3.zero;
+        for (int i = 0; i < 3; i++)
+        {
+            _enemeyMove.transform.DOScale(2f, .3f);
+            yield return new WaitForSeconds(.3f);
+            _enemeyMove.transform.DOScale(.5f, .3f);
+        }
+        _enemeyMove.transform.DOScale(2.5f, .3f);
+        yield return new WaitForSeconds(.3f);
+        _enemeyMove.gameObject.SetActive(false);
+
     }
 }

@@ -29,7 +29,7 @@ public class BoxRaycastAtaquePLayer : MonoBehaviour
         {
             //  Debug.Log("Hit: true");
            // Debug.Log("Hit: " + hit.collider.name);
-            hit.collider.GetComponent<HitSlider>().TakeDamage(25);
+          //  hit.collider.GetComponent<HitSlider>().TakeDamage(25);
            // _enemeyMove._stopMove = true;
 
         }

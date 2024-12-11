@@ -588,6 +588,11 @@ MonoBehaviour:
   countdownTime: 5
   currentTime: 0
   _canvasLive: {fileID: 8055545319441351535}
+  _hitSlider: {fileID: 6820154186303233415}
+  _deathOn: 0
+  _invuneravel: 0
+  invincibilityTime: 0.5
+  reverseSpeed: 15
 --- !u!114 &-7458234796811607664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +628,8 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   lerpSpeed: 5
-  invincibilityTime: 2
+  invincibilityTime: 0.5
+  _enemeyMove: {fileID: 6587966757814691122}
 --- !u!1 &3764402987282425016
 GameObject:
   m_ObjectHideFlags: 0
