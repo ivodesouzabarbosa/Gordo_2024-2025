@@ -500,8 +500,8 @@ MonoBehaviour:
   _hitSlider: {fileID: -8011686553459716975}
   _deathOn: 0
   _invuneravel: 0
-  invincibilityTime: 0.15
-  reverseSpeed: 15
+  invincibilityTime: 0.2
+  reverseSpeed: 6
 --- !u!114 &-4748084571849977002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +538,7 @@ MonoBehaviour:
   currentHealth: 0
   maxHealth: 100
   lerpSpeed: 5
-  invincibilityTime: 0.15
+  invincibilityTime: 0.2
   _enemeyMove: {fileID: 6587966757814691122}
 --- !u!1 &3505506778803027131
 GameObject:

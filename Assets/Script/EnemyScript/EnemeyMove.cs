@@ -31,7 +31,9 @@ public class EnemeyMove : MonoBehaviour
     public bool _invuneravel = false; // Variável que queremos controlar
     public float invincibilityTime = 1f; // Tempo de espera entre danos
     bool _moveBack;
-    [SerializeField] private float reverseSpeed = 10f; // Velocidade fixa para trás
+    bool _moveZero;
+    [SerializeField] private float reverseSpeed = 7f; // Velocidade fixa para trás
+    bool _backMoveTemCheck;
 
     private void Awake()
     {
@@ -45,6 +47,8 @@ public class EnemeyMove : MonoBehaviour
         currentTime = countdownTime;
         closestTarget = targetIni;
         _moveBack = true;
+        _moveZero = true;
+        _backMoveTemCheck = false;
     }
 
     private void Update()
@@ -90,16 +94,29 @@ public class EnemeyMove : MonoBehaviour
                 if (_invuneravel && Time.time >= invincibilityTime)
                 {
                     _invuneravel = false;
-                    rb.linearVelocity = Vector3.zero; 
+                    _moveZero = true;
+
 
                 }
                
             }
-            else if (!_moveBack)
+            else if (!_moveZero)
             {
+                MoveBackward();
                 if (Time.time >= invincibilityTime + 1f)
                 {
+                    _moveBack = false;
+                    _moveZero=true;
+                    rb.linearVelocity = Vector3.zero;
+
+                }
+            }
+            else if (!_moveBack)
+            {
+                if (Time.time >= invincibilityTime + 2f)
+                {
                     _moveBack = true;
+                    _backMoveTemCheck = false;
 
                 }
             }
@@ -243,6 +260,8 @@ public class EnemeyMove : MonoBehaviour
     {
         _invuneravel = true;
         _moveBack = false;
+        _backMoveTemCheck = true;
+        _moveZero = false;
         invincibilityTime = Time.time + duracao; // Define o tempo final
     
     }
