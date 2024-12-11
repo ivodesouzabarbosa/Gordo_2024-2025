@@ -8,6 +8,7 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 public class HitSlider : MonoBehaviour
 {
     public Slider healthSlider;     // Referência ao Slider na HUD
+    public Vector3 scaleS;
     public float currentHealth;     // Vida atual
     public float maxHealth = 100f;  // Vida máxima
     public float lerpSpeed = 5f;    // Velocidade de interpolação
@@ -20,9 +21,15 @@ public class HitSlider : MonoBehaviour
 
     void Start()
     {
-        healthSlider.transform.position = Vector3.zero;
+        scaleS = healthSlider.transform.localScale;
+        healthSlider.transform.localScale = Vector3.zero;
+       // Invoke("TimeStart", 1);
         ResetLife();
      //   _enemeyMove=GetComponent<EnemeyMove>();
+    }
+    void TimeStart()
+    {
+        healthSlider.transform.localScale = scaleS;
     }
 
     void Update()
@@ -59,7 +66,7 @@ public class HitSlider : MonoBehaviour
             // Aplica o dano e atualiza o tempo do último dano
             targetHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
             lastDamageTime = Time.time;
-            _enemeyMove.AtivarPorTempo(.25f);
+            _enemeyMove.AtivarPorTempo(.1f);
         }
        
     }
@@ -72,6 +79,7 @@ public class HitSlider : MonoBehaviour
 
     public void ResetLife()
     {
+     
         StopCoroutine(DeathTime());
         // Configura o Slider para o intervalo desejado
         healthSlider.minValue = 0;
@@ -86,7 +94,15 @@ public class HitSlider : MonoBehaviour
         lastDamageTime = -invincibilityTime; // Permite tomar dano imediatamente no início
         _enemeyMove._invuneravel = false;
         _enemeyMove._deathOn = false;//morte do inimigo
+        if (_enemeyMove._deathOn)
+        {
+            _enemeyMove._deathOn = false;
+            healthSlider.transform.localScale = scaleS;
+        }
         _enemeyMove.transform.localScale = Vector3.one;
+        Invoke("TimeStart", 1);
+        // scaleS = healthSlider.transform.lossyScale;
+        //  healthSlider.transform.localScale = scaleS;
     }
 
     public void Death()
@@ -95,7 +111,7 @@ public class HitSlider : MonoBehaviour
     }
     IEnumerator DeathTime()
     {
-        healthSlider.transform.position = Vector3.zero;
+        healthSlider.transform.localScale = Vector3.zero;
         for (int i = 0; i < 3; i++)
         {
             _enemeyMove.transform.DOScale(2f, .3f);

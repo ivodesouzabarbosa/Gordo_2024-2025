@@ -164,7 +164,7 @@ public class PlayerMove : MonoBehaviour
         {
             _checkAt = true;
             _nunbAtaque = UnityEngine.Random.Range(1, 4);
-            ActivateBoolForSeconds(1.2f); // Ativar por 3 segundos
+            ActivateBoolForSeconds(.1f); // Ativar por 3 segundos
         }
     }
     public void SelectSkin(int value)

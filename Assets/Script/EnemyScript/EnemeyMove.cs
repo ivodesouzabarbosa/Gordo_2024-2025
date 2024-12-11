@@ -97,7 +97,7 @@ public class EnemeyMove : MonoBehaviour
             }
             else if (!_moveBack)
             {
-                if (Time.time >= invincibilityTime + 0.5f)
+                if (Time.time >= invincibilityTime + 1f)
                 {
                     _moveBack = true;
 

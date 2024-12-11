@@ -33,7 +33,7 @@ public class BoxCastAtack : MonoBehaviour
         if (boxCollider != null)
         {
             // Checa se o cooldown acabou
-            if (Time.time - lastCollisionTime >= 1.2f)//cooldownTime+1
+            if (Time.time - lastCollisionTime >= cooldownTime)//cooldownTime+1
             {
                 canCollide = true; // Permite nova colisão
             }
@@ -45,7 +45,7 @@ public class BoxCastAtack : MonoBehaviour
 
             // Executa o BoxCast com rotação e direção ajustadas
             RaycastHit hit;
-            if (canCollide && Physics.BoxCast(boxCenter, boxSize / 2, transform.rotation * castDirection.normalized, out hit, boxRotation, castDistance, layerMask))
+            if (Physics.BoxCast(boxCenter, boxSize / 2, transform.rotation * castDirection.normalized, out hit, boxRotation, castDistance, layerMask))
             {
                 Debug.Log($"Colidiu com: {hit.collider.name}");
                 lastCollisionTime = Time.time; // Armazena o tempo da colisão
