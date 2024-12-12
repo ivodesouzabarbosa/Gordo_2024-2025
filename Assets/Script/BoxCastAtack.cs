@@ -15,7 +15,9 @@ public class BoxCastAtack : MonoBehaviour
 
     private bool canCollide = true; // Controla se é possível colidir novamente
     private float lastCollisionTime; // Armazena o tempo da última colisão detectada
-   
+    public PlayerMove _playerMove;
+
+  
 
     void Start()
     {
@@ -48,11 +50,14 @@ public class BoxCastAtack : MonoBehaviour
             if (Physics.BoxCast(boxCenter, boxSize / 2, transform.rotation * castDirection.normalized, out hit, boxRotation, castDistance, layerMask))
             {
                 Debug.Log($"Colidiu com: {hit.collider.name}");
+                hit.collider.transform.parent.GetComponent<HitSlider>()._hitSliderPlayer = _playerMove._selectPerson._sliderPLayers;
                 lastCollisionTime = Time.time; // Armazena o tempo da colisão
                 canCollide = false; // Desabilita colisões até o cooldown passar
-                int value = Random.Range(10,25);
-
+                int value = Random.Range(10, 25);
                 hit.collider.transform.parent.GetComponent<HitSlider>().TakeDamage(value);//hit do inimigo
+             //   Debug.Log(hit.collider.transform.parent.GetComponent<HitSlider>().currentHealth);
+               
+
             }
         }
     }

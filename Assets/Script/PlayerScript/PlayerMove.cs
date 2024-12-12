@@ -42,6 +42,8 @@ public class PlayerMove : MonoBehaviour
     private float timer = 0f; // Temporizador
     private bool isTiming = false; // Controle do temporizador
 
+    public MeshRenderer _meshRenderer;
+
 
     // Start is called before the first frame update
     void Start()

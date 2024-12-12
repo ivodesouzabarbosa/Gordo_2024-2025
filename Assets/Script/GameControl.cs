@@ -14,6 +14,7 @@ public class GameControl : MonoBehaviour
     public GameObject _coolFimFase;
 
     public List<Transform> targets = new List<Transform>(); // Lista de
+    
     public Transform _player;
     public bool _checkCamOn;
     public List<GameObject> _BlockList;

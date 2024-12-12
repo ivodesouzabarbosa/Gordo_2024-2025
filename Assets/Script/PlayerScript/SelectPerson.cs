@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class SelectPerson : MonoBehaviour
 {
     public int _indexPlayer;
+    public PlayerDados playerDados;
     GameControl _gameControl;
     [SerializeField] Button _buttonSelect;
     public PlayerInput playerInput;
@@ -76,6 +77,7 @@ public class SelectPerson : MonoBehaviour
         SetIndex();
         //Debug.Log("_gameControl._numberPlayer " + _indexPlayer);
         _sliderPLayers = _gameControl._multiPlayerControl._sliderPLayers[_indexPlayer];
+        _sliderPLayers.playerDadosSlider = _gameControl._multiPlayerControl._dadosListPlayer[_indexPlayer];
         _gameControl._multiPlayerControl._sliderPLayersOn.Add(this.GetComponent<SliderPLayer>());
         _sliderPLayers.gameObject.SetActive(true);
         _gameControl._numberPlayer++;

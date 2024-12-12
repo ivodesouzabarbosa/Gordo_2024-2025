@@ -19,6 +19,7 @@ public class MultiPlayerControl : MonoBehaviour
     public Transform _PlayerGame;
     public PlayerInputManager _inputManager;
     public List<SliderPLayer> _sliderPLayers = new List<SliderPLayer>();
+    public List<PlayerDados> _dadosListPlayer = new List<PlayerDados>();
     public List<SliderPLayer> _sliderPLayersOn = new List<SliderPLayer>();
     public Transform _sliderPLayersGame;
 

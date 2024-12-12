@@ -97,22 +97,25 @@ public class EnemyBaseControl : MonoBehaviour
             {
                 bullet.transform.position = _posListBase2[_numbList1].position;
                 bullet.GetComponent<EnemeyMove>().targetIni = _posListBase1[_numbList1];
+              //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();// = true;
                 Pos1list();
             }
             else if (_checkPosini && _posListBase2[_numbList2].GetComponent<BaseEnemey>().BaseOn)
             {
                 bullet.transform.position = _posListBase1[_numbList2].position;
                 bullet.GetComponent<EnemeyMove>().targetIni = _posListBase2[_numbList2];
+              //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();
                 Pos2list();
             }
             else
             {
                 bullet.GetComponent<EnemeyMove>().PosInver();
-
+              //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();
                 return;
             }
             bullet.SetActive(true);
             bullet.GetComponent<HitSlider>().ResetLife();
+            bullet.GetComponent<HitSlider>()._capsHit.ColliderON();
             _checkPosini = !_checkPosini;
         }
     }

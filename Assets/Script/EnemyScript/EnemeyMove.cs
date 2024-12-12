@@ -135,6 +135,10 @@ public class EnemeyMove : MonoBehaviour
             // Rotaciona para alinhar ao alvo
             RotateTowardsTarget();
         }
+        else
+        {
+
+        }
     }
 
     private void MoveBackward()

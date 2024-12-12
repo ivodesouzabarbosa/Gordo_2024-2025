@@ -17,6 +17,8 @@ public class HitSlider : MonoBehaviour
     private float targetHealth;     // Vida alvo após o ataque
     private float lastDamageTime;   // Tempo do último dano recebido
     public EnemeyMove _enemeyMove;
+    public CapsHit _capsHit;
+    public SliderPLayer _hitSliderPlayer;
  
 
     void Start()
@@ -93,7 +95,7 @@ public class HitSlider : MonoBehaviour
         // Inicializa o tempo do último dano
         lastDamageTime = -invincibilityTime; // Permite tomar dano imediatamente no início
         _enemeyMove._invuneravel = false;
-        _enemeyMove._deathOn = false;//morte do inimigo
+      //  _enemeyMove._deathOn = false;//morte do inimigo
         if (_enemeyMove._deathOn)
         {
             _enemeyMove._deathOn = false;
@@ -107,7 +109,9 @@ public class HitSlider : MonoBehaviour
 
     public void Death()
     {
+        _capsHit.capsuleCollider.enabled = false;
         StartCoroutine(DeathTime());
+        _hitSliderPlayer.HitMove(_enemeyMove.transform, GetComponent<MeshRenderer>().materials[0]);
     }
     IEnumerator DeathTime()
     {

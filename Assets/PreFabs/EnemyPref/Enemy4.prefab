@@ -432,6 +432,7 @@ MonoBehaviour:
   lerpSpeed: 5
   invincibilityTime: 0.2
   _enemeyMove: {fileID: 6587966757814691122}
+  _capsHit: {fileID: 4648095086019571188}
 --- !u!1 &3009377206612158200
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,6 +936,7 @@ MonoBehaviour:
   castDistance: 0
   gizmoColor: {r: 1, g: 0, b: 0, a: 1}
   resetTime: 1.2
+  capsuleCollider: {fileID: 334424814287648919}
 --- !u!1 &8910352321665853928
 GameObject:
   m_ObjectHideFlags: 0

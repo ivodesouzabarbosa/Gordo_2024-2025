@@ -8,17 +8,18 @@ public class CapsHit : MonoBehaviour
     public Color gizmoColor = Color.red; // Cor do Gizmo para depuração
     public float resetTime = 1.2f; // Tempo em segundos para reiniciar a detecção
 
-    private CapsuleCollider capsuleCollider; // Para referência ao colisor
+    public CapsuleCollider capsuleCollider; // Para referência ao colisor
     private Vector3 bottomPoint; // Ponto inferior da cápsula
     private Vector3 topPoint; // Ponto superior da cápsula
     private float radius; // Raio da cápsula
     private bool hasDetectedCollision = false; // Controle para detectar apenas uma vez
     private float collisionTime = 0f; // Armazena o tempo em que a colisão foi detectada
+   
 
     void Start()
     {
         // Obtém o CapsuleCollider do objeto
-        capsuleCollider = GetComponent<CapsuleCollider>();
+    //    capsuleCollider = GetComponent<CapsuleCollider>();
         if (capsuleCollider == null)
         {
             Debug.LogError("Este objeto precisa de um CapsuleCollider para funcionar.");
@@ -61,6 +62,14 @@ public class CapsHit : MonoBehaviour
             }
         }
     }
+
+    public void ColliderON()
+    {
+        capsuleCollider.enabled = true;
+    }
+
+    
+
 
     // Método para desenhar os Gizmos no Editor
     private void OnDrawGizmos()
