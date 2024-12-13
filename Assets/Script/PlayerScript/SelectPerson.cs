@@ -78,7 +78,7 @@ public class SelectPerson : MonoBehaviour
         //Debug.Log("_gameControl._numberPlayer " + _indexPlayer);
         _sliderPLayers = _gameControl._multiPlayerControl._sliderPLayers[_indexPlayer];
         _sliderPLayers.playerDadosSlider = _gameControl._multiPlayerControl._dadosListPlayer[_indexPlayer];
-        _gameControl._multiPlayerControl._sliderPLayersOn.Add(this.GetComponent<SliderPLayer>());
+        _gameControl._multiPlayerControl._sliderPLayersOn.Add(_sliderPLayers);
         _sliderPLayers.gameObject.SetActive(true);
         _gameControl._numberPlayer++;
          transform.SetParent(_gameControl._panelSelectPerson);
@@ -301,7 +301,7 @@ public class SelectPerson : MonoBehaviour
             _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
             _timeD = true;
             Debug.Log("Animação de dinimuir botão  de voltar");
-            _sliderPLayers.gameObject.SetActive(false);
+           // _sliderPLayers.gameObject.SetActive(false);
             //_pPlayer.SetParent(transform);
             _gameControl._multiPlayerControl._numberPersonSel--;
             _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
@@ -342,8 +342,8 @@ public class SelectPerson : MonoBehaviour
         _btVoltaSkin.gameObject.SetActive(false);
         _btVoltar.gameObject.SetActive(true);
         _btskin1.Select();
-
-
+        _checkSelect = false;
+        _gameControl._multiPlayerControl._numberPersonSel--;
         //_pPlayer.SetParent(transform);
         //  _gameControl._multiPlayerControl._numberPersonSel--;
         //   _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
@@ -352,7 +352,7 @@ public class SelectPerson : MonoBehaviour
         //   _checkSelect = false;
         //  _playerMove._personSeleck = false;
         //  Invoke("TimeVoltar", 0.3f);
-}
+    }
 
 
     public void VoltarCam()
