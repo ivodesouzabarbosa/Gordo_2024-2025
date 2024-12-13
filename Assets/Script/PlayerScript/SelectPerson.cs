@@ -301,9 +301,13 @@ public class SelectPerson : MonoBehaviour
             _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
             _timeD = true;
             Debug.Log("Animação de dinimuir botão  de voltar");
-           // _sliderPLayers.gameObject.SetActive(false);
+            // _sliderPLayers.gameObject.SetActive(false);
             //_pPlayer.SetParent(transform);
-            _gameControl._multiPlayerControl._numberPersonSel--;
+            if (!_playerMove._checkSkin)
+            {
+                _gameControl._multiPlayerControl._numberPersonSel--;
+            }
+            //_gameControl._multiPlayerControl._numberPersonSel--;
             _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
             _playerMove._selectPersonMove = false;
             //  _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
