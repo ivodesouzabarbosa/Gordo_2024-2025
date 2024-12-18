@@ -15,6 +15,7 @@ public class SelectPerson : MonoBehaviour
     public PlayerInput playerInput;
     public Transform _ordT;
 
+
     public int numbPerson;
     public int numbSelectPerson;
     public Image imgBlockPerson;

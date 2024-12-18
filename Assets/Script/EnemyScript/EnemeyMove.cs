@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class EnemeyMove : MonoBehaviour
 {
     public string targetTag = "Player"; // Tag usada para identificar os alvos
+    public Animator _anim;
     public Transform targetIni; // Tag usada para identificar os alvos
     [SerializeField] float distance;
     [SerializeField] float distanceCheck;
@@ -66,6 +68,9 @@ public class EnemeyMove : MonoBehaviour
         {
             // Atualiza o alvo mais próximo
             FindClosestTarget();
+
+            float speedA = MathF.Abs(rb.linearVelocity.x + rb.linearVelocity.z);
+            _anim.SetFloat("speed", speedA);
 
             if (closestTarget == null)
             {
@@ -222,7 +227,7 @@ public class EnemeyMove : MonoBehaviour
     {
         if (_gameControl._levelOn <= 2)
         {
-            int rand = Random.Range(0, _gameControl._enemyBaseControl._posListBase2.Count);
+            int rand = UnityEngine.Random.Range(0, _gameControl._enemyBaseControl._posListBase2.Count);
             if (_gameControl._enemyBaseControl._posListBase2[rand].GetComponent<BaseEnemey>().BaseOn)
             {
                 transform.position = _gameControl._enemyBaseControl._posListBase2[rand].position;
@@ -233,7 +238,7 @@ public class EnemeyMove : MonoBehaviour
         }
         else
         {
-            int rand = Random.Range(0, _gameControl._enemyBaseControl._posListBase1.Count);
+            int rand = UnityEngine.Random.Range(0, _gameControl._enemyBaseControl._posListBase1.Count);
             if (_gameControl._enemyBaseControl._posListBase1[rand].GetComponent<BaseEnemey>().BaseOn)
             {
                 transform.position = _gameControl._enemyBaseControl._posListBase1[rand].position;
