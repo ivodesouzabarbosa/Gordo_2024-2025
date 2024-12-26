@@ -208,6 +208,7 @@ public class SelectPerson : MonoBehaviour
                     _btConfimSkin.gameObject.SetActive(true);
                     _buttonConf.gameObject.SetActive(false);
                     _btskin1.Select();
+                    _sliderPLayers._playerMove = _playerMoveTemp;
                     _playerMoveTemp._personSeleck = true;
                     _btVoltar.gameObject.SetActive(true);
                    // _btVoltar.localScale = Vector3.one; Debug.Log("Animação de aumentar botão de voltar");
@@ -276,7 +277,7 @@ public class SelectPerson : MonoBehaviour
         _btVoltaSkin.gameObject.SetActive(true);
         _btVoltar.gameObject.SetActive(false);
          ConfirmSelec();
-
+        _sliderPLayers._playerMove = _playerMoveTemp;
 
     }
     public void ConfirmPerson()
@@ -288,7 +289,7 @@ public class SelectPerson : MonoBehaviour
         _btVoltar.GetComponent<Button>().Select();
         _buttonConf.gameObject.SetActive(false);
         _btVoltaSkin.gameObject.SetActive(false);
-
+        _sliderPLayers._playerMove = _playerMoveTemp;
         // _btVoltar.localScale = Vector3.one; Debug.Log("Animação de aumentar botão de voltar");
         // _buttonConf.transform.localScale = Vector3.zero; Debug.Log("Animação de diminuir botão de confirmar");
 
@@ -326,7 +327,7 @@ public class SelectPerson : MonoBehaviour
             _btskin2.gameObject.SetActive(false);
             _btConfimSkin.gameObject.SetActive(false);
             _btVoltaSkin.gameObject.SetActive(false);
-
+            _sliderPLayers._playerMove = null;
             _btBaixo.Select();
             Invoke("TimeVoltar", 0.3f);
         }
@@ -423,6 +424,7 @@ public class SelectPerson : MonoBehaviour
         _playerMove.transform.DOMove(_gameControl._basePlayer[_indexPlayer].position, 0.25f);
         _gameControl._multiPlayerControl.MoveCamMenu(_camImgPlayer, _gameControl, numbSelectPerson);
         _gameControl._multiPlayerControl._personSelecNumber.Add(numbSelectPerson);
+        _sliderPLayers._playerMove = _playerMove;
 
         for (int i = 0; i < _gameControl._multiPlayerControl._selectsPersonList.Count; i++)
         {

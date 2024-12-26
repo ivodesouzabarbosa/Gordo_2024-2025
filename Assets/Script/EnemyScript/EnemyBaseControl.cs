@@ -114,8 +114,8 @@ public class EnemyBaseControl : MonoBehaviour
                 return;
             }
             bullet.SetActive(true);
-            bullet.GetComponent<HitSlider>().ResetLife();
-            bullet.GetComponent<HitSlider>()._capsHit.ColliderON();
+            bullet.GetComponent<HitSliderEnemy>().ResetLife();
+            bullet.GetComponent<HitSliderEnemy>()._capsHit.ColliderON();
             _checkPosini = !_checkPosini;
         }
     }

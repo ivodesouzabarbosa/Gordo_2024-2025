@@ -99,7 +99,6 @@ public class InptPLayerControll : MonoBehaviour
                     selectPerson._playerMove.gameObject.SetActive(true);
                     selectPerson._playerMove._personMoveCam = false;
                     selectPerson._playerMove.transform.position = _gameControl._camPlayer.transform.position;
-                    Debug.Log("ww");
                 }
                 else
                 {

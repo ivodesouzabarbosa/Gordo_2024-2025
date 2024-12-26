@@ -27,30 +27,42 @@ public class EnemeyMove : MonoBehaviour
     public float countdownTime = 5f; // Tempo inicial do contador em segundos
     public float currentTime;
     public Transform _canvasLive;
-    public HitSlider _hitSlider;
+    public HitSliderEnemy _hitSlider;
     public bool _deathOn;
 
-    public bool _invuneravel = false; // Variável que queremos controlar
+   // public bool _invuneravel = false; // Variável que queremos controlar
     public float invincibilityTime = 1f; // Tempo de espera entre danos
     bool _moveBack;
     bool _moveZero;
     [SerializeField] private float reverseSpeed = 7f; // Velocidade fixa para trás
-    bool _backMoveTemCheck;
-
+  //  bool _backMoveTemCheck;
+    public int _atack=0;
+    public bool checkAtack;
+    private float timer;           // Armazena o tempo de início
+    public float delay = .50f;       // Tempo em segundos para mudar para false
+    public ParticleSystem[] _pe;
+    public bool _hit;
+    
     private void Awake()
     {
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         _canvasLive.SetParent(_gameControl._canvasEnemy);
+        for (int i = 0; i < _pe.Length; i++)
+        {
+          //  _pe[i].gameObject.SetActive(false);
+            _pe[i].Stop();
+        }
     }
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        timer = Time.time; // Registra o tempo inicial
         currentTime = countdownTime;
         closestTarget = targetIni;
         _moveBack = true;
         _moveZero = true;
-        _backMoveTemCheck = false;
+      //  _backMoveTemCheck = false;
     }
 
     private void Update()
@@ -69,8 +81,7 @@ public class EnemeyMove : MonoBehaviour
             // Atualiza o alvo mais próximo
             FindClosestTarget();
 
-            float speedA = MathF.Abs(rb.linearVelocity.x + rb.linearVelocity.z);
-            _anim.SetFloat("speed", speedA);
+
 
             if (closestTarget == null)
             {
@@ -92,26 +103,16 @@ public class EnemeyMove : MonoBehaviour
               //  distance = Vector3.Distance(transform.position, closestTarget.position);
             }
 
-            if (_invuneravel)
-            {
-                // Movimento para trás independente de direção
-                MoveBackward();
-                if (_invuneravel && Time.time >= invincibilityTime)
-                {
-                    _invuneravel = false;
-                    _moveZero = true;
-
-
-                }
-               
-            }
-            else if (!_moveZero)
+            if (!_moveZero)
             {
                 MoveBackward();
+                _hit = true;
+                _atack = 0;
                 if (Time.time >= invincibilityTime + 1f)
                 {
                     _moveBack = false;
                     _moveZero=true;
+                    _hit = false;
                     rb.linearVelocity = Vector3.zero;
 
                 }
@@ -121,20 +122,36 @@ public class EnemeyMove : MonoBehaviour
                 if (Time.time >= invincibilityTime + 2f)
                 {
                     _moveBack = true;
-                    _backMoveTemCheck = false;
+                  
+                  //  _backMoveTemCheck = false;
 
                 }
             }
-            else if (_moveBack && !_invuneravel && distance > stoppingDistance && !_stopMove)
+            else if (_moveBack && distance > stoppingDistance && !_stopMove)
             {
                 // Movimento normal em direção ao alvo
                 MoveForward();
+                _atack = 0;
             }
             else
             {
                 // Para o movimento
                 currentSpeed = 0f;
                 rb.linearVelocity = Vector3.zero;
+                if (!checkAtack)
+                {
+                    checkAtack = true;
+                    int r = UnityEngine.Random.Range(1, 3);
+                    _atack = r;
+                }
+                // Verifica se o tempo decorrido é maior ou igual ao delay
+                if (checkAtack && Time.time >= timer + delay)
+                {
+                    checkAtack = false; // Define como false após o delay
+                    timer = Time.time; // Registra o tempo inicial
+                    Debug.Log("Variável agora é false.");
+                }
+
             }
 
             // Rotaciona para alinhar ao alvo
@@ -144,6 +161,21 @@ public class EnemeyMove : MonoBehaviour
         {
 
         }
+        AnimEnemy();
+    }
+    public void RandAtck()
+    {
+        checkAtack = false;
+    }
+
+    void AnimEnemy()
+    {
+        float speedA = MathF.Abs(rb.linearVelocity.x + rb.linearVelocity.z);
+       // float speedB = rb.linearVelocity.x + rb.linearVelocity.z;
+        _anim.SetFloat("speed", speedA);
+        _anim.SetBool("hit", _hit);
+        _anim.SetInteger("atack", _atack);
+
     }
 
     private void MoveBackward()
@@ -267,9 +299,9 @@ public class EnemeyMove : MonoBehaviour
     }
     public void AtivarPorTempo(float duracao)
     {
-        _invuneravel = true;
+     //   _invuneravel = true;
         _moveBack = false;
-        _backMoveTemCheck = true;
+     //   _backMoveTemCheck = true;
         _moveZero = false;
         invincibilityTime = Time.time + duracao; // Define o tempo final
     

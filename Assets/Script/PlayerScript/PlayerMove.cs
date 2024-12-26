@@ -44,11 +44,15 @@ public class PlayerMove : MonoBehaviour
 
     public MeshRenderer _meshRenderer;
 
+    public bool _deathOn;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+      
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         controller = GetComponent<CharacterController>();
         _anim = GetComponent<Animator>();
@@ -75,6 +79,7 @@ public class PlayerMove : MonoBehaviour
             if (timer <= 0f)
             {
                 _checkAt = false; // Desativar a booleana
+                _selectPerson._sliderPLayers._staminaSystem.isUsingStamina = false;
                 isTiming = false; // Parar o temporizador
             }
         }
@@ -162,9 +167,10 @@ public class PlayerMove : MonoBehaviour
     public void SetAtack(InputAction.CallbackContext value)
     {
       
-        if (!_checkAt)
+        if (!_checkAt && !_selectPerson._sliderPLayers._staminaSystem.isUsingStamina && !_selectPerson._sliderPLayers._staminaSystem.isStaminaZero)
         {
             _checkAt = true;
+            _selectPerson._sliderPLayers._staminaSystem.isUsingStamina = true;
             _nunbAtaque = UnityEngine.Random.Range(1, 4);
             ActivateBoolForSeconds(.1f); // Ativar por 3 segundos
         }

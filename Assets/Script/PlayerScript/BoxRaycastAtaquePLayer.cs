@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoxRaycastAtaquePLayer : MonoBehaviour
@@ -11,9 +12,14 @@ public class BoxRaycastAtaquePLayer : MonoBehaviour
     public LayerMask layerMask;                   // Camadas para detectar colisões
     public PlayerMove _playerMove;
 
+    public float delayInSeconds; // Tempo de atraso
+    private float timer = 0f;
+    private bool functionCalled;
+    RaycastHit _hit;
+
     private void Start()
     {
-        
+        functionCalled = true;
     }
 
     private void Update()
@@ -25,20 +31,36 @@ public class BoxRaycastAtaquePLayer : MonoBehaviour
         Vector3 rotatedDirection = transform.TransformDirection(direction.normalized);
 
         // Faz o BoxCast
-        if (Physics.BoxCast(origin, boxSize / 2, rotatedDirection, out RaycastHit hit, transform.rotation, distance, layerMask))
+        if (_playerMove._checkAt && Physics.BoxCast(origin, boxSize / 2, rotatedDirection, out RaycastHit hit, transform.rotation, distance, layerMask))
         {
             //  Debug.Log("Hit: true");
-           // Debug.Log("Hit: " + hit.collider.name);
-          //  hit.collider.GetComponent<HitSlider>().TakeDamage(25);
-           // _enemeyMove._stopMove = true;
+            Debug.Log("Hit: " + gameObject.name + hit.collider.name);
+            _hit=hit;
+            functionCalled = false;
 
         }
-        else
+
+
+        if (!functionCalled)
         {
-           // Debug.Log("Hit: false");
-          //  _enemeyMove._stopMove = false;
+            timer += Time.deltaTime;
+            if (timer >= delayInSeconds)
+            {
+                HitTime(_hit);
+                functionCalled = true; // Para evitar múltiplas chamadas
+                timer = 0f;
+            }
         }
     }
+
+
+    void HitTime(RaycastHit hit)
+    {
+        hit.collider.transform.parent.GetComponent<HitSliderEnemy>()._hitSliderPlayer = _playerMove._selectPerson._sliderPLayers;
+        hit.collider.transform.parent.GetComponent<HitSliderEnemy>().TakeDamage(25);
+        hit.collider.transform.parent.GetComponent<EnemeyMove>()._stopMove = true;
+    }
+
 
     private void OnDrawGizmos()
     {

@@ -30,12 +30,15 @@ public class BoxRaycastEnemey : MonoBehaviour
             //  Debug.Log("Hit: true");
           //  Debug.Log("Hit: " + hit.collider.name);
             _enemeyMove._stopMove = true;
-           
+            _enemeyMove._atack = 0;
+            _enemeyMove.checkAtack = true;
+
         }
         else
         {
           //  Debug.Log("Hit: false");
             _enemeyMove._stopMove = false;
+           
         }
     }
 

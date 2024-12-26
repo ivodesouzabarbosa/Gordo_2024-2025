@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SliderPLayer : MonoBehaviour
 {
@@ -16,10 +17,19 @@ public class SliderPLayer : MonoBehaviour
     public PlayerDados playerDadosSlider;
     public TextMeshProUGUI _text_numberEnemy;
 
+    public StaminaSystem _staminaSystem;
+
+    public HitSliderPlayer _hitSliderPlayer;
+    public PlayerMove _playerMove;
+
+
+
     private void Start()
     {
+        _staminaSystem = GetComponent<StaminaSystem>();
+        _hitSliderPlayer = GetComponent<HitSliderPlayer>();
      //  _circleMove.transform.localScale = Vector3.zero;
-     ///   _spriteRenderer = _circleMove.GetComponent<SpriteRenderer>();
+        ///   _spriteRenderer = _circleMove.GetComponent<SpriteRenderer>();
 
     }
 
