@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class SelectPerson : MonoBehaviour
 {
     public int _indexPlayer;
-    public PlayerDados playerDados;
+  //  public PlayerDados playerDados;
     GameControl _gameControl;
     [SerializeField] Button _buttonSelect;
     public PlayerInput playerInput;
@@ -60,7 +60,7 @@ public class SelectPerson : MonoBehaviour
     {
 
         _pPlayer.GetComponent<InptPLayerControll>().selectPerson = this.GetComponent<SelectPerson>();
-
+        
       //  _btVoltar.localScale = Vector3.zero;
         _btVoltar.gameObject.SetActive(false);
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
@@ -78,7 +78,7 @@ public class SelectPerson : MonoBehaviour
         SetIndex();
         //Debug.Log("_gameControl._numberPlayer " + _indexPlayer);
         _sliderPLayers = _gameControl._multiPlayerControl._sliderPLayers[_indexPlayer];
-        _sliderPLayers.playerDadosSlider = _gameControl._multiPlayerControl._dadosListPlayer[_indexPlayer];
+       // _sliderPLayers.playerDadosSlider = _gameControl._multiPlayerControl._dadosListPlayer[_indexPlayer];
         _gameControl._multiPlayerControl._sliderPLayersOn.Add(_sliderPLayers);
         _sliderPLayers.gameObject.SetActive(true);
         _gameControl._numberPlayer++;
@@ -197,10 +197,15 @@ public class SelectPerson : MonoBehaviour
         }
         else
         {
+            if (numbSelectPerson < 0)
+            {
+                numbSelectPerson = 0;
+            }
             _playerMoveTemp = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
+           
             if (!_gameControl._multiPlayerControl._checkPersonSel[numbSelectPerson])
             {
-               
+                _gameControl._multiPlayerControl._personSelecNumber.Add(numbSelectPerson);
                 if (_playerMoveTemp._checkSkin && !_playerMoveTemp._personSeleck)
                 {
                     _btskin1.gameObject.SetActive(true);
@@ -237,6 +242,7 @@ public class SelectPerson : MonoBehaviour
                 }
                 else
                 {
+                   
                     ConfirmPerson();
 
                 }
@@ -278,11 +284,15 @@ public class SelectPerson : MonoBehaviour
         _btVoltar.gameObject.SetActive(false);
          ConfirmSelec();
         _sliderPLayers._playerMove = _playerMoveTemp;
+        _gameControl._multiPlayerControl._numberPersonSel++;
 
     }
     public void ConfirmPerson()
     {
-        _gameControl._multiPlayerControl.SetCheckBlock(numbSelectPerson, true);
+        if (numbSelectPerson >= 0)
+        {
+            _gameControl._multiPlayerControl.SetCheckBlock(numbSelectPerson, true);
+        }
         ConfirmSelec();
         _btVoltar.gameObject.SetActive(true);
         //_btVoltar.GetComponent<Button>().interactable = true;
@@ -296,25 +306,34 @@ public class SelectPerson : MonoBehaviour
 
     }
 
-    public void BtVoltarPerson()
+    public void BtVoltarPerson(bool menu)
     {
         if (!_timeD)
         {
-            _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
+            if (numbSelectPerson >= 0)
+            {
+                _playerMove = _gameControl._playerMove[numbSelectPerson].GetComponent<PlayerMove>();
+            }
+           
             _timeD = true;
             Debug.Log("Animação de dinimuir botão  de voltar");
             // _sliderPLayers.gameObject.SetActive(false);
             //_pPlayer.SetParent(transform);
-            if (!_playerMove._checkSkin)
-            {
-                _gameControl._multiPlayerControl._numberPersonSel--;
-            }
+
             //_gameControl._multiPlayerControl._numberPersonSel--;
-            _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
-            _playerMove._selectPersonMove = false;
+            if (_playerMove != null)
+            {
+                _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
+                _playerMove._selectPersonMove = false;
+            }
+          
             //  _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
             _checkSelect = false;
-            _playerMove._personSeleck = false;
+            if (_playerMove != null)
+            {
+                _playerMove._personSeleck = false;
+            }
+           
             _buttonConf.interactable = true;
             _buttonConf.transform.localScale = Vector3.one; Debug.Log("Animação de aumentar botão de confirmar");
 
@@ -328,7 +347,7 @@ public class SelectPerson : MonoBehaviour
             _btConfimSkin.gameObject.SetActive(false);
             _btVoltaSkin.gameObject.SetActive(false);
             _sliderPLayers._playerMove = null;
-            _btBaixo.Select();
+          //  _btBaixo.Select();
             Invoke("TimeVoltar", 0.3f);
         }
 
@@ -349,7 +368,8 @@ public class SelectPerson : MonoBehaviour
         _btVoltar.gameObject.SetActive(true);
         _btskin1.Select();
         _checkSelect = false;
-        _gameControl._multiPlayerControl._numberPersonSel--;
+
+       // _gameControl._multiPlayerControl._numberPersonSel--;
         //_pPlayer.SetParent(transform);
         //  _gameControl._multiPlayerControl._numberPersonSel--;
         //   _playerMove.transform.DOMove(_playerMove._posIniMenu, 0.25f);
@@ -369,42 +389,60 @@ public class SelectPerson : MonoBehaviour
     }
     void TimeVoltar()
     {
-        _gameControl._multiPlayerControl.SetCheckBlock(numbSelectPerson, false);
-        for (int i = 0; i < _gameControl._multiPlayerControl._selectsPersonList.Count; i++)
+        if (numbSelectPerson >= 0)
         {
-            bool chck = _gameControl._multiPlayerControl._checkPersonSel[i];
-            if (!_gameControl._multiPlayerControl._selectsPersonList[i]._checkSelect && !chck)
+
+
+            _gameControl._multiPlayerControl.SetCheckBlock(numbSelectPerson, false);
+            for (int i = 0; i < _gameControl._multiPlayerControl._selectsPersonList.Count; i++)
             {
-                _gameControl._multiPlayerControl._selectsPersonList[i].imgBlockPerson.gameObject.SetActive(false);
+                bool chck = _gameControl._multiPlayerControl._checkPersonSel[i];
+                if (!_gameControl._multiPlayerControl._selectsPersonList[i]._checkSelect && !chck)
+                {
+                    _gameControl._multiPlayerControl._selectsPersonList[i].imgBlockPerson.gameObject.SetActive(false);
+                }
+                _gameControl._multiPlayerControl._selectsPersonList[i].VoltarCam();
             }
-            _gameControl._multiPlayerControl._selectsPersonList[i].VoltarCam();
-        }
 
-        for (int i = 0; i < _buttonsNav.Count; i++)
-        {
-            _buttonsNav[i].interactable = true;
-        }
-        imgSelecPerson.gameObject.SetActive(false);
+            for (int i = 0; i < _buttonsNav.Count; i++)
+            {
+                _buttonsNav[i].interactable = true;
+            }
+            imgSelecPerson.gameObject.SetActive(false);
 
 
-        // _gameControl._playerMove[numbSelectPerson].gameObject.SetActive(false);
+            // _gameControl._playerMove[numbSelectPerson].gameObject.SetActive(false);
 
-        _gameControl._multiPlayerControl._personSelecNumber.Remove(numbSelectPerson);
+            for (int i = 0; i < _gameControl._multiPlayerControl._personSelecNumber.Count; i++)
+            {
+                if (_gameControl._multiPlayerControl._personSelecNumber[i] == numbSelectPerson)
+                {
+                    // Debug.Log("r " + _gameControl._multiPlayerControl._personSelecNumber[i]);
+                    _gameControl._multiPlayerControl._personSelecNumber.Remove(_gameControl._multiPlayerControl._personSelecNumber[i]);
+
+                    _gameControl._multiPlayerControl._numberPersonSel--;
+                    numbSelectPerson = -1;
+                }
+            }
+
+
+
 ;
-        // _gameControl._multiPlayerControl.CheckListFree(imgBlockPerson.gameObject, numbSelectPerson);
-        //_playerMove = null;
-        _timeD = false;
-        PersonImgOn();
+            // _gameControl._multiPlayerControl.CheckListFree(imgBlockPerson.gameObject, numbSelectPerson);
+            //_playerMove = null;
+            _timeD = false;
+            PersonImgOn();
 
-       
 
-        imgBlockPerson.gameObject.SetActive(false);
-        imgSelecPerson.gameObject.SetActive(false);
-        _btVoltar.gameObject.SetActive(false);
-//_btVoltar.localScale = Vector3.zero; Debug.Log("Animação de diminuir botão de voltar");
-        _buttonConf.interactable = true;
-        _buttonConf.transform.localScale = Vector3.one; Debug.Log("Animação de aumentar botão de confirmar");
-        _buttonConf.gameObject.SetActive(true);
+
+            imgBlockPerson.gameObject.SetActive(false);
+            imgSelecPerson.gameObject.SetActive(false);
+            _btVoltar.gameObject.SetActive(false);
+            //_btVoltar.localScale = Vector3.zero; Debug.Log("Animação de diminuir botão de voltar");
+            _buttonConf.interactable = true;
+            _buttonConf.transform.localScale = Vector3.one; Debug.Log("Animação de aumentar botão de confirmar");
+            _buttonConf.gameObject.SetActive(true);
+        }
     }
 
     public void CamConfirm()
@@ -423,7 +461,16 @@ public class SelectPerson : MonoBehaviour
         _playerMove.transform.position = _gameControl._basePlayer[_indexPlayer].position;
         _playerMove.transform.DOMove(_gameControl._basePlayer[_indexPlayer].position, 0.25f);
         _gameControl._multiPlayerControl.MoveCamMenu(_camImgPlayer, _gameControl, numbSelectPerson);
-        _gameControl._multiPlayerControl._personSelecNumber.Add(numbSelectPerson);
+
+        if (!_playerMove._checkSkin)
+        {
+            _gameControl._multiPlayerControl._numberPersonSel++;
+           
+        }
+       // _gameControl._multiPlayerControl._personSelecNumber.Add(numbSelectPerson);
+
+       
+
         _sliderPLayers._playerMove = _playerMove;
 
         for (int i = 0; i < _gameControl._multiPlayerControl._selectsPersonList.Count; i++)
@@ -450,7 +497,7 @@ public class SelectPerson : MonoBehaviour
         PersonImgOn();
 
         //  _gameControl._multiPlayerControl.CheckSelecPersonList();
-        _gameControl._multiPlayerControl._numberPersonSel++;
+      //  _gameControl._multiPlayerControl._numberPersonSel++;
         _gameControl._multiPlayerControl.CheckIniGame(_indexPlayer);
 
     }
@@ -470,6 +517,7 @@ public class SelectPerson : MonoBehaviour
               
 
             }
+            if(numbSelectPerson>=0)
             _personSelec[numbSelectPerson].SetActive(true);
           
 

@@ -106,6 +106,11 @@ public class EnemeyMove : MonoBehaviour
             if (!_moveZero)
             {
                 MoveBackward();
+                for (int i = 0; i < _pe.Length; i++)
+                {
+                    //  _pe[i].gameObject.SetActive(false);
+                    _pe[i].Play();
+                }
                 _hit = true;
                 _atack = 0;
                 if (Time.time >= invincibilityTime + 1f)
@@ -114,6 +119,11 @@ public class EnemeyMove : MonoBehaviour
                     _moveZero=true;
                     _hit = false;
                     rb.linearVelocity = Vector3.zero;
+                    for (int i = 0; i < _pe.Length; i++)
+                    {
+                        //  _pe[i].gameObject.SetActive(false);
+                        _pe[i].Stop();
+                    }
 
                 }
             }
@@ -149,7 +159,7 @@ public class EnemeyMove : MonoBehaviour
                 {
                     checkAtack = false; // Define como false após o delay
                     timer = Time.time; // Registra o tempo inicial
-                    Debug.Log("Variável agora é false.");
+                  //  Debug.Log("Variável agora é false.");
                 }
 
             }

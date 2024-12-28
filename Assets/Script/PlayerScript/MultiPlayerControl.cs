@@ -19,7 +19,7 @@ public class MultiPlayerControl : MonoBehaviour
     public Transform _PlayerGame;
     public PlayerInputManager _inputManager;
     public List<SliderPLayer> _sliderPLayers = new List<SliderPLayer>();
-    public List<PlayerDados> _dadosListPlayer = new List<PlayerDados>();
+ //   public List<PlayerDados> _dadosListPlayer = new List<PlayerDados>();
     public List<SliderPLayer> _sliderPLayersOn = new List<SliderPLayer>();
     public Transform _sliderPLayersGame;
 
@@ -40,14 +40,17 @@ public class MultiPlayerControl : MonoBehaviour
 
     public void MoveCamMenu(Transform _transform, GameControl gameControl, int selecPerson )
     {
-        Vector3 vectorCam = gameControl._playerMove[selecPerson].transform.position;
-        _transform.DOMove(new Vector3(vectorCam.x+3, -3,vectorCam.z), .5f);
+        if (selecPerson >= 0)
+        {
+            Vector3 vectorCam = gameControl._playerMove[selecPerson].transform.position;
+            _transform.DOMove(new Vector3(vectorCam.x + 3, -3, vectorCam.z), .5f);
+        }
     }
     
     public void CheckIniGame(int value)
     {
         PlayerMove playerMove = _gameControl._playerMove[0];
-        if (_numberPersonSel == _gameControl._numberPlayer)
+        if (_personSelecNumber.Count == _gameControl._numberPlayer)
         {
             if (playerMove._selectPersonMove)
             {

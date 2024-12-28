@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 public class InptPLayerControll : MonoBehaviour
@@ -14,6 +15,7 @@ public class InptPLayerControll : MonoBehaviour
 
     public TextMeshProUGUI _nomePLayerMenu;
     bool checkPass;
+    MultiplayerEventSystem _multiplayerEventSystem;
    
 
    
@@ -23,7 +25,8 @@ public class InptPLayerControll : MonoBehaviour
    
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         _playerInput = GetComponent<PlayerInput>();
-     
+        _multiplayerEventSystem = GetComponent<MultiplayerEventSystem>();
+
        // Invoke("SetTimeNome",0.3f);
 
 
@@ -57,12 +60,16 @@ public class InptPLayerControll : MonoBehaviour
         if (IsJoystickConnected() && _imgDesc.gameObject.activeInHierarchy)
         {
             Debug.Log(selectPerson._nomePLayer + " conectado");
+          
             _nomePLayerMenu.text = selectPerson._nomePLayer;
             selectPerson._sliderPLayers.SetNomePlayer(selectPerson._nomePLayer);
             _imgDesc.gameObject.SetActive(false);
            // SetNomePlayer(selectPerson._nomePLayer);
             _gameControl._numberPlayer++;
             selectPerson._sliderPLayers.gameObject.SetActive(true);
+            selectPerson.BtSelectPlayer(0);
+
+
 
 
         }
@@ -72,12 +79,17 @@ public class InptPLayerControll : MonoBehaviour
             _imgDesc.gameObject.SetActive(true);
             selectPerson._sliderPLayers.gameObject.SetActive(false);
             _gameControl._numberPlayer--;
-            if (selectPerson._checkSelect)// se ainda estiver no menu de seleção de personagem
-            {
-                selectPerson.BtVoltarPerson();
-                
-            }
-           
+            //  Debug.Log("ee "+selectPerson.playerInput.playerIndex);
+            //  Debug.Log("yy "+selectPerson._indexPlayer);
+            //  selectPerson.playerInput.playerIndex = selectPerson._indexPlayer;
+            selectPerson.numbSelectPerson = -1;
+            selectPerson.BtVoltarPerson(true);
+            _multiplayerEventSystem.SetSelectedGameObject(selectPerson._btCima.gameObject);
+         
+
+
+
+
         }
     }
     public void PlayerConectGame()

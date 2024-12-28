@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class GameControl : MonoBehaviour
 {
     public GroundControl _groundControl;
+    public GameSalve _gameSalve;
     public bool _gameStart;
     public CamPlayer _camPlayer;
     public EnemyBaseControl _enemyBaseControl;

@@ -6288,7 +6288,6 @@ MonoBehaviour:
   _textPlayerGame: {fileID: 416959228}
   _iniTransf: {fileID: 504529658}
   _circleMove: {fileID: 552530103}
-  playerDadosSlider: {fileID: 0}
   _text_numberEnemy: {fileID: 504529659}
   _staminaSystem: {fileID: 0}
   _hitSliderPlayer: {fileID: 0}
@@ -6986,7 +6985,6 @@ MonoBehaviour:
   _textPlayerGame: {fileID: 1856952246}
   _iniTransf: {fileID: 2118521069}
   _circleMove: {fileID: 659351200}
-  playerDadosSlider: {fileID: 0}
   _text_numberEnemy: {fileID: 2118521070}
   _staminaSystem: {fileID: 0}
   _hitSliderPlayer: {fileID: 0}
@@ -10043,7 +10041,6 @@ MonoBehaviour:
   _textPlayerGame: {fileID: 2060313062}
   _iniTransf: {fileID: 53434325}
   _circleMove: {fileID: 1794761349}
-  playerDadosSlider: {fileID: 0}
   _text_numberEnemy: {fileID: 53434326}
   _staminaSystem: {fileID: 0}
   _hitSliderPlayer: {fileID: 0}
@@ -12749,6 +12746,7 @@ GameObject:
   - component: {fileID: 1616038500}
   - component: {fileID: 1616038501}
   - component: {fileID: 1616038502}
+  - component: {fileID: 1616038503}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -12784,6 +12782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _groundControl: {fileID: 276757112}
+  _gameSalve: {fileID: 1616038503}
   _gameStart: 0
   _camPlayer: {fileID: 594418136}
   _enemyBaseControl: {fileID: 1616038500}
@@ -12876,11 +12875,6 @@ MonoBehaviour:
   - {fileID: 1215674523}
   - {fileID: 746343891}
   - {fileID: 817949398}
-  _dadosListPlayer:
-  - {fileID: 11400000, guid: 98a80665d8f176f449089f0149f651b8, type: 2}
-  - {fileID: 11400000, guid: d26ae04e87dd2cf418ca4844073ed393, type: 2}
-  - {fileID: 11400000, guid: 5c8b0fea8a6a2014fac3f4bc297522b1, type: 2}
-  - {fileID: 11400000, guid: a412a6bbacdf5ed4ba153ac536e44254, type: 2}
   _sliderPLayersOn: []
   _sliderPLayersGame: {fileID: 1837884669}
 --- !u!114 &1616038502
@@ -12895,6 +12889,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a227a30208b042d43a1ccba87a19bdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1616038503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616038497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78b33f1200d8e2e4ebe2cf6b739e6448, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _numbPlayers: 0
+  _numbPlayerVivos: 0
+  _namePlayer1: 
+  _namePlayer2: 
+  _namePlayer3: 
+  _namePlayer4: 
+  _playerEnemey1: 0
+  _playerEnemey2: 0
+  _playerEnemey3: 0
+  _playerEnemey4: 0
 --- !u!1 &1623273698
 GameObject:
   m_ObjectHideFlags: 0
@@ -14223,7 +14239,6 @@ MonoBehaviour:
   _textPlayerGame: {fileID: 1579957128}
   _iniTransf: {fileID: 1864575523}
   _circleMove: {fileID: 169944959}
-  playerDadosSlider: {fileID: 0}
   _text_numberEnemy: {fileID: 1864575524}
   _staminaSystem: {fileID: 1754891000}
   _hitSliderPlayer: {fileID: 1754891001}
@@ -14488,23 +14503,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127f34a57f75a5d4aa2ee90b48fbb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    m_Bits: 32768
-  castDirection: {x: 0, y: 0, z: 1}
-  castDistance: 0
-  gizmoColor:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
-  cooldownTime: 0.23
-  boxCollider: {fileID: 0}
-  boxCenter: {x: 0, y: 0, z: 0}
-  boxSize: {x: 0, y: 0, z: 0}
-  boxRotation: {x: 0, y: 0, z: 0, w: 0}
-  canCollide: 1
-  lastCollisionTime: 0
-  _playerMove: {fileID: 2079843049}
 --- !u!65 &1786337746
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15177,23 +15175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127f34a57f75a5d4aa2ee90b48fbb225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMask:
-    m_Bits: 32768
-  castDirection: {x: 0, y: 0, z: 1}
-  castDistance: 0
-  gizmoColor:
-    r: 1
-    g: 0
-    b: 0
-    a: 1
-  cooldownTime: 1
-  boxCollider: {fileID: 0}
-  boxCenter: {x: 0, y: 0, z: 0}
-  boxSize: {x: 0, y: 0, z: 0}
-  boxRotation: {x: 0, y: 0, z: 0, w: 0}
-  canCollide: 1
-  lastCollisionTime: 0
-  _playerMove: {fileID: 2079843049}
 --- !u!65 &1844203336
 BoxCollider:
   m_ObjectHideFlags: 0
