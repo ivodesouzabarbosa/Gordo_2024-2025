@@ -7,6 +7,7 @@ TagManager:
   - CamTriguer
   - CoolPeido
   - ColliderAtaqueDIG
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - HitAtackEnemy
   - HitPlayer
   - HitEnemy
-  - 
+  - Mili
   - 
   - 
   - 

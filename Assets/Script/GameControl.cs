@@ -13,6 +13,7 @@ public class GameControl : MonoBehaviour
     public MultiPlayerControl _multiPlayerControl;
     public Transform _playerBase;
     public GameObject _coolFimFase;
+   
 
     public List<Transform> targets = new List<Transform>(); // Lista de
     
