@@ -15,10 +15,10 @@ public class PlayerMove : MonoBehaviour
     public float _speed;
     public float _gravity = -9.81f;    // Intensidade da gravidade
     public float _jumpHeight = 1.5f;   // Altura do pulo
-    public float _rotationSpeed = 10f; // Velocidade de rotação para os lados
+    public float _rotationSpeed = 10f; // Velocidade de rotaï¿½ï¿½o para os lados
 
-    private bool _isGrounded;          // Checa se está no chão
-    private bool _checkJump;          // Checa se apertou botão de pular
+    private bool _isGrounded;          // Checa se estï¿½ no chï¿½o
+    private bool _checkJump;          // Checa se apertou botï¿½o de pular
 
     [SerializeField] Vector3 _inputDir;
     [SerializeField] float _speedAnim;
@@ -46,6 +46,14 @@ public class PlayerMove : MonoBehaviour
 
     public bool _deathOn;
 
+    public bool luva;
+    public GameObject luvasBox;
+
+    public float velocidade = 2f; // Velocidade da transiÃ§Ã£o
+    private bool transicaoAtiva = false;
+    private float t = 0f; // Tempo normalizado da interpolaÃ§Ã£o
+
+
 
 
     // Start is called before the first frame update
@@ -55,19 +63,30 @@ public class PlayerMove : MonoBehaviour
       
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         controller = GetComponent<CharacterController>();
-        _anim = GetComponent<Animator>();
+      //  _anim = GetComponent<Animator>();
         _posIniMenu=transform.position;
         if (_playerObject.Count > 1)
         {
             _checkSkin = true;
         }
         SelectSkin(_indexSkin);
+
+        if (_anim != null)
+        {
+           // _anim.SetLayerWeight(2, 0);
+           // _anim.SetLayerWeight(3, 1);
+           // luva = true;
+          //  pesoLayer2 = _anim.GetLayerWeight(2);
+          //  pesoLayer3 = _anim.GetLayerWeight(3);
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        LuvaOn();
         if (_checkAnim)
         {
             Anim();
@@ -100,7 +119,7 @@ public class PlayerMove : MonoBehaviour
   
     void Move()
     {
-        // Verifica se está no chão
+        // Verifica se estï¿½ no chï¿½o
         _isGrounded = controller.isGrounded;
 
         if (_isGrounded && _inputDir.y < 0)
@@ -115,10 +134,10 @@ public class PlayerMove : MonoBehaviour
 
         if (move.magnitude > 0.1f)
         {
-            // Calcula a rotação para alinhar o objeto do jogador à direção do movimento
+            // Calcula a rotaï¿½ï¿½o para alinhar o objeto do jogador ï¿½ direï¿½ï¿½o do movimento
             Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
 
-            // Suaviza a transição para a nova rotação
+            // Suaviza a transiï¿½ï¿½o para a nova rotaï¿½ï¿½o
             _playerObject[_indexSkin].rotation = Quaternion.Slerp(_playerObject[_indexSkin].rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         }
 
@@ -138,29 +157,41 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleRotation()
     {
-        // Captura a entrada horizontal para rotação
+        // Captura a entrada horizontal para rotaï¿½ï¿½o
         float rotateY = _inputDir.y;
 
-        // Calcula o ângulo de rotação baseado na entrada
+        // Calcula o ï¿½ngulo de rotaï¿½ï¿½o baseado na entrada
         float rotation = rotateY * _rotationSpeed * Time.deltaTime;
 
-        // Aplica a rotação ao personagem no eixo Y
+        // Aplica a rotaï¿½ï¿½o ao personagem no eixo Y
         transform.Rotate(0, rotation, 0);
     }
 
-    void Anim()//controle de animações
+    void Anim()//controle de animaï¿½ï¿½es
     {
-        _speedAnim = MathF.Abs((_inputDir.x + _inputDir.z) * _speed);
-        _anim.SetFloat("move", _speedAnim);
-        _anim.SetInteger("atack", _nunbAtaque);
-        _anim.SetBool("checkAt", _checkAt);
+        float x = MathF.Abs(_inputDir.x);
+        float y = MathF.Abs(_inputDir.z);
+
+        _speedAnim = x+y * _speed;
+        if (_anim != null)
+        {
+            _anim.SetFloat("move", _speedAnim);
+            _anim.SetInteger("atack", _nunbAtaque);
+            _anim.SetBool("checkAt", _checkAt);
+        }
+ 
     }
 
     public void SetMove(InputAction.CallbackContext value)
     {
         _inputDir.x = value.ReadValue<Vector2>().x;
-        _inputDir.z = value.ReadValue<Vector2>().y;
+        _inputDir.z = value.ReadValue<Vector2>().y*2;
 
+    }
+
+    public void SetLuva(InputAction.CallbackContext value)
+    {
+        IniciarTransicao();
     }
 
 
@@ -231,5 +262,50 @@ public class PlayerMove : MonoBehaviour
         SelectSkin(_indexSkin);
     }
 
-   
+   void LuvaOn()
+    {
+        if (transicaoAtiva)
+        {
+            // Incrementa t baseado no tempo
+            t += Time.deltaTime * velocidade;
+            t = Mathf.Clamp01(t); // MantÃ©m t entre 0 e 1
+
+            // Aplica interpolaÃ§Ã£o suave usando SmoothStep
+            float pesoLayer2, pesoLayer3;
+            float suaveT = Mathf.SmoothStep(0f, 1f, t); // Suaviza a transiÃ§Ã£o
+
+
+            if (luva)
+            {
+                pesoLayer2 = Mathf.Lerp(1f, 0f, suaveT);
+                pesoLayer3 = Mathf.Lerp(0f, 1f, suaveT);
+            }
+            else
+            {
+                pesoLayer2 = Mathf.Lerp(0f, 1f, suaveT);
+                pesoLayer3 = Mathf.Lerp(1f, 0f, suaveT);
+            }
+
+            // Aplica os valores ao Animator
+            _anim.SetLayerWeight(2, pesoLayer2);
+            _anim.SetLayerWeight(3, pesoLayer3);
+
+            // Se chegou ao final da transiÃ§Ã£o, desativa
+            if (t >= 1f)
+            {
+                transicaoAtiva = false;
+            }
+        }
+    }
+    public void IniciarTransicao()
+    {
+        if (!transicaoAtiva)
+        {
+            t = 0f; // Reinicia o tempo de interpolaÃ§Ã£o
+            transicaoAtiva = true;
+            luva = !luva;
+            luvasBox.SetActive(!luvasBox.activeInHierarchy);
+        }
+     
+    }
 }

@@ -44,6 +44,15 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Soco"",
+                    ""type"": ""Button"",
+                    ""id"": ""ba856bd6-7dde-4288-b7fd-c08ed5b6a972"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -209,6 +218,17 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5276e0c3-6c12-4eeb-8bd5-2f7a2ec8ba1c"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Soco"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -809,6 +829,7 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
         m_PlayerBase = asset.FindActionMap("PlayerBase", throwIfNotFound: true);
         m_PlayerBase_Move = m_PlayerBase.FindAction("Move", throwIfNotFound: true);
         m_PlayerBase_Jump = m_PlayerBase.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerBase_Soco = m_PlayerBase.FindAction("Soco", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -890,12 +911,14 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
     private List<IPlayerBaseActions> m_PlayerBaseActionsCallbackInterfaces = new List<IPlayerBaseActions>();
     private readonly InputAction m_PlayerBase_Move;
     private readonly InputAction m_PlayerBase_Jump;
+    private readonly InputAction m_PlayerBase_Soco;
     public struct PlayerBaseActions
     {
         private @MovePlayer m_Wrapper;
         public PlayerBaseActions(@MovePlayer wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PlayerBase_Move;
         public InputAction @Jump => m_Wrapper.m_PlayerBase_Jump;
+        public InputAction @Soco => m_Wrapper.m_PlayerBase_Soco;
         public InputActionMap Get() { return m_Wrapper.m_PlayerBase; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -911,6 +934,9 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
             @Jump.started += instance.OnJump;
             @Jump.performed += instance.OnJump;
             @Jump.canceled += instance.OnJump;
+            @Soco.started += instance.OnSoco;
+            @Soco.performed += instance.OnSoco;
+            @Soco.canceled += instance.OnSoco;
         }
 
         private void UnregisterCallbacks(IPlayerBaseActions instance)
@@ -921,6 +947,9 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
             @Jump.started -= instance.OnJump;
             @Jump.performed -= instance.OnJump;
             @Jump.canceled -= instance.OnJump;
+            @Soco.started -= instance.OnSoco;
+            @Soco.performed -= instance.OnSoco;
+            @Soco.canceled -= instance.OnSoco;
         }
 
         public void RemoveCallbacks(IPlayerBaseActions instance)
@@ -1069,6 +1098,7 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnSoco(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
