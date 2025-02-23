@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class BoxRaycast : MonoBehaviour
@@ -7,6 +8,15 @@ public class BoxRaycast : MonoBehaviour
     public Vector3 boxSize = new Vector3(1f, 1f, 1f);  // Tamanho da caixa
     public LayerMask layerMask;  // Camadas que o BoxCast irá detectar
     public Vector3 offset = new Vector3(0f, 1f, 0f);  // Offset para ajustar a posição
+    public Transform _transformOBj;
+    public Transform _transformM;
+    Transform _transformp;
+
+    private void Start()
+    {
+        transform.parent.GetComponent<PlayerControl>()._boxRaycast = GetComponent<BoxRaycast>();
+            
+    }
 
     void Update()
     {
@@ -20,6 +30,12 @@ public class BoxRaycast : MonoBehaviour
         if (Physics.BoxCast(origin, boxSize / 2, direction, out RaycastHit hit, transform.rotation, maxDistance, layerMask))
         {
             Debug.Log("Colidiu com: " + hit.collider.name);
+            _transformOBj = hit.collider.gameObject.transform;
+            _transformp = hit.collider.gameObject.transform.parent;
+        }
+        else
+        {
+            _transformOBj = null;
         }
     }
 
@@ -41,5 +57,13 @@ public class BoxRaycast : MonoBehaviour
         // Desenha uma linha entre as duas caixas para indicar o trajeto
         Gizmos.color = Color.red;
         Gizmos.DrawLine(origin, origin + direction * maxDistance);
+    }
+
+    public void ObjMove()
+    {
+        _transformOBj.SetParent(_transformM);
+        _transformOBj.DOLocalMove(new Vector3(0,0,0), .7f);
+        _transformOBj.DOScale(new Vector3(.6f, .6f, .6f), .7f);
+
     }
 }

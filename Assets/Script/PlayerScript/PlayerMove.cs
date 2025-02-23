@@ -52,6 +52,7 @@ public class PlayerMove : MonoBehaviour
     public float velocidade = 2f; // Velocidade da transição
     private bool transicaoAtiva = false;
     private float t = 0f; // Tempo normalizado da interpolação
+    PlayerControl _playerControl;
 
 
 
@@ -60,8 +61,8 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-      
-        _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+        _playerControl= GetComponent<PlayerControl>();
+          _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
         controller = GetComponent<CharacterController>();
       //  _anim = GetComponent<Animator>();
         _posIniMenu=transform.position;
@@ -192,6 +193,15 @@ public class PlayerMove : MonoBehaviour
     public void SetLuva(InputAction.CallbackContext value)
     {
         IniciarTransicao();
+    }
+
+    public void SetPegarObj(InputAction.CallbackContext value)
+    {
+        if (_playerControl._boxRaycast._transformOBj != null)
+        {
+            Debug.Log("pegaObj");
+            _playerControl._boxRaycast.ObjMove();
+        }
     }
 
 

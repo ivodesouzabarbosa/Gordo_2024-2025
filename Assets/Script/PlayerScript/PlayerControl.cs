@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     public int _indexPlayer; 
     GameControl _gameControl;
     PlayerMove _playerMove;
+    public BoxRaycast _boxRaycast;
     
 
 
