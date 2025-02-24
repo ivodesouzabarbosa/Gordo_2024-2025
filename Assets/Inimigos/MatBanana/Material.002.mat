@@ -118,14 +118,14 @@ Material:
     - _IndirectLightingMix: 0.5
     - _InvertDissolveTex: 0
     - _LightingWorldPosStrength: 0.2
-    - _Lumin: 0.2
-    - _MaxLight: 0
+    - _Lumin: 0.22
+    - _MaxLight: 1
     - _MaxValue: 10
     - _Metallic: 0
-    - _MinLight: 0.845
+    - _MinLight: 0.899
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: -0.61
+    - _Offset: -0.59
     - _Parallax: 0.02
     - _RimBlend: 0.5
     - _RimThreshold: 0.1

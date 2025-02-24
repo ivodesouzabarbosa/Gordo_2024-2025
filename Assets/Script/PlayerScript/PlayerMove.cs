@@ -7,6 +7,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
+    PlayerControl _playerControl;
+    public MaoMiliControl _maoMiliControl;
+
     public int _indexPerson;
     public int _indexSkin;
     public bool _checkSkin;
@@ -52,8 +55,7 @@ public class PlayerMove : MonoBehaviour
     public float velocidade = 2f; // Velocidade da transição
     private bool transicaoAtiva = false;
     private float t = 0f; // Tempo normalizado da interpolação
-    PlayerControl _playerControl;
-
+    public bool _maoOcupada;
 
 
 
@@ -192,28 +194,73 @@ public class PlayerMove : MonoBehaviour
 
     public void SetLuva(InputAction.CallbackContext value)
     {
-        IniciarTransicao();
+        if (!_maoOcupada)
+        {
+            IniciarTransicao();
+        }
+        
     }
 
-    public void SetPegarObj(InputAction.CallbackContext value)
+    public void SetJogarObj(InputAction.CallbackContext value)
     {
-        if (_playerControl._boxRaycast._transformOBj != null)
+
+        Debug.Log("Jogar objeto 0");
+        if (_maoOcupada && _maoMiliControl._objMili != null)
         {
-            Debug.Log("pegaObj");
-            _playerControl._boxRaycast.ObjMove();
+            Debug.Log("Jogar objeto 1");
+            ObjMili obj = _maoMiliControl._objMili;
+            if (obj._naMao)
+            {
+                Debug.Log("Jogar objeto 2");
+                _maoOcupada = false;
+                obj._naMao = false;
+                _maoMiliControl._objMili.isLaunched = true;
+                //_playerControl._boxRaycast._transformOBj = null;
+            }
+           
         }
     }
 
 
     public void SetAtack(InputAction.CallbackContext value)
     {
-      
+        if (luva)// da soco se estiver com luva
+        {
+            if (!_checkAt && !_selectPerson._sliderPLayers._staminaSystem.isUsingStamina && !_selectPerson._sliderPLayers._staminaSystem.isStaminaZero)
+            {
+                _checkAt = true;
+                _selectPerson._sliderPLayers._staminaSystem.isUsingStamina = true;
+                _nunbAtaque = UnityEngine.Random.Range(1, 4);
+                ActivateBoolForSeconds(.1f); // Ativar por 3 segundos
+            }
+        }
+        else if(!luva && !_maoOcupada)// pega objeto no chão se tiver sem luva
+        {
+            if (_playerControl._boxRaycast._transformOBj != null)
+            {
+                ObjMili obj = _playerControl._boxRaycast._transformOBj.GetComponent<ObjMili>();
+                if (!obj._naMao)
+                {
+                    Debug.Log("pegaObj");
+                    _maoOcupada = true;
+                    obj._naMao = true;
+                    _playerControl._boxRaycast.ObjMove();
+                }
+
+            }
+        }
+        else if (!luva && _maoOcupada)
+        {
+            // bater com objeto
+        }
+    }
+
+    public void SetJogarOBJ(InputAction.CallbackContext value)
+    {
+
         if (!_checkAt && !_selectPerson._sliderPLayers._staminaSystem.isUsingStamina && !_selectPerson._sliderPLayers._staminaSystem.isStaminaZero)
         {
-            _checkAt = true;
-            _selectPerson._sliderPLayers._staminaSystem.isUsingStamina = true;
-            _nunbAtaque = UnityEngine.Random.Range(1, 4);
-            ActivateBoolForSeconds(.1f); // Ativar por 3 segundos
+            _maoOcupada = false;
         }
     }
     public void SelectSkin(int value)

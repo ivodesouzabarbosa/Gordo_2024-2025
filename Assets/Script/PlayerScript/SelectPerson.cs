@@ -551,11 +551,11 @@ public class SelectPerson : MonoBehaviour
         }
 
     }
-    public void SetPegarObj(InputAction.CallbackContext value)
+    public void SetJogarObj(InputAction.CallbackContext value)
     {
         if (_checkSelect && _playerMove != null && _gameControl._gameStart)
         {
-            _playerMove.SetPegarObj(value);
+            _playerMove.SetJogarObj(value);
 
         }
 
