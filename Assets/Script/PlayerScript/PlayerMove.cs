@@ -199,6 +199,7 @@ public class PlayerMove : MonoBehaviour
             IniciarTransicao();
         }
         
+
     }
 
     public void SetJogarObj(InputAction.CallbackContext value)
@@ -224,6 +225,7 @@ public class PlayerMove : MonoBehaviour
 
     public void SetAtack(InputAction.CallbackContext value)
     {
+        Debug.Log("atack");
         if (luva)// da soco se estiver com luva
         {
             if (!_checkAt && !_selectPerson._sliderPLayers._staminaSystem.isUsingStamina && !_selectPerson._sliderPLayers._staminaSystem.isStaminaZero)
