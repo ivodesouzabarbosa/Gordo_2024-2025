@@ -111,7 +111,7 @@ public class EnemeyMove : MonoBehaviour
 
 
 
-                Invoke("MoveBackward", 0.2f);
+                MoveBackward();
 
                 for (int i = 0; i < _pe.Length; i++)
                 {
@@ -207,6 +207,7 @@ public class EnemeyMove : MonoBehaviour
     private void MoveBackward()
     {
         // Define uma velocidade fixa para trás
+        _anim.SetInteger("atack", 0);
         Vector3 backwardVelocity = -transform.forward * reverseSpeed; // Move para trás na direção fixa
         rb.linearVelocity = new Vector3(backwardVelocity.x, rb.linearVelocity.y, backwardVelocity.z);
 

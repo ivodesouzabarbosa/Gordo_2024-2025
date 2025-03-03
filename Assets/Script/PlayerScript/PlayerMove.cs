@@ -371,7 +371,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (other.gameObject.layer==15)
         {
-            Debug.Log("Ataque novo");
+           
             other.transform.parent.GetComponent<HitSliderEnemy>()._hitSliderPlayer = _selectPerson._sliderPLayers;
             other.transform.parent.GetComponent<HitSliderEnemy>().TakeDamage(25);
             other.transform.parent.GetComponent<EnemeyMove>()._stopMove = true;
