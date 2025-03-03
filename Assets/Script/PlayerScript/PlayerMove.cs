@@ -58,7 +58,6 @@ public class PlayerMove : MonoBehaviour
     public bool _maoOcupada;
 
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -232,7 +231,8 @@ public class PlayerMove : MonoBehaviour
             {
                 _checkAt = true;
                 _selectPerson._sliderPLayers._staminaSystem.isUsingStamina = true;
-                _nunbAtaque = UnityEngine.Random.Range(1, 4);
+                 _nunbAtaque = UnityEngine.Random.Range(1, 4);
+                //_nunbAtaque = 2;
                 ActivateBoolForSeconds(.1f); // Ativar por 3 segundos
             }
         }
@@ -366,5 +366,15 @@ public class PlayerMove : MonoBehaviour
             luvasBox.SetActive(!luvasBox.activeInHierarchy);
         }
      
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer==15)
+        {
+            Debug.Log("Ataque novo");
+            other.transform.parent.GetComponent<HitSliderEnemy>()._hitSliderPlayer = _selectPerson._sliderPLayers;
+            other.transform.parent.GetComponent<HitSliderEnemy>().TakeDamage(25);
+            other.transform.parent.GetComponent<EnemeyMove>()._stopMove = true;
+        }
     }
 }

@@ -199,17 +199,6 @@
                 },
                 {
                     "name": "",
-                    "id": "8aad9511-566b-42e4-9ae3-de412e80ead1",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse;Touch",
-                    "action": "JogarMili",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ff6c0e3f-9bbd-4460-ade8-ce5dc9ddf36c",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",

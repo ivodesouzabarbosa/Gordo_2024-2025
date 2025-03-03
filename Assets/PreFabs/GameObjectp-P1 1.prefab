@@ -742,6 +742,7 @@ MonoBehaviour:
   imgSelecPerson: {fileID: 2380741198290739368}
   imgFreePerson: {fileID: 8897187614729282573}
   _playerMove: {fileID: 0}
+  _playerMoveTemp: {fileID: 0}
   _buttonConf: {fileID: 8798928814504893818}
   _checkSelect: 0
   _personSelec:
@@ -753,10 +754,17 @@ MonoBehaviour:
   - {fileID: 8135622368997198176}
   - {fileID: 103004063331361036}
   _btVoltar: {fileID: 5797225910059361929}
+  _btVoltaSkin: {fileID: 0}
+  _btConfimSkin: {fileID: 0}
   _btBaixo: {fileID: 103004063331361036}
   _btCima: {fileID: 8135622368997198176}
+  _btskin1: {fileID: 0}
+  _btskin2: {fileID: 0}
   _camImgPlayer: {fileID: 0}
   _rawImagecam: {fileID: 290837166656856587}
+  _pPlayer: {fileID: 0}
+  _sliderPLayers: {fileID: 0}
+  _nomePLayer: 
 --- !u!1 &5941654361596959896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1205,7 +1213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 77d28982d464f874c9e9ada97376d369, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 451617f67276c8740a97b7987e9b13ff, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -1219,64 +1227,64 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 354979099132118733}
-        m_TargetAssemblyTypeName: SelectPerson, Assembly-CSharp
-        m_MethodName: SetMove
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: fb70ed27-9e7b-446b-bc8c-01dfc2b8a32a
+      m_Calls: []
+    m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
+    m_ActionName: 'Player/Move[/XInputControllerWindows/leftStick,/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
+    m_ActionName: 'Player/Look[/XInputControllerWindows/rightStick,/XInputControllerWindows1/rightStick,/Mouse/delta]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6c2ab1b8-8984-453a-af3d-a3c78ae1679a
+    m_ActionName: 'Player/Fire[/XInputControllerWindows/rightTrigger,/XInputControllerWindows1/rightTrigger,/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9b75cbe5-8ebf-4386-b725-0f9edb2dd211
     m_ActionName: 'PlayerBase/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows1/leftStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: ff0f0a45-577b-41ab-891b-d6c03211561c
+    m_ActionId: 8591844b-e152-4d38-9487-f42c83fab459
     m_ActionName: 'PlayerBase/Jump[/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 9b2d3ae5-1dbf-4d2a-bf80-ce572b2251e3
+    m_ActionId: c95b2375-e6d9-4b88-9c4c-c5e76515df4b
     m_ActionName: 'UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows1/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows1/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows1/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows1/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows1/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows1/rightStick/right,/XInputControllerWindows/dpad,/XInputControllerWindows1/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 95978216-42ed-4d50-b7c0-9301d768e427
+    m_ActionId: 7607c7b6-cd76-4816-beef-bd0341cfe950
     m_ActionName: 'UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 32fdd19c-bf4c-48e9-ad26-2b6e2c67c52a
+    m_ActionId: 15cef263-9014-4fd5-94d9-4e4a6234a6ef
     m_ActionName: 'UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: aed47943-4c23-46de-a4ba-844a1c170818
+    m_ActionId: 32b35790-4ed0-4e9a-aa41-69ac6d629449
     m_ActionName: 'UI/Point[/Mouse/position]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: cf9a90ff-aee1-4b41-a436-1911ea3e6c67
+    m_ActionId: 3c7022bf-7922-4f7c-a998-c437916075ad
     m_ActionName: 'UI/Click[/Mouse/leftButton]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: d67f5cdd-de7a-4ca2-9740-2e4d4be2c8f4
+    m_ActionId: 0489e84a-4833-4c40-bfae-cea84b696689
     m_ActionName: 'UI/ScrollWheel[/Mouse/scroll]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 90fc16ca-0870-40ed-8836-aa6ede860c01
+    m_ActionId: dad70c86-b58c-4b17-88ad-f5e53adf419e
     m_ActionName: 'UI/MiddleClick[/Mouse/middleButton]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 8d5f6a5e-79d0-45e3-aef6-35cc65a2d448
+    m_ActionId: 44b200b1-1557-4083-816c-b22cbdf77ddf
     m_ActionName: 'UI/RightClick[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: f1d23678-8d96-4b32-8327-046b6f011cb6
+    m_ActionId: 24908448-c609-4bc3-a128-ea258674378a
     m_ActionName: UI/TrackedDevicePosition
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 1a18679b-63d5-4ac9-9058-5d8fac9b437a
+    m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
@@ -1313,6 +1321,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!1 &7109419194411770099
 GameObject:
   m_ObjectHideFlags: 0

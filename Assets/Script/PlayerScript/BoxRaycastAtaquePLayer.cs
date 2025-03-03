@@ -43,13 +43,16 @@ public class BoxRaycastAtaquePLayer : MonoBehaviour
 
         if (!functionCalled)
         {
-            timer += Time.deltaTime;
-            if (timer >= delayInSeconds)
+            //timer += Time.deltaTime;
+            HitTime(_hit);
+            functionCalled = true; // Para evitar múltiplas chamadas
+           // timer = 0f;
+           /* if (timer >= delayInSeconds)
             {
                 HitTime(_hit);
                 functionCalled = true; // Para evitar múltiplas chamadas
                 timer = 0f;
-            }
+            }*/
         }
     }
 
