@@ -95,17 +95,20 @@ public class EnemeyMove : MonoBehaviour
 
             distance = Vector3.Distance(transform.position, closestTarget.position);
             // Calcula a direção padrão para o alvo
-            if (distance > distanceCheck)
-            {
-                direction = (targetIni.position - transform.position).normalized;
-              //  distance = Vector3.Distance(transform.position, targetIni.position);
-            }
-            else
-            {
-                direction = (closestTarget.position - transform.position).normalized;
-              //  distance = Vector3.Distance(transform.position, closestTarget.position);
-            }
 
+            if (_gameControl._gameStart)
+            {
+                if (distance > distanceCheck)
+                {
+                    direction = (targetIni.position - transform.position).normalized;
+                    //  distance = Vector3.Distance(transform.position, targetIni.position);
+                }
+                else
+                {
+                    direction = (closestTarget.position - transform.position).normalized;
+                    //  distance = Vector3.Distance(transform.position, closestTarget.position);
+                }
+            }
             if (!_moveZero)
             {
 
@@ -290,6 +293,7 @@ public class EnemeyMove : MonoBehaviour
             if (_gameControl._enemyBaseControl._posListBase2[rand].GetComponent<BaseEnemey>().BaseOn)
             {
                 transform.position = _gameControl._enemyBaseControl._posListBase2[rand].position;
+                targetIni = _gameControl._enemyBaseControl._posListBase1[rand];
             }
             
            
@@ -301,6 +305,7 @@ public class EnemeyMove : MonoBehaviour
             if (_gameControl._enemyBaseControl._posListBase1[rand].GetComponent<BaseEnemey>().BaseOn)
             {
                 transform.position = _gameControl._enemyBaseControl._posListBase1[rand].position;
+                targetIni = _gameControl._enemyBaseControl._posListBase2[rand];
             }
            
 
