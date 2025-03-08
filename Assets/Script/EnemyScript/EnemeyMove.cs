@@ -42,7 +42,10 @@ public class EnemeyMove : MonoBehaviour
     public float delay = .50f;       // Tempo em segundos para mudar para false
     public ParticleSystem[] _pe;
     public bool _hit;
-    
+
+    public float timeRemaining = 1f;
+    float timer2 = 0;
+
     private void Awake()
     {
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
@@ -92,20 +95,27 @@ public class EnemeyMove : MonoBehaviour
 
             distance = Vector3.Distance(transform.position, closestTarget.position);
             // Calcula a direção padrão para o alvo
-            if (distance > distanceCheck)
-            {
-                direction = (targetIni.position - transform.position).normalized;
-              //  distance = Vector3.Distance(transform.position, targetIni.position);
-            }
-            else
-            {
-                direction = (closestTarget.position - transform.position).normalized;
-              //  distance = Vector3.Distance(transform.position, closestTarget.position);
-            }
 
+            if (_gameControl._gameStart)
+            {
+                if (distance > distanceCheck)
+                {
+                    direction = (targetIni.position - transform.position).normalized;
+                    //  distance = Vector3.Distance(transform.position, targetIni.position);
+                }
+                else
+                {
+                    direction = (closestTarget.position - transform.position).normalized;
+                    //  distance = Vector3.Distance(transform.position, closestTarget.position);
+                }
+            }
             if (!_moveZero)
             {
+
+
+
                 MoveBackward();
+
                 for (int i = 0; i < _pe.Length; i++)
                 {
                     //  _pe[i].gameObject.SetActive(false);
@@ -113,7 +123,7 @@ public class EnemeyMove : MonoBehaviour
                 }
                 _hit = true;
                 _atack = 0;
-                if (Time.time >= invincibilityTime + 1f)
+                if (Time.time >= invincibilityTime + 0.5f)
                 {
                     _moveBack = false;
                     _moveZero=true;
@@ -129,7 +139,7 @@ public class EnemeyMove : MonoBehaviour
             }
             else if (!_moveBack)
             {
-                if (Time.time >= invincibilityTime + 2f)
+                if (Time.time >= invincibilityTime + 1f)
                 {
                     _moveBack = true;
                   
@@ -150,16 +160,25 @@ public class EnemeyMove : MonoBehaviour
                 rb.linearVelocity = Vector3.zero;
                 if (!checkAtack)
                 {
-                    checkAtack = true;
-                    int r = UnityEngine.Random.Range(1, 3);
-                    _atack = r;
+                    timer2 += Time.deltaTime;
+                    if (timer2 >= 0.5f) // Chama a função a cada 2 segundos
+                    {
+                        checkAtack = true;
+                        int r = UnityEngine.Random.Range(1, 3);
+                        _atack = r;
+                        
+                    }
+
+                   
                 }
                 // Verifica se o tempo decorrido é maior ou igual ao delay
                 if (checkAtack && Time.time >= timer + delay)
                 {
                     checkAtack = false; // Define como false após o delay
                     timer = Time.time; // Registra o tempo inicial
-                  //  Debug.Log("Variável agora é false.");
+                    timeRemaining = 1.5f;
+                    timer2 = 0f;
+                    //  Debug.Log("Variável agora é false.");
                 }
 
             }
@@ -191,6 +210,7 @@ public class EnemeyMove : MonoBehaviour
     private void MoveBackward()
     {
         // Define uma velocidade fixa para trás
+        _anim.SetInteger("atack", 0);
         Vector3 backwardVelocity = -transform.forward * reverseSpeed; // Move para trás na direção fixa
         rb.linearVelocity = new Vector3(backwardVelocity.x, rb.linearVelocity.y, backwardVelocity.z);
 
@@ -273,6 +293,7 @@ public class EnemeyMove : MonoBehaviour
             if (_gameControl._enemyBaseControl._posListBase2[rand].GetComponent<BaseEnemey>().BaseOn)
             {
                 transform.position = _gameControl._enemyBaseControl._posListBase2[rand].position;
+                targetIni = _gameControl._enemyBaseControl._posListBase1[rand];
             }
             
            
@@ -284,6 +305,7 @@ public class EnemeyMove : MonoBehaviour
             if (_gameControl._enemyBaseControl._posListBase1[rand].GetComponent<BaseEnemey>().BaseOn)
             {
                 transform.position = _gameControl._enemyBaseControl._posListBase1[rand].position;
+                targetIni = _gameControl._enemyBaseControl._posListBase2[rand];
             }
            
 

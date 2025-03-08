@@ -114,13 +114,13 @@ Material:
     - _IndirectLightingMix: 0.5
     - _InvertDissolveTex: 0
     - _LightingWorldPosStrength: 0.2
-    - _Lumin: 0.68
+    - _Lumin: 0.22
     - _MaxLight: 1
     - _Metallic: 0
-    - _MinLight: 0
+    - _MinLight: 0.899
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Offset: 0.09
+    - _Offset: -0.59
     - _OtlWidth: 1
     - _Parallax: 0.02
     - _RimBlend: 0.5
@@ -139,7 +139,7 @@ Material:
     - _SoftParticlesFadeDistanceNear: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _Steps: 3.3
+    - _Steps: 1
     - _StpSmooth: 0
     - _UVDistortionAdd: 0
     - _UVSec: 0

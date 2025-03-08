@@ -7,6 +7,8 @@ public class ObjMili : MonoBehaviour
     public float rotationSpeed;
     public bool isLaunched = false;  // Controle de lançamento
     public List<Transform> objects = new List<Transform>();
+    public MaoMiliControl maoMiliControl;
+    public bool _naMao;
 
 
     Rigidbody _rb;
@@ -21,9 +23,24 @@ public class ObjMili : MonoBehaviour
     {
         if (isLaunched)
         {
-            // Move o objeto para frente na direção que ele está olhando
-            transform.Translate(new Vector3(2,0,0) * launchSpeed * Time.deltaTime);
-            objects[0].Rotate(new Vector3(0, 0, -360), rotationSpeed * Time.deltaTime);
+            if (transform.parent != null)
+            {
+                // Obtém a referência ao controle do pai
+                maoMiliControl = transform.parent.GetComponent<MaoMiliControl>();
+                maoMiliControl._objMili = GetComponent<ObjMili>();
+
+                // Remove o pai sem modificar a rotação
+                transform.SetParent(null);
+
+                // Garante que o objeto mantenha a rotação do pai antes de ser solto
+                transform.rotation = Quaternion.Euler(0, maoMiliControl._m_transform.eulerAngles.y, 0);
+            }
+
+            // Move o objeto sempre para frente, sem inclinar para baixo
+            transform.position += transform.forward * launchSpeed * Time.deltaTime;
+
+            // Faz o objeto girar corretamente
+            objects[0].Rotate(new Vector3(360 * rotationSpeed, 0, 0) * Time.deltaTime);
         }
     }
 }
