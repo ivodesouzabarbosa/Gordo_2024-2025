@@ -537,7 +537,7 @@ public class SelectPerson : MonoBehaviour
         if(_checkSelect && _playerMove != null && _gameControl._gameStart)
         {
             _playerMove.SetAtack(value);
-            Debug.Log("ataque");
+         //   Debug.Log("ataque");
          
         }
             

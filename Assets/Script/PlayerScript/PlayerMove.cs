@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMove : MonoBehaviour
 {
-    PlayerControl _playerControl;
+    public PlayerControl _playerControl;
     public MaoMiliControl _maoMiliControl;
 
     public int _indexPerson;
@@ -56,6 +56,8 @@ public class PlayerMove : MonoBehaviour
     private bool transicaoAtiva = false;
     private float t = 0f; // Tempo normalizado da interpolação
     public bool _maoOcupada;
+    public bool _pegarMili;
+    public bool _stopPerson;
 
 
     // Start is called before the first frame update
@@ -128,21 +130,25 @@ public class PlayerMove : MonoBehaviour
         {
             _inputDir.y = -2f;
         }
-
+        if (!_stopPerson) {
+           
         Vector3 move = transform.right * _inputDir.x + transform.forward * (_inputDir.z/6) * _speed;
 
         controller.Move(move * _speed * Time.deltaTime);
 
+        
+            if (move.magnitude > 0.1f)
+            {
+                // Calcula a rota��o para alinhar o objeto do jogador � dire��o do movimento
+                Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
 
-        if (move.magnitude > 0.1f)
-        {
-            // Calcula a rota��o para alinhar o objeto do jogador � dire��o do movimento
-            Quaternion targetRotation = Quaternion.LookRotation(move.normalized);
-
-            // Suaviza a transi��o para a nova rota��o
-            _playerObject[_indexSkin].rotation = Quaternion.Slerp(_playerObject[_indexSkin].rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+                // Suaviza a transi��o para a nova rota��o
+                _playerObject[_indexSkin].rotation = Quaternion.Slerp(_playerObject[_indexSkin].rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            }
         }
-
+        else { 
+            _inputDir=new Vector3(0,0,0);
+        }
 
         // Pulo
         if (_checkJump && _isGrounded)
@@ -180,6 +186,8 @@ public class PlayerMove : MonoBehaviour
             _anim.SetFloat("move", _speedAnim);
             _anim.SetInteger("atack", _nunbAtaque);
             _anim.SetBool("checkAt", _checkAt);
+            _anim.SetBool("pegarMili", _pegarMili);
+            _anim.SetBool("MiliM", _maoOcupada);
         }
  
     }
@@ -204,17 +212,18 @@ public class PlayerMove : MonoBehaviour
     public void SetJogarObj(InputAction.CallbackContext value)
     {
 
-        Debug.Log("Jogar objeto 0");
+       // Debug.Log("Jogar objeto 0");
         if (_maoOcupada && _maoMiliControl._objMili != null)
         {
-            Debug.Log("Jogar objeto 1");
+         //   Debug.Log("Jogar objeto 1");
             ObjMili obj = _maoMiliControl._objMili;
             if (obj._naMao)
             {
-                Debug.Log("Jogar objeto 2");
-                _maoOcupada = false;
+                Debug.Log("Jogar objeto");
+             //   _maoOcupada = false;
                 obj._naMao = false;
-                _maoMiliControl._objMili.isLaunched = true;
+                //_maoMiliControl._objMili.isLaunched = true;
+                 _nunbAtaque = 4;
                 //_playerControl._boxRaycast._transformOBj = null;
             }
            
@@ -224,9 +233,10 @@ public class PlayerMove : MonoBehaviour
 
     public void SetAtack(InputAction.CallbackContext value)
     {
-        Debug.Log("atack");
-        if (luva)// da soco se estiver com luva
+      
+        if (luva && !_maoOcupada)// da soco se estiver com luva
         {
+            Debug.Log("atack");
             if (!_checkAt && !_selectPerson._sliderPLayers._staminaSystem.isUsingStamina && !_selectPerson._sliderPLayers._staminaSystem.isStaminaZero)
             {
                 _checkAt = true;
@@ -244,16 +254,22 @@ public class PlayerMove : MonoBehaviour
                 if (!obj._naMao)
                 {
                     Debug.Log("pegaObj");
+                    _pegarMili = true;
                     _maoOcupada = true;
+                    luva=false;
                     obj._naMao = true;
-                    _playerControl._boxRaycast.ObjMove();
+                    _stopPerson = true;
+                  //  IniciarTransicao();
+                    // _playerControl._boxRaycast.ObjMove();
                 }
 
             }
         }
-        else if (!luva && _maoOcupada)
+        else 
         {
-            // bater com objeto
+           Debug.Log("bater com objeto");
+            if(_nunbAtaque==0)
+            _nunbAtaque = UnityEngine.Random.Range(1, 3);
         }
     }
 
@@ -262,7 +278,8 @@ public class PlayerMove : MonoBehaviour
 
         if (!_checkAt && !_selectPerson._sliderPLayers._staminaSystem.isUsingStamina && !_selectPerson._sliderPLayers._staminaSystem.isStaminaZero)
         {
-            _maoOcupada = false;
+          //  _maoOcupada = false;
+          //  _nunbAtaque = 4;
         }
     }
     public void SelectSkin(int value)
@@ -330,29 +347,40 @@ public class PlayerMove : MonoBehaviour
             t = Mathf.Clamp01(t); // Mantém t entre 0 e 1
 
             // Aplica interpolação suave usando SmoothStep
-            float pesoLayer2, pesoLayer3;
+            float pesoLayer2, pesoLayer3, pesoLayer4;
             float suaveT = Mathf.SmoothStep(0f, 1f, t); // Suaviza a transição
 
 
-            if (luva)
+            if (luva && !_maoOcupada)
             {
                 pesoLayer2 = Mathf.Lerp(1f, 0f, suaveT);
                 pesoLayer3 = Mathf.Lerp(0f, 1f, suaveT);
+                pesoLayer4 = Mathf.Lerp(1f, 0f, suaveT);
             }
-            else
+            else if(!luva && !_maoOcupada)
             {
                 pesoLayer2 = Mathf.Lerp(0f, 1f, suaveT);
                 pesoLayer3 = Mathf.Lerp(1f, 0f, suaveT);
+                pesoLayer4 = Mathf.Lerp(1f, 0f, suaveT);
+            }
+            else
+            {
+                pesoLayer2 = Mathf.Lerp(1f, 0f, suaveT);
+                pesoLayer3 = Mathf.Lerp(1f, 0f, suaveT);
+                pesoLayer4 = Mathf.Lerp(0f, 1f, suaveT);
             }
 
             // Aplica os valores ao Animator
             _anim.SetLayerWeight(2, pesoLayer2);
             _anim.SetLayerWeight(3, pesoLayer3);
+            _anim.SetLayerWeight(4, pesoLayer4);
 
             // Se chegou ao final da transição, desativa
             if (t >= 1f)
             {
                 transicaoAtiva = false;
+              //  _pegarMili = false;
+              //  _stopPerson=false;
             }
         }
     }
