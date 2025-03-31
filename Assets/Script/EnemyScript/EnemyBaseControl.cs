@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Cinemachine.DocumentationSortingAttribute;
 
 public class EnemyBaseControl : MonoBehaviour
 {
@@ -54,12 +53,10 @@ public class EnemyBaseControl : MonoBehaviour
 
     void TimerEnded(int level)
     {
-       
         currentTime = countdownTime;
             if (level == 0)
             {
-          
-            InvokeEnemey(EnemeyPool1._enemeyPool1.GetPooledObject());
+                InvokeEnemey(EnemeyPool1._enemeyPool1.GetPooledObject());
                 InvokeEnemey(EnemeyPool2._enemeyPool2.GetPooledObject());
                 InvokeEnemey(EnemeyPool3._enemeyPool3.GetPooledObject());
             }
@@ -94,58 +91,33 @@ public class EnemyBaseControl : MonoBehaviour
     }
     void InvokeEnemey(GameObject bullet)
     {
-       
         if (bullet != null)
         {
-            if (!_gameControl._gameStart)
-            {
-                _posListBase1[_numbList1].GetComponent<BaseEnemey>().BaseOn=true;
-            }
-
             if (!_checkPosini && _posListBase1[_numbList1].GetComponent<BaseEnemey>().BaseOn)
             {
-             
                 bullet.transform.position = _posListBase2[_numbList1].position;
                 bullet.GetComponent<EnemeyMove>().targetIni = _posListBase1[_numbList1];
               //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();// = true;
                 Pos1list();
-                ActEnemy(bullet);
             }
             else if (_checkPosini && _posListBase2[_numbList2].GetComponent<BaseEnemey>().BaseOn)
             {
-               
                 bullet.transform.position = _posListBase1[_numbList2].position;
                 bullet.GetComponent<EnemeyMove>().targetIni = _posListBase2[_numbList2];
               //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();
                 Pos2list();
-                ActEnemy(bullet);
             }
             else
             {
-               
                 bullet.GetComponent<EnemeyMove>().PosInver();
-                //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();
-                Debug.Log("return");
+              //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();
                 return;
             }
-          
-           
-           // ActEnemy(bullet);
-
-            if (_gameControl._gameStart)
-            {
-                _checkPosini = !_checkPosini;
-            }
-           
+            bullet.SetActive(true);
+            bullet.GetComponent<HitSliderEnemy>().ResetLife();
+            bullet.GetComponent<HitSliderEnemy>()._capsHit.ColliderON();
+            _checkPosini = !_checkPosini;
         }
-    }
-
-    void ActEnemy(GameObject value)
-    {
-        value.SetActive(true);
-        Debug.Log("ActEnemy");
-        value.GetComponent<HitSliderEnemy>().ResetLife();
-        value.GetComponent<HitSliderEnemy>()._capsHit.ColliderON();
     }
 
     void Pos1list()

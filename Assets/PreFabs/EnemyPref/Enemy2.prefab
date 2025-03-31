@@ -14927,7 +14927,6 @@ GameObject:
   - component: {fileID: 6587966757814691122}
   - component: {fileID: -7458234796811607664}
   - component: {fileID: 6820154186303233415}
-  - component: {fileID: -743876939972462158}
   m_Layer: 7
   m_Name: Enemy2
   m_TagString: Untagged
@@ -15100,7 +15099,6 @@ MonoBehaviour:
   - {fileID: 6562821291935871383}
   - {fileID: 5997223976632521860}
   _hit: 0
-  timeRemaining: 0.5
 --- !u!114 &-7458234796811607664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15143,26 +15141,6 @@ MonoBehaviour:
   _hitSliderPlayer: {fileID: 0}
   _particleSystemHit: {fileID: 1229207871406002297}
   _textureEnemy: {fileID: 8325884757802447187}
---- !u!114 &-743876939972462158
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2870456747863721192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19787e8eb8771724d9c0827b6e9574d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  boxOrigin: {x: 0, y: 0, z: 0}
-  boxSize: {x: 1, y: 1, z: 1}
-  direction: {x: 0, y: -90, z: 1}
-  distance: 2
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 131072
-  _checkGround: 0
 --- !u!1 &3764402987282425016
 GameObject:
   m_ObjectHideFlags: 0

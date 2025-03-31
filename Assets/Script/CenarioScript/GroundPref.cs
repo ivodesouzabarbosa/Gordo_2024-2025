@@ -10,7 +10,6 @@ public class GroundPref : MonoBehaviour
     public List<GameObject> _interList;
     public int _index;
     public int _level;
-    public GameObject _groundBaseCool;
 
   
 
@@ -24,21 +23,17 @@ public class GroundPref : MonoBehaviour
         if (_gameControl._groundControl._inter1n == _index)//fim do level 1
         {
             _interList[0].SetActive(true);
-            _groundBaseCool.SetActive(false);
         }
         else if (_gameControl._groundControl._inter2n == _index)// fim do level 2
         {
             _interList[1].SetActive(true);
-            _groundBaseCool.SetActive(false);
         }
         else if (_gameControl._groundControl._groundList.Count - 1 == _index)// inicio do level 3 e volta sem pausar o game
         {
             _interList[2].SetActive(true);
-            _groundBaseCool.SetActive(false);
         }
         else
         {
-          
             GroundLevel(_level);
         }
     
