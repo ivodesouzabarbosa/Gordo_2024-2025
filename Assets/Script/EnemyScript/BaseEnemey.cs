@@ -9,6 +9,9 @@ public class BaseEnemey : MonoBehaviour
     public LayerMask hitLayers; // Layers que o Raycast pode detectar
     public bool BaseOn;
 
+
+   
+
     void Update()
     {
         // Origem do Raycast é a posição do objeto atual
@@ -26,7 +29,7 @@ public class BaseEnemey : MonoBehaviour
             // Desenha uma linha até o ponto de impacto
             Debug.DrawLine(origin, hit.point, Color.green);
 
-            BaseOn = false;
+            BaseOn = true;
 
           //  Debug.Log($"Acertou: {hit.collider.name} na posição {hit.point}");
         }
@@ -34,7 +37,7 @@ public class BaseEnemey : MonoBehaviour
         {
             // Desenha uma linha até o final da distância máxima, caso não acerte nada
             Debug.DrawLine(origin, origin + direction * rayDistance, Color.red);
-            BaseOn = true;
+            BaseOn = false;
           //  Debug.Log("Nenhum impacto detectado para baixo.");
         }
     }
