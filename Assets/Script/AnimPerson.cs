@@ -11,6 +11,8 @@ public class AnimPerson : MonoBehaviour
     {
        // _playerMove._nunbAtaque = 0;
         _playerMove._playerControl._boxRaycast.ObjMove();
+        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(false);
+        _playerMove._maoMiliControl._objMili._miliCollider.enabled =false;
     }
 
     public void AnimPegarfalse()
@@ -35,12 +37,24 @@ public class AnimPerson : MonoBehaviour
     public void JogarOBJ()
     {
         _playerMove._maoMiliControl._objMili.isLaunched = true;
-     
+        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(true);
+        _playerMove._maoMiliControl._objMili = null;
         _playerMove._pegarMili = false;
         _playerMove._stopPerson = false;
         _playerMove.IniciarTransicao();
         _playerMove._nunbAtaque = 0;
         _playerMove._maoOcupada = false;
+      
     }
 
+   public void AtackMiliON()
+    {
+
+        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(true);
+    }
+    public void AtackMiliOff()
+    {
+
+        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(false);
+    }
 }

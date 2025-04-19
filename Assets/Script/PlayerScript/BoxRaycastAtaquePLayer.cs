@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -62,6 +63,7 @@ public class BoxRaycastAtaquePLayer : MonoBehaviour
         hit.collider.transform.parent.GetComponent<HitSliderEnemy>()._hitSliderPlayer = _playerMove._selectPerson._sliderPLayers;
         hit.collider.transform.parent.GetComponent<HitSliderEnemy>().TakeDamage(25);
         hit.collider.transform.parent.GetComponent<EnemeyMove>()._stopMove = true;
+        Debug.Log("ataqueplaterMili");
     }
 
 

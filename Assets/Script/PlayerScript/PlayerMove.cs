@@ -221,6 +221,8 @@ public class PlayerMove : MonoBehaviour
             if (obj._naMao)
             {
                 Debug.Log("Jogar objeto");
+                obj.atackMiliBox.SetActive(true);
+                obj._objMove = true;
              //   _maoOcupada = false;
                 obj._naMao = false;
                 //_maoMiliControl._objMili.isLaunched = true;
@@ -252,7 +254,8 @@ public class PlayerMove : MonoBehaviour
             if (_playerControl._boxRaycast._transformOBj != null)
             {
                 ObjMili obj = _playerControl._boxRaycast._transformOBj.GetComponent<ObjMili>();
-                if (!obj._naMao)
+
+                if (!obj._naMao && !obj._objMove)
                 {
                     Debug.Log("pegaObj");
                     _pegarMili = true;
@@ -399,7 +402,6 @@ public class PlayerMove : MonoBehaviour
                 luva = !luva;
                 luvasBox.SetActive(luva);
             }
-
          
         }
      
