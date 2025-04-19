@@ -35,11 +35,12 @@ public class AnimPerson : MonoBehaviour
     public void JogarOBJ()
     {
         _playerMove._maoMiliControl._objMili.isLaunched = true;
-        _playerMove._maoOcupada = false;
+     
         _playerMove._pegarMili = false;
         _playerMove._stopPerson = false;
         _playerMove.IniciarTransicao();
         _playerMove._nunbAtaque = 0;
+        _playerMove._maoOcupada = false;
     }
 
 }

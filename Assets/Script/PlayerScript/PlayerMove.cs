@@ -58,6 +58,7 @@ public class PlayerMove : MonoBehaviour
     public bool _maoOcupada;
     public bool _pegarMili;
     public bool _stopPerson;
+ 
 
 
     // Start is called before the first frame update
@@ -256,7 +257,8 @@ public class PlayerMove : MonoBehaviour
                     Debug.Log("pegaObj");
                     _pegarMili = true;
                     _maoOcupada = true;
-                    luva=false;
+              
+                    luva =false;
                     obj._naMao = true;
                     _stopPerson = true;
                   //  IniciarTransicao();
@@ -362,12 +364,14 @@ public class PlayerMove : MonoBehaviour
                 pesoLayer2 = Mathf.Lerp(0f, 1f, suaveT);
                 pesoLayer3 = Mathf.Lerp(1f, 0f, suaveT);
                 pesoLayer4 = Mathf.Lerp(1f, 0f, suaveT);
+            
             }
             else
             {
                 pesoLayer2 = Mathf.Lerp(1f, 0f, suaveT);
                 pesoLayer3 = Mathf.Lerp(1f, 0f, suaveT);
                 pesoLayer4 = Mathf.Lerp(0f, 1f, suaveT);
+           
             }
 
             // Aplica os valores ao Animator
@@ -390,8 +394,13 @@ public class PlayerMove : MonoBehaviour
         {
             t = 0f; // Reinicia o tempo de interpolação
             transicaoAtiva = true;
-            luva = !luva;
-            luvasBox.SetActive(!luvasBox.activeInHierarchy);
+            if (!_maoOcupada)
+            {
+                luva = !luva;
+                luvasBox.SetActive(luva);
+            }
+
+         
         }
      
     }

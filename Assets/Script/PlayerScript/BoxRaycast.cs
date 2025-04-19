@@ -69,8 +69,8 @@ public class BoxRaycast : MonoBehaviour
         if (_transformOBj != null)
         {
             _transformOBj.SetParent(_transformM);
-            _transformOBj.DOLocalMove(Vector3.zero, .7f);
-            _transformOBj.DORotate(Vector3.zero, .7f);
+            _transformOBj.DOLocalMove(Vector3.zero, .5f);
+            _transformOBj.DOLocalRotate(Vector3.zero, .7f);
         }
     }
 
