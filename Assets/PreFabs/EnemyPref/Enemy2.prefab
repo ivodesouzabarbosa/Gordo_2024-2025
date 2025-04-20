@@ -15161,7 +15161,7 @@ MonoBehaviour:
   distance: 2
   layerMask:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   _checkGround: 0
 --- !u!1 &3764402987282425016
 GameObject:

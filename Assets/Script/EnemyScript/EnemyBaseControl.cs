@@ -8,9 +8,10 @@ public class EnemyBaseControl : MonoBehaviour
 {
     public List<Transform> _posListBase1 = new List<Transform>();
 
-    int _numbList1;
+    public int _numbList1;
+
     public List<Transform> _posListBase2 = new List<Transform>();
-    int _numbList2;
+    public int _numbList2;
 
     public List<GameObject> _listEnemy1;
     public List<GameObject> _listEnemy2;
@@ -23,31 +24,44 @@ public class EnemyBaseControl : MonoBehaviour
     private float currentTime;
     GameControl _gameControl;
     bool _checkPosini;
-
+    bool iniCheck;
 
     private void Awake()
     {
         _gameControl = GameObject.FindWithTag("GameController").GetComponent<GameControl>();
+        currentTime = countdownTime;
+
+        iniCheck = true;
+        Shuffle(_posListBase1);
+       
+        Invoke("BaseIni", 1);
     }
 
     void Start()
     {
-        currentTime = countdownTime;
-        Shuffle(_posListBase1);
+      
 
+    }
+
+    void BaseIni()
+    {
+        iniCheck = true;
     }
     void Update()
     {
-        // Reduz o tempo enquanto ele for maior que zero
-        if (currentTime > 0)
+        if (iniCheck)
         {
-            currentTime -= Time.deltaTime; // Decremento com base no tempo real
-            currentTime = Mathf.Max(currentTime, 0); // Evita valores negativos
-        }
-        else
-        {
-            // Ação quando o tempo chega a zero
-            TimerEnded(_gameControl._levelOn);
+            // Reduz o tempo enquanto ele for maior que zero
+            if (currentTime > 0)
+            {
+                currentTime -= Time.deltaTime; // Decremento com base no tempo real
+                currentTime = Mathf.Max(currentTime, 0); // Evita valores negativos
+            }
+            else
+            {
+                // Ação quando o tempo chega a zero
+                TimerEnded(_gameControl._levelOn);
+            }
         }
     }
 
@@ -59,7 +73,7 @@ public class EnemyBaseControl : MonoBehaviour
             if (level == 0)
             {
           
-            InvokeEnemey(EnemeyPool1._enemeyPool1.GetPooledObject());
+                InvokeEnemey(EnemeyPool1._enemeyPool1.GetPooledObject());
                 InvokeEnemey(EnemeyPool2._enemeyPool2.GetPooledObject());
                 InvokeEnemey(EnemeyPool3._enemeyPool3.GetPooledObject());
             }
@@ -109,7 +123,7 @@ public class EnemyBaseControl : MonoBehaviour
                 bullet.GetComponent<EnemeyMove>().targetIni = _posListBase1[_numbList1];
               //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();// = true;
                 Pos1list();
-                ActEnemy(bullet);
+               ActEnemy(bullet);
             }
             else if (_checkPosini && _posListBase2[_numbList2].GetComponent<BaseEnemey>().BaseOn)
             {
@@ -125,12 +139,19 @@ public class EnemyBaseControl : MonoBehaviour
                
                 bullet.GetComponent<EnemeyMove>().PosInver();
                 //  bullet.GetComponent<EnemeyMove>()._hitSlider._capsHit.ColliderON();
+
                 Debug.Log("return");
+                if (_checkPosini)
+                {
+                    Debug.Log(_posListBase1[_numbList1].GetComponent<BaseEnemey>().BaseOn);
+                    Debug.Log(_posListBase2[_numbList2].GetComponent<BaseEnemey>().BaseOn);
+                }
+                _checkPosini = !_checkPosini;
                 return;
             }
-          
-           
-           // ActEnemy(bullet);
+
+         
+            // ActEnemy(bullet);
 
             if (_gameControl._gameStart)
             {

@@ -254,6 +254,7 @@ public class PlayerMove : MonoBehaviour
             if (_playerControl._boxRaycast._transformOBj != null)
             {
                 ObjMili obj = _playerControl._boxRaycast._transformOBj.GetComponent<ObjMili>();
+                obj._selectPersonMili = _selectPerson;
 
                 if (!obj._naMao && !obj._objMove)
                 {

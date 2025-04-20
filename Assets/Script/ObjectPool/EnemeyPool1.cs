@@ -8,6 +8,7 @@ public class EnemeyPool1 : ObjectPool
 
     public override void Awake()
     {
+
         base.Awake();
         _enemeyPool1 = this;
 

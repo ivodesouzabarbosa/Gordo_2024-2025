@@ -134,5 +134,12 @@ public class HitSliderEnemy : MonoBehaviour
 
 
     }
+
+
+    public void HitMili(SelectPerson _selectPerson) {
+        _hitSliderPlayer = _selectPerson._sliderPLayers;
+        TakeDamage(25);
+        GetComponent<EnemeyMove>()._stopMove = true;
+    }
    
 }

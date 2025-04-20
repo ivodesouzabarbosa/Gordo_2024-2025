@@ -30,6 +30,7 @@ public class ObjectPool : MonoBehaviour
             ObjectParentSet(tmp);
 
         }
+
     }
 
     void ObjectParentSet(GameObject inst)

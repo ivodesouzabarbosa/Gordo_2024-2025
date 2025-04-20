@@ -22,12 +22,14 @@ public class ObjMili : MonoBehaviour
     public float disappearDelay = 2f;
 
     bool hasHitGround = false;
+    public bool _hitEnemy = false;
     float disappearTimer = 0f;
 
     public bool _objMove;
 
     Vector3 posIni;
 
+    public SelectPerson _selectPersonMili;
     void Start()
     {
 
@@ -67,7 +69,7 @@ public class ObjMili : MonoBehaviour
                 }
 
                 // BoxCast simples para detectar o chão
-                if (Physics.BoxCast(transform.position, transform.localScale / 2f, Vector3.down, Quaternion.identity, groundCheckDistance, groundLayer))
+                if (_hitEnemy || Physics.BoxCast(transform.position, transform.localScale / 2f, Vector3.down, Quaternion.identity, groundCheckDistance, groundLayer))
                 {
                     hasHitGround = true;
                     disappearTimer = disappearDelay;
@@ -96,6 +98,7 @@ public class ObjMili : MonoBehaviour
 
     void ResetOBJ()
     {
+        _hitEnemy=false; 
         // Volta para a posição inicial
         transform.position = posIni;
 
@@ -109,7 +112,7 @@ public class ObjMili : MonoBehaviour
         isLaunched = false;
         hasHitGround = false;
         _objMove = false;
-
+        _selectPersonMili=null;
         // Reativa componentes visuais e colisores
         if (_miliCollider != null)
         {

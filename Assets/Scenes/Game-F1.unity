@@ -902,7 +902,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   BaseOn: 0
 --- !u!1 &103884973
 GameObject:
@@ -2727,10 +2727,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.44, y: 0.88, z: 0.44}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1098767443}
+  m_Father: {fileID: 1043857980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &303583306
 BoxCollider:
@@ -2815,18 +2815,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 303583304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a2f1136ffea644b8befacd79c62737, type: 3}
+  m_Script: {fileID: 11500000, guid: 69b43bbc73359324dbd2990a333801a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxOrigin: {x: 0, y: 0, z: 0}
-  boxSize: {x: 1, y: 1, z: 1}
-  direction: {x: 0, y: 0, z: 1}
-  distance: 5
-  layerMask:
+  castDistance: 5
+  hitLayers:
     serializedVersion: 2
     m_Bits: 32768
-  _playerMove: {fileID: 2079843049}
-  delayInSeconds: 0
+  _hitSliderEnemy: {fileID: 0}
+  objMili: {fileID: 1098767444}
 --- !u!1 &305698987
 GameObject:
   m_ObjectHideFlags: 0
@@ -3004,7 +3001,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   BaseOn: 0
 --- !u!1 &317245084
 GameObject:
@@ -7127,7 +7124,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   BaseOn: 0
 --- !u!1 &817949394
 GameObject:
@@ -9838,7 +9835,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.44, y: 0.44, z: 0.44}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 303583305}
   m_Father: {fileID: 1098767443}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1043857981
@@ -9963,7 +9961,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ojbParent: {fileID: 749913910}
   objectToPool: {fileID: 2870456747863721192, guid: c823ec3050191ff48a5958b72657be72, type: 3}
-  amountToPool: 6
+  amountToPool: 3
 --- !u!1 &1050085688
 GameObject:
   m_ObjectHideFlags: 0
@@ -10446,12 +10444,11 @@ Transform:
   m_GameObject: {fileID: 1098767442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.67, z: 0}
+  m_LocalPosition: {x: 17.56, y: -3.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1043857980}
-  - {fileID: 303583305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1098767444
@@ -10482,7 +10479,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   disappearDelay: 2
+  _hitEnemy: 0
   _objMove: 0
+  _selectPersonMili: {fileID: 0}
 --- !u!1 &1099704743
 GameObject:
   m_ObjectHideFlags: 0
@@ -11275,7 +11274,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   BaseOn: 0
 --- !u!1 &1180676805
 GameObject:
@@ -14399,10 +14398,12 @@ MonoBehaviour:
   - {fileID: 99330463}
   - {fileID: 314400513}
   - {fileID: 2127926028}
+  _numbList1: 0
   _posListBase2:
   - {fileID: 1172985213}
   - {fileID: 800614279}
   - {fileID: 1667939934}
+  _numbList2: 0
   _listEnemy1: []
   _listEnemy2: []
   _listEnemy3: []
@@ -15245,7 +15246,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   BaseOn: 0
 --- !u!1 &1670820279
 GameObject:
@@ -16244,7 +16245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ojbParent: {fileID: 749913910}
   objectToPool: {fileID: 2870456747863721192, guid: 20e0677d82d63b5408bf3b2d73d811ff, type: 3}
-  amountToPool: 6
+  amountToPool: 3
 --- !u!1 &1807890519
 GameObject:
   m_ObjectHideFlags: 0
@@ -20506,7 +20507,7 @@ MonoBehaviour:
   rayDistance: 10
   hitLayers:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   BaseOn: 0
 --- !u!1 &2133635817
 GameObject:

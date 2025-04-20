@@ -35,7 +35,7 @@ public class BoxRaycastAtaquePLayer : MonoBehaviour
         if (_playerMove._checkAt && Physics.BoxCast(origin, boxSize / 2, rotatedDirection, out RaycastHit hit, transform.rotation, distance, layerMask))
         {
             //  Debug.Log("Hit: true");
-            Debug.Log("Hit: " + gameObject.name + hit.collider.name);
+            Debug.Log("Hit: " + gameObject.name + hit.collider.name +"jkijjj");
             _hit=hit;
             functionCalled = false;
 

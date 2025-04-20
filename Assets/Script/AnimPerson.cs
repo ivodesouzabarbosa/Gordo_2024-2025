@@ -11,7 +11,10 @@ public class AnimPerson : MonoBehaviour
     {
        // _playerMove._nunbAtaque = 0;
         _playerMove._playerControl._boxRaycast.ObjMove();
-        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(false);
+        if (!_playerMove._maoMiliControl._objMili._objMove)
+        {
+            _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(false);
+        }
         _playerMove._maoMiliControl._objMili._miliCollider.enabled =false;
     }
 
@@ -49,12 +52,16 @@ public class AnimPerson : MonoBehaviour
 
    public void AtackMiliON()
     {
-
-        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(true);
+        if (!_playerMove._maoMiliControl._objMili._objMove)
+        {
+            _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(true);
+        }
     }
     public void AtackMiliOff()
     {
-
-        _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(false);
+        if (!_playerMove._maoMiliControl._objMili._objMove)
+        {
+            _playerMove._maoMiliControl._objMili.atackMiliBox.SetActive(false);
+        }
     }
 }
