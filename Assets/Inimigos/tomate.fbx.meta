@@ -3,7 +3,52 @@ guid: 877b8aa931438844681625fc16488c34
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.005
+    second: {fileID: 2100000, guid: 99f648ca3ed763f41b1d539d2fd84678, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.013
+    second: {fileID: 2100000, guid: 8da7682a6b445df4489d1ad40a2254d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Piercing
+    second: {fileID: 2100000, guid: c0621f2501bec8f4f91595f3c04c8a89, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sobrancelha
+    second: {fileID: 2100000, guid: 43a4ac1473a6ad2479de3fc6e0cfb69f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tenis
+    second: {fileID: 2100000, guid: 8e476f97f59fe374eaed7364a63005bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "bra\xE7os e pernas"
+    second: {fileID: 2100000, guid: 09fb8440789e1b4459c7380f1470c223, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: material.006
+    second: {fileID: 2100000, guid: 09fb8440789e1b4459c7380f1470c223, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: olhos
+    second: {fileID: 2100000, guid: d71909d7871229a468a1c4f52d6a6ef9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pupil
+    second: {fileID: 2100000, guid: 4090e897cddd2db479f8896f8314436d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

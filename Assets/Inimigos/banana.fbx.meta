@@ -3,7 +3,37 @@ guid: 2725053dcbd08ae45abd3d1fc238ce0b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.001
+    second: {fileID: 2100000, guid: c470e93614c9873428cff657eba8308d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.002
+    second: {fileID: 2100000, guid: 761c4599096eeb648b507a5a9c152dcd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.003
+    second: {fileID: 2100000, guid: 3f1700902d708c149991b1ed9851b301, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eye_globe
+    second: {fileID: 2100000, guid: 7e633fbc7c7c4d74fa5f6774fdff3267, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hair
+    second: {fileID: 2100000, guid: b725d0c10c3398e47ab33eee7b0fc097, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pupil
+    second: {fileID: 2100000, guid: eb6e51a4d4e417f45b133e7a668c8f57, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
