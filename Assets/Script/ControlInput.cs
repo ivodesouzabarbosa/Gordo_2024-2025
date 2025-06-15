@@ -286,10 +286,10 @@ public partial class @ControlInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5ee3d61b-316f-45e4-b922-e42aa297b6e9"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";GameControl"",
                     ""action"": ""JogarMili"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -886,12 +886,27 @@ public partial class @ControlInput: IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
                     ""isOR"": false
                 },
                 {
                     ""devicePath"": ""<Mouse>"",
-                    ""isOptional"": false,
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Touchscreen>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<XRController>"",
+                    ""isOptional"": true,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Pointer>"",
+                    ""isOptional"": true,
                     ""isOR"": false
                 }
             ]

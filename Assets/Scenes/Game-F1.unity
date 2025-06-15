@@ -9124,6 +9124,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1291897964}
   m_SourcePrefab: {fileID: 100100000, guid: 2f72fe895999b6543a29b4a0da887151, type: 3}
+--- !u!1 &924675550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5465914032820057854, guid: 2f72fe895999b6543a29b4a0da887151, type: 3}
+  m_PrefabInstance: {fileID: 924675549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &927546433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19857,7 +19862,7 @@ PrefabInstance:
     - target: {fileID: 7961941735116505818, guid: 02f6d995d074d274db29cf27c66ea8d9, type: 3}
       propertyPath: luvasBox
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 924675550}
     - target: {fileID: 7961941735116505818, guid: 02f6d995d074d274db29cf27c66ea8d9, type: 3}
       propertyPath: m_Enabled
       value: 1
