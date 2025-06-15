@@ -2140,22 +2140,6 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 10d2127a-726d-408e-8954-655137b5824e
-    m_ActionName: Game/Move
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3ce92607-b53a-4247-87f6-1ba3aec91db1
-    m_ActionName: Game/Equipar-Luva
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 338ddd60-2704-4170-af3c-a7d233aa5073
-    m_ActionName: Game/SocoOuPegar
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ae83e40c-a01e-462f-9ed7-31cfac79b81e
-    m_ActionName: Game/JogarMili
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 354979099132118733}
         m_TargetAssemblyTypeName: SelectPerson, Assembly-CSharp
@@ -2260,7 +2244,7 @@ MonoBehaviour:
     m_ActionId: 38c86d4b-c15b-4e2d-801b-972d1e80c31d
     m_ActionName: 'Player/Equipar-Luva[/XInputControllerWindows/buttonNorth]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
+  m_DefaultControlScheme: GameControl
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
