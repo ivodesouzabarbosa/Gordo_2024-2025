@@ -12,7 +12,6 @@ public class EnemyBaseControl : MonoBehaviour
 
     public List<Transform> _posListBase2 = new List<Transform>();
     public int _numbList2;
-
     public List<GameObject> _listEnemy1;
     public List<GameObject> _listEnemy2;
     public List<GameObject> _listEnemy3;
