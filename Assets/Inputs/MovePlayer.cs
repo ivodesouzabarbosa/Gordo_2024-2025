@@ -137,7 +137,7 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Control"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -872,17 +872,27 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": [
         {
-            ""name"": ""Control"",
-            ""bindingGroup"": ""Control"",
+            ""name"": ""teclado&mouse"",
+            ""bindingGroup"": ""teclado&mouse"",
             ""devices"": [
                 {
-                    ""devicePath"": ""<Gamepad>"",
-                    ""isOptional"": true,
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
                     ""isOR"": false
                 },
                 {
-                    ""devicePath"": ""<Keyboard>"",
-                    ""isOptional"": true,
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Joystick>"",
+                    ""isOptional"": false,
                     ""isOR"": false
                 }
             ]
@@ -1296,17 +1306,17 @@ public partial class @MovePlayer: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
     public UIActions @UI => new UIActions(this);
-    private int m_ControlSchemeIndex = -1;
+    private int m_tecladomouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
     /// </summary>
     /// <seealso cref="UnityEngine.InputSystem.InputControlScheme" />
-    public InputControlScheme ControlScheme
+    public InputControlScheme tecladomouseScheme
     {
         get
         {
-            if (m_ControlSchemeIndex == -1) m_ControlSchemeIndex = asset.FindControlSchemeIndex("Control");
-            return asset.controlSchemes[m_ControlSchemeIndex];
+            if (m_tecladomouseSchemeIndex == -1) m_tecladomouseSchemeIndex = asset.FindControlSchemeIndex("teclado&mouse");
+            return asset.controlSchemes[m_tecladomouseSchemeIndex];
         }
     }
     /// <summary>

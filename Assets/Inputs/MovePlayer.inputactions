@@ -51,7 +51,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Control",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -786,17 +786,27 @@
     ],
     "controlSchemes": [
         {
-            "name": "Control",
-            "bindingGroup": "Control",
+            "name": "teclado&mouse",
+            "bindingGroup": "teclado&mouse",
             "devices": [
                 {
-                    "devicePath": "<Gamepad>",
-                    "isOptional": true,
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
                     "isOR": false
                 },
                 {
-                    "devicePath": "<Keyboard>",
-                    "isOptional": true,
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Gamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Joystick>",
+                    "isOptional": false,
                     "isOR": false
                 }
             ]
