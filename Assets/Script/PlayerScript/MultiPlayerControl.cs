@@ -81,6 +81,16 @@ public class MultiPlayerControl : MonoBehaviour
     public void PersonMovemntStart()// liberar movimento de personagens
     {
         _gameControl._gameStart=true;
+
+        for (int i = 0; i < _personSelecNumber.Count; i++)
+        {
+            if (_personSelecNumber[i] == 0)
+            {
+                Debug.Log("Player " +i);
+            }
+
+
+        }
     }
 
    
